@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pod on Oliver&#39;s Blog</title>
+    <link>https://0x0034.github.io/tags/pod/</link>
+    <description>Recent content in Pod on Oliver&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 26 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://0x0034.github.io/tags/pod/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pod拓扑分布式约束</title>
+      <link>https://0x0034.github.io/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/</link>
+      <pubDate>Mon, 26 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0034.github.io/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/</guid>
+      <description>Pod拓扑分布式约束 #   约束字段: topologySpreadConstraints
+结构信息: Pod.spec.topologySpreadConstraints
+拓扑分布式约束在1.19.+的版本才会默认启用
+ 分布式约束YAML模板 #  apiVersion: v1 kind: Pod metadata: name: mypod spec: # 定义分布式约束 topologySpreadConstraints: # 限制节点间匹配Pod的最大差值 - maxSkew: &amp;lt;integer&amp;gt; # 限制节点而使用的约束标签的键,当节点存在同一个label,会将这两个节点认为是一个拓扑域 topologyKey: &amp;lt;string&amp;gt; # 当不满足时执行的动作 # DoNotSchedule（默认）告诉调度器不要调度。 # ScheduleAnyway 告诉调度器仍然继续调度，只是根据如何能将偏差最小化来对 节点进行排序。 whenUnsatisfiable: &amp;lt;string&amp;gt; # 匹配Pod使用的标签 labelSelector: &amp;lt;object&amp;gt; 样例 #  单个 TopologySpreadConstraint 约束 #  YAML样例one-constraint.yaml
+kind: Pod apiVersion: v1 metadata: name: mypod labels: foo: bar spec: topologySpreadConstraints: # 节点间的最大差值为1 - maxSkew: 1 # 指定选择Pod的key topologyKey: zone # 当不满足时,禁止调度 whenUnsatisfiable: DoNotSchedule labelSelector: # 匹配Pod的标签为 foo:bar  matchLabels: foo: bar containers: - name: pause image: k8s.</description>
+    </item>
+    
+  </channel>
+</rss>

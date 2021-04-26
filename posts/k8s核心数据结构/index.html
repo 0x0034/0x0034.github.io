@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="generator" content="Hugo 0.82.1" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="核心数据结构 #  Group,Version,Resource 核心数据结构详情如下
+资源组数据结构字段说明如下:
+ Name : 资源组名称 Version: 资源组下所支持的资源版本 PerferredVersio: 当一个资源组存在多个资源版本时,首选版本  资源版本数据结构字段说明如下:
+  Versions: 所支持的资源版本列表
+  资源数据结构字段说明如下:
+ Name: 资源名称 SingularName: 资源的单数名称. 这个必须由小写字母组成,默认使用资源种类(Kind) 的小写形式进行命名. Namespaced: 资源是否拥有所属命名空间 Group: 资源所所在的资源组名称 Version: 资源所在的资源版本 Kind: 资源种类 Verbs: 资源可操作的方法列表 ShortNames: 资源的简称,例如pod简称为po  ">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="k8s核心数据结构" />
+<meta property="og:description" content="核心数据结构 #  Group,Version,Resource 核心数据结构详情如下
+资源组数据结构字段说明如下:
+ Name : 资源组名称 Version: 资源组下所支持的资源版本 PerferredVersio: 当一个资源组存在多个资源版本时,首选版本  资源版本数据结构字段说明如下:
+  Versions: 所支持的资源版本列表
+  资源数据结构字段说明如下:
+ Name: 资源名称 SingularName: 资源的单数名称. 这个必须由小写字母组成,默认使用资源种类(Kind) 的小写形式进行命名. Namespaced: 资源是否拥有所属命名空间 Group: 资源所所在的资源组名称 Version: 资源所在的资源版本 Kind: 资源种类 Verbs: 资源可操作的方法列表 ShortNames: 资源的简称,例如pod简称为po  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0x0034.github.io/posts/k8s%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-11-26T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-11-26T00:00:00&#43;00:00" />
+
+<title>k8s核心数据结构 | Oliver&#39;s Blog</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.2bc2364a4a4b31f0ec1debecf0a8f90a840821f143dfe1ac6a0f7cbcbdcf64ac.css" integrity="sha256-K8I2SkpLMfDsHevs8Kj5CoQIIfFD3&#43;Gsag98vL3PZKw=">
+<script defer src="/en.search.min.7ebd7d7cc331456c02e5c7434ff8c23a250abf8d439fd923e10ee61d7abcfd1a.js" integrity="sha256-fr19fMMxRWwC5cdDT/jCOiUKv41Dn9kj4Q7mHXq8/Ro="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Oliver&#39;s Blog</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        博客
+      </a>
+  </li>
+  
+  <li>
+    <a href="/about-me/" >
+        关于我
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>k8s核心数据结构</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown">
+  <h1>
+    <a href="/posts/k8s%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">k8s核心数据结构</a>
+  </h1>
+  
+  <h5>November 26, 2020</h5>
+
+
+
+  
+  <div>
+    
+      <a href="/categories/kubernetes/">kubernetes</a>
+  </div>
+  
+
+  
+  <div>
+    
+      <a href="/tags/k8s/">k8s</a>, 
+      <a href="/tags/kubernetes/">kubernetes</a>
+  </div>
+  
+
+
+  <p><h1 id="核心数据结构">
+  核心数据结构
+  <a class="anchor" href="#%e6%a0%b8%e5%bf%83%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84">#</a>
+</h1>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1giclle9h3cj30tk0gyabf.jpg" alt="核心数据结构" /></p>
+<!-- raw HTML omitted -->
+<p>Group,Version,Resource 核心数据结构详情如下</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gid5xncg1ij30ew06vglw.jpg" alt="" /></p>
+<!-- raw HTML omitted -->
+<p>资源组数据结构字段说明如下:</p>
+<ul>
+<li>Name : 资源组名称</li>
+<li>Version: 资源组下所支持的资源版本</li>
+<li>PerferredVersio: 当一个资源组存在多个资源版本时,首选版本</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gid62sozvnj30dn03u74d.jpg" alt="" /></p>
+<!-- raw HTML omitted -->
+<p>资源版本数据结构字段说明如下:</p>
+<ul>
+<li>
+<p>Versions: 所支持的资源版本列表</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gid6fnfi5lj308a0a374o.jpg" alt="" /></p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>资源数据结构字段说明如下:</p>
+<ul>
+<li>Name: 资源名称</li>
+<li>SingularName: 资源的单数名称. 这个必须由小写字母组成,默认使用资源种类(Kind) 的小写形式进行命名.</li>
+<li>Namespaced: 资源是否拥有所属命名空间</li>
+<li>Group: 资源所所在的资源组名称</li>
+<li>Version: 资源所在的资源版本</li>
+<li>Kind: 资源种类</li>
+<li>Verbs: 资源可操作的方法列表</li>
+<li>ShortNames: 资源的简称,例如pod简称为po</li>
+</ul>
+</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

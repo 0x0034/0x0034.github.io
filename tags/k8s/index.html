@@ -6,17 +6,17 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="golang" />
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="k8s" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://0x0034.github.io/categories/golang/" />
+<meta property="og:url" content="https://0x0034.github.io/tags/k8s/" />
 
-<title>golang | Oliver&#39;s Blog</title>
+<title>k8s | Oliver&#39;s Blog</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.2bc2364a4a4b31f0ec1debecf0a8f90a840821f143dfe1ac6a0f7cbcbdcf64ac.css" integrity="sha256-K8I2SkpLMfDsHevs8Kj5CoQIIfFD3&#43;Gsag98vL3PZKw=">
 <script defer src="/en.search.min.7ebd7d7cc331456c02e5c7434ff8c23a250abf8d439fd923e10ee61d7abcfd1a.js" integrity="sha256-fr19fMMxRWwC5cdDT/jCOiUKv41Dn9kj4Q7mHXq8/Ro="></script>
-<link rel="alternate" type="application/rss+xml" href="https://0x0034.github.io/categories/golang/index.xml" title="Oliver's Blog" />
+<link rel="alternate" type="application/rss+xml" href="https://0x0034.github.io/tags/k8s/index.xml" title="Oliver's Blog" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -110,7 +110,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>golang</strong>
+  <strong>k8s</strong>
 
   <label for="toc-control">
     
@@ -223,75 +223,72 @@ https://github.com/alex-shpak/hugo-book
   
   <article class="markdown book-post">
     <h2>
-      <a href="/posts/goisforlovers/">(Hu)go Template Primer</a>
+      <a href="/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/">Pod拓扑分布式约束</a>
     </h2>
     
-  <h5>April 2, 2014</h5>
+  <h5>April 26, 2021</h5>
 
 
 
   
   <div>
     
-      <a href="/categories/development/">Development</a>, 
-      <a href="/categories/golang/">golang</a>
+      <a href="/categories/kubernetes/">kubernetes</a>
   </div>
   
 
   
   <div>
     
-      <a href="/tags/go/">go</a>, 
-      <a href="/tags/golang/">golang</a>, 
-      <a href="/tags/templates/">templates</a>, 
-      <a href="/tags/themes/">themes</a>, 
-      <a href="/tags/development/">development</a>
+      <a href="/tags/k8s/">k8s</a>, 
+      <a href="/tags/kubernetes/">kubernetes</a>, 
+      <a href="/tags/pod/">Pod</a>, 
+      <a href="/tags/%E6%8B%93%E6%89%91%E7%BA%A6%E6%9D%9F/">拓扑约束</a>
   </div>
   
 
 
-    <p>Hugo uses the excellent Go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in Go templates.
-This document is a brief primer on using Go templates.
-        <a href="/posts/goisforlovers/">...</a>
+    <p>Pod拓扑分布式约束 #   约束字段: topologySpreadConstraints
+结构信息: Pod.spec.topologySpreadConstraints
+拓扑分布式约束在1.19.+的版本才会默认启用
+ 分布式约束YAML模板 #  apiVersion: v1 kind: Pod metadata: name: mypod spec: # 定义分布式约束 topologySpreadConstraints: # 限制节点间匹配Pod的最大差值 - maxSkew: &lt;integer&gt; # 限制节点而使用的约束标签的键,当节点存在同一个label,会将这两个节点认为是一个拓扑域 topologyKey: &lt;string&gt; # 当不满足时执行的动作 # DoNotSchedule（默认）告诉调度器不要调度。 # ScheduleAnyway 告诉调度器仍然继续调度，只是根据如何能将偏差最小化来对 节点进行排序。 whenUnsatisfiable: &lt;string&gt; # 匹配Pod使用的标签 labelSelector: &lt;object&gt; 样例 #  单个 TopologySpreadConstraint 约束 #  YAML样例one-constraint.yaml
+kind: Pod apiVersion: v1 metadata: name: mypod labels: foo: bar spec: topologySpreadConstraints: # 节点间的最大差值为1 - maxSkew: 1 # 指定选择Pod的key topologyKey: zone # 当不满足时,禁止调度 whenUnsatisfiable: DoNotSchedule labelSelector: # 匹配Pod的标签为 foo:bar  matchLabels: foo: bar containers: - name: pause image: k8s.
+        <a href="/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/posts/hugoisforlovers/">Getting Started with Hugo</a>
+      <a href="/posts/k8s%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">k8s核心数据结构</a>
     </h2>
     
-  <h5>April 2, 2014</h5>
+  <h5>November 26, 2020</h5>
 
 
 
   
   <div>
     
-      <a href="/categories/development/">Development</a>, 
-      <a href="/categories/golang/">golang</a>
+      <a href="/categories/kubernetes/">kubernetes</a>
   </div>
   
 
   
   <div>
     
-      <a href="/tags/go/">go</a>, 
-      <a href="/tags/golang/">golang</a>, 
-      <a href="/tags/hugo/">hugo</a>, 
-      <a href="/tags/development/">development</a>
+      <a href="/tags/k8s/">k8s</a>, 
+      <a href="/tags/kubernetes/">kubernetes</a>
   </div>
   
 
 
-    <p>Step 1. Install Hugo #  Go to Hugo releases and download the appropriate version for your OS and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at Install Hugo
-Step 2. Build the Docs #  Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
-        <a href="/posts/hugoisforlovers/">...</a>
-      
+    <p>核心数据结构 #  Group,Version,Resource 核心数据结构详情如下
+资源组数据结构字段说明如下:
+ Name : 资源组名称 Version: 资源组下所支持的资源版本 PerferredVersio: 当一个资源组存在多个资源版本时,首选版本  资源版本数据结构字段说明如下:
+  Versions: 所支持的资源版本列表
+  资源数据结构字段说明如下:
+ Name: 资源名称 SingularName: 资源的单数名称. 这个必须由小写字母组成,默认使用资源种类(Kind) 的小写形式进行命名. Namespaced: 资源是否拥有所属命名空间 Group: 资源所所在的资源组名称 Version: 资源所在的资源版本 Kind: 资源种类 Verbs: 资源可操作的方法列表 ShortNames: 资源的简称,例如pod简称为po  
     </p>
   </article>
   

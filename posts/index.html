@@ -15,7 +15,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.2bc2364a4a4b31f0ec1debecf0a8f90a840821f143dfe1ac6a0f7cbcbdcf64ac.css" integrity="sha256-K8I2SkpLMfDsHevs8Kj5CoQIIfFD3&#43;Gsag98vL3PZKw=">
-<script defer src="/en.search.min.f010d7c6a01c3e996e00c95fbb1548e2ddafffc1f95fa0008c5e5189402c1e9e.js" integrity="sha256-8BDXxqAcPpluAMlfuxVI4t2v/8H5X6AAjF5RiUAsHp4="></script>
+<script defer src="/en.search.min.7ebd7d7cc331456c02e5c7434ff8c23a250abf8d439fd923e10ee61d7abcfd1a.js" integrity="sha256-fr19fMMxRWwC5cdDT/jCOiUKv41Dn9kj4Q7mHXq8/Ro="></script>
 <link rel="alternate" type="application/rss+xml" href="https://0x0034.github.io/posts/index.xml" title="Oliver's Blog" />
 <!--
 Made with Book Theme
@@ -132,6 +132,11 @@ https://github.com/alex-shpak/hugo-book
       <ul>
       
         <li class="flex justify-between">
+          <a href="/categories/kubernetes/">kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/categories/development/">Development</a>
           <span>2</span>
         </li>
@@ -149,6 +154,26 @@ https://github.com/alex-shpak/hugo-book
     <li class="book-section-flat">
       <strong>Tags</strong>
       <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/k8s/">k8s</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/kubernetes/">kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/pod/">Pod</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/%E6%8B%93%E6%89%91%E7%BA%A6%E6%9D%9F/">拓扑约束</a>
+          <span>1</span>
+        </li>
       
         <li class="flex justify-between">
           <a href="/tags/development/">development</a>
@@ -195,6 +220,77 @@ https://github.com/alex-shpak/hugo-book
 
       
       
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/">Pod拓扑分布式约束</a>
+    </h2>
+    
+  <h5>April 26, 2021</h5>
+
+
+
+  
+  <div>
+    
+      <a href="/categories/kubernetes/">kubernetes</a>
+  </div>
+  
+
+  
+  <div>
+    
+      <a href="/tags/k8s/">k8s</a>, 
+      <a href="/tags/kubernetes/">kubernetes</a>, 
+      <a href="/tags/pod/">Pod</a>, 
+      <a href="/tags/%E6%8B%93%E6%89%91%E7%BA%A6%E6%9D%9F/">拓扑约束</a>
+  </div>
+  
+
+
+    <p>Pod拓扑分布式约束 #   约束字段: topologySpreadConstraints
+结构信息: Pod.spec.topologySpreadConstraints
+拓扑分布式约束在1.19.+的版本才会默认启用
+ 分布式约束YAML模板 #  apiVersion: v1 kind: Pod metadata: name: mypod spec: # 定义分布式约束 topologySpreadConstraints: # 限制节点间匹配Pod的最大差值 - maxSkew: &lt;integer&gt; # 限制节点而使用的约束标签的键,当节点存在同一个label,会将这两个节点认为是一个拓扑域 topologyKey: &lt;string&gt; # 当不满足时执行的动作 # DoNotSchedule（默认）告诉调度器不要调度。 # ScheduleAnyway 告诉调度器仍然继续调度，只是根据如何能将偏差最小化来对 节点进行排序。 whenUnsatisfiable: &lt;string&gt; # 匹配Pod使用的标签 labelSelector: &lt;object&gt; 样例 #  单个 TopologySpreadConstraint 约束 #  YAML样例one-constraint.yaml
+kind: Pod apiVersion: v1 metadata: name: mypod labels: foo: bar spec: topologySpreadConstraints: # 节点间的最大差值为1 - maxSkew: 1 # 指定选择Pod的key topologyKey: zone # 当不满足时,禁止调度 whenUnsatisfiable: DoNotSchedule labelSelector: # 匹配Pod的标签为 foo:bar  matchLabels: foo: bar containers: - name: pause image: k8s.
+        <a href="/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/posts/k8s%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">k8s核心数据结构</a>
+    </h2>
+    
+  <h5>November 26, 2020</h5>
+
+
+
+  
+  <div>
+    
+      <a href="/categories/kubernetes/">kubernetes</a>
+  </div>
+  
+
+  
+  <div>
+    
+      <a href="/tags/k8s/">k8s</a>, 
+      <a href="/tags/kubernetes/">kubernetes</a>
+  </div>
+  
+
+
+    <p>核心数据结构 #  Group,Version,Resource 核心数据结构详情如下
+资源组数据结构字段说明如下:
+ Name : 资源组名称 Version: 资源组下所支持的资源版本 PerferredVersio: 当一个资源组存在多个资源版本时,首选版本  资源版本数据结构字段说明如下:
+  Versions: 所支持的资源版本列表
+  资源数据结构字段说明如下:
+ Name: 资源名称 SingularName: 资源的单数名称. 这个必须由小写字母组成,默认使用资源种类(Kind) 的小写形式进行命名. Namespaced: 资源是否拥有所属命名空间 Group: 资源所所在的资源组名称 Version: 资源所在的资源版本 Kind: 资源种类 Verbs: 资源可操作的方法列表 ShortNames: 资源的简称,例如pod简称为po  
+    </p>
+  </article>
   
   <article class="markdown book-post">
     <h2>
@@ -354,6 +450,11 @@ Follow the following steps:
       <ul>
       
         <li class="flex justify-between">
+          <a href="/categories/kubernetes/">kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
           <a href="/categories/development/">Development</a>
           <span>2</span>
         </li>
@@ -371,6 +472,26 @@ Follow the following steps:
     <li class="book-section-flat">
       <strong>Tags</strong>
       <ul>
+      
+        <li class="flex justify-between">
+          <a href="/tags/k8s/">k8s</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/kubernetes/">kubernetes</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/pod/">Pod</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/tags/%E6%8B%93%E6%89%91%E7%BA%A6%E6%9D%9F/">拓扑约束</a>
+          <span>1</span>
+        </li>
       
         <li class="flex justify-between">
           <a href="/tags/development/">development</a>

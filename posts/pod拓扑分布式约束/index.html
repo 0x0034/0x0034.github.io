@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="generator" content="Hugo 0.82.1" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pod拓扑分布式约束 #   约束字段: topologySpreadConstraints
+结构信息: Pod.spec.topologySpreadConstraints
+拓扑分布式约束在1.19.&#43;的版本才会默认启用
+ 分布式约束YAML模板 #  apiVersion: v1 kind: Pod metadata: name: mypod spec: # 定义分布式约束 topologySpreadConstraints: # 限制节点间匹配Pod的最大差值 - maxSkew: &lt;integer&gt; # 限制节点而使用的约束标签的键,当节点存在同一个label,会将这两个节点认为是一个拓扑域 topologyKey: &lt;string&gt; # 当不满足时执行的动作 # DoNotSchedule（默认）告诉调度器不要调度。 # ScheduleAnyway 告诉调度器仍然继续调度，只是根据如何能将偏差最小化来对 节点进行排序。 whenUnsatisfiable: &lt;string&gt; # 匹配Pod使用的标签 labelSelector: &lt;object&gt; 样例 #  单个 TopologySpreadConstraint 约束 #  YAML样例one-constraint.yaml
+kind: Pod apiVersion: v1 metadata: name: mypod labels: foo: bar spec: topologySpreadConstraints: # 节点间的最大差值为1 - maxSkew: 1 # 指定选择Pod的key topologyKey: zone # 当不满足时,禁止调度 whenUnsatisfiable: DoNotSchedule labelSelector: # 匹配Pod的标签为 foo:bar  matchLabels: foo: bar containers: - name: pause image: k8s.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Pod拓扑分布式约束" />
+<meta property="og:description" content="Pod拓扑分布式约束 #   约束字段: topologySpreadConstraints
+结构信息: Pod.spec.topologySpreadConstraints
+拓扑分布式约束在1.19.&#43;的版本才会默认启用
+ 分布式约束YAML模板 #  apiVersion: v1 kind: Pod metadata: name: mypod spec: # 定义分布式约束 topologySpreadConstraints: # 限制节点间匹配Pod的最大差值 - maxSkew: &lt;integer&gt; # 限制节点而使用的约束标签的键,当节点存在同一个label,会将这两个节点认为是一个拓扑域 topologyKey: &lt;string&gt; # 当不满足时执行的动作 # DoNotSchedule（默认）告诉调度器不要调度。 # ScheduleAnyway 告诉调度器仍然继续调度，只是根据如何能将偏差最小化来对 节点进行排序。 whenUnsatisfiable: &lt;string&gt; # 匹配Pod使用的标签 labelSelector: &lt;object&gt; 样例 #  单个 TopologySpreadConstraint 约束 #  YAML样例one-constraint.yaml
+kind: Pod apiVersion: v1 metadata: name: mypod labels: foo: bar spec: topologySpreadConstraints: # 节点间的最大差值为1 - maxSkew: 1 # 指定选择Pod的key topologyKey: zone # 当不满足时,禁止调度 whenUnsatisfiable: DoNotSchedule labelSelector: # 匹配Pod的标签为 foo:bar  matchLabels: foo: bar containers: - name: pause image: k8s." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0x0034.github.io/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-26T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-04-26T00:00:00&#43;00:00" />
+
+<title>Pod拓扑分布式约束 | Oliver&#39;s Blog</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.2bc2364a4a4b31f0ec1debecf0a8f90a840821f143dfe1ac6a0f7cbcbdcf64ac.css" integrity="sha256-K8I2SkpLMfDsHevs8Kj5CoQIIfFD3&#43;Gsag98vL3PZKw=">
+<script defer src="/en.search.min.7ebd7d7cc331456c02e5c7434ff8c23a250abf8d439fd923e10ee61d7abcfd1a.js" integrity="sha256-fr19fMMxRWwC5cdDT/jCOiUKv41Dn9kj4Q7mHXq8/Ro="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Oliver&#39;s Blog</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        博客
+      </a>
+  </li>
+  
+  <li>
+    <a href="/about-me/" >
+        关于我
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Pod拓扑分布式约束</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#分布式约束yaml模板">分布式约束YAML模板</a></li>
+    <li><a href="#样例">样例</a>
+      <ul>
+        <li><a href="#单个-topologyspreadconstraint-约束">单个 TopologySpreadConstraint 约束</a></li>
+        <li><a href="#多个-topologyspreadconstraint-约束">多个 TopologySpreadConstraint 约束</a></li>
+      </ul>
+    </li>
+    <li><a href="#隐性约定">隐性约定</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown">
+  <h1>
+    <a href="/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/">Pod拓扑分布式约束</a>
+  </h1>
+  
+  <h5>April 26, 2021</h5>
+
+
+
+  
+  <div>
+    
+      <a href="/categories/kubernetes/">kubernetes</a>
+  </div>
+  
+
+  
+  <div>
+    
+      <a href="/tags/k8s/">k8s</a>, 
+      <a href="/tags/kubernetes/">kubernetes</a>, 
+      <a href="/tags/pod/">Pod</a>, 
+      <a href="/tags/%E6%8B%93%E6%89%91%E7%BA%A6%E6%9D%9F/">拓扑约束</a>
+  </div>
+  
+
+
+  <p><h1 id="pod拓扑分布式约束">
+  Pod拓扑分布式约束
+  <a class="anchor" href="#pod%e6%8b%93%e6%89%91%e5%88%86%e5%b8%83%e5%bc%8f%e7%ba%a6%e6%9d%9f">#</a>
+</h1>
+<blockquote>
+<p>约束字段:  topologySpreadConstraints</p>
+<p>结构信息: Pod.spec.topologySpreadConstraints</p>
+<p>拓扑分布式约束在1.19.+的版本才会默认启用</p>
+</blockquote>
+<h2 id="分布式约束yaml模板">
+  分布式约束YAML模板
+  <a class="anchor" href="#%e5%88%86%e5%b8%83%e5%bc%8f%e7%ba%a6%e6%9d%9fyaml%e6%a8%a1%e6%9d%bf">#</a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mypod</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#75715e"># 定义分布式约束</span>
+  <span style="color:#f92672">topologySpreadConstraints</span>:
+  		<span style="color:#75715e"># 限制节点间匹配Pod的最大差值</span>
+    - <span style="color:#f92672">maxSkew</span>: <span style="color:#ae81ff">&lt;integer&gt;</span>
+    	<span style="color:#75715e"># 限制节点而使用的约束标签的键,当节点存在同一个label,会将这两个节点认为是一个拓扑域</span>
+      <span style="color:#f92672">topologyKey</span>: <span style="color:#ae81ff">&lt;string&gt;</span>
+      <span style="color:#75715e"># 当不满足时执行的动作</span>
+      <span style="color:#75715e"># DoNotSchedule（默认）告诉调度器不要调度。</span>
+      <span style="color:#75715e"># ScheduleAnyway 告诉调度器仍然继续调度，只是根据如何能将偏差最小化来对 节点进行排序。</span>
+      <span style="color:#f92672">whenUnsatisfiable</span>: <span style="color:#ae81ff">&lt;string&gt;</span>
+      <span style="color:#75715e"># 匹配Pod使用的标签</span>
+      <span style="color:#f92672">labelSelector</span>: <span style="color:#ae81ff">&lt;object&gt;</span>
+</code></pre></div><h2 id="样例">
+  样例
+  <a class="anchor" href="#%e6%a0%b7%e4%be%8b">#</a>
+</h2>
+<h3 id="单个-topologyspreadconstraint-约束">
+  单个 TopologySpreadConstraint 约束
+  <a class="anchor" href="#%e5%8d%95%e4%b8%aa-topologyspreadconstraint-%e7%ba%a6%e6%9d%9f">#</a>
+</h3>
+<p>YAML样例<code>one-constraint.yaml</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mypod</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">foo</span>: <span style="color:#ae81ff">bar</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">topologySpreadConstraints</span>:
+  	<span style="color:#75715e"># 节点间的最大差值为1</span>
+  - <span style="color:#f92672">maxSkew</span>: <span style="color:#ae81ff">1</span>
+  	<span style="color:#75715e"># 指定选择Pod的key</span>
+    <span style="color:#f92672">topologyKey</span>: <span style="color:#ae81ff">zone</span>
+    <span style="color:#75715e"># 当不满足时,禁止调度</span>
+    <span style="color:#f92672">whenUnsatisfiable</span>: <span style="color:#ae81ff">DoNotSchedule</span>
+    <span style="color:#f92672">labelSelector</span>:
+    	<span style="color:#75715e"># 匹配Pod的标签为 foo:bar </span>
+      <span style="color:#f92672">matchLabels</span>:
+        <span style="color:#f92672">foo</span>: <span style="color:#ae81ff">bar</span>
+  <span style="color:#f92672">containers</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">pause</span>
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8s.gcr.io/pause:3.1</span>
+</code></pre></div><p>现在四个Node , 存在标签如下所示</p>
+<pre><code>NAME    STATUS      LABELS
+node1   Ready       node=node1,zone=zoneA
+node2   Ready       node=node2,zone=zoneA
+node3   Ready       node=node3,zone=zoneB
+node4   Ready       node=node4,zone=zoneB
+</code></pre><p><img src="https://raw.githubusercontent.com/0x0034/images/master/20210204104050.png" alt="" /></p>
+<p>当我们执行如上的<code>one-constraint.yaml</code> ,因为存在拓扑分布式约束.</p>
+<p>假设当<code>mypod</code> 调度到zoneA的任意一台节点上, 那么zoneA的拥有标签<code>foo:bar</code>的Pod数量为3 ,zoneB拥有标签<code>foo:bar</code>的Pod数量为1 .</p>
+<p>3-1 =2 &gt;1 ,不满足yaml中的分布约束 , 所以<code>mypod</code> 只能放在zoneB的任意一台机器中.</p>
+<p>顺便一提 , 在拓扑分布式约束中 , node1 和node2 都具有<code>zone: zoneA</code> , 这两个节点在分配的时候会被认为是在一个拓扑域中.</p>
+<h3 id="多个-topologyspreadconstraint-约束">
+  多个 TopologySpreadConstraint 约束
+  <a class="anchor" href="#%e5%a4%9a%e4%b8%aa-topologyspreadconstraint-%e7%ba%a6%e6%9d%9f">#</a>
+</h3>
+<p>YAML样例<code>more-constraints.yaml</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">mypod</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">foo</span>: <span style="color:#ae81ff">bar</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">topologySpreadConstraints</span>:
+  - <span style="color:#f92672">maxSkew</span>: <span style="color:#ae81ff">1</span>
+    <span style="color:#f92672">topologyKey</span>: <span style="color:#ae81ff">zone</span>
+    <span style="color:#f92672">whenUnsatisfiable</span>: <span style="color:#ae81ff">DoNotSchedule</span>
+    <span style="color:#f92672">labelSelector</span>:
+      <span style="color:#f92672">matchLabels</span>:
+        <span style="color:#f92672">foo</span>: <span style="color:#ae81ff">bar</span>
+  - <span style="color:#f92672">maxSkew</span>: <span style="color:#ae81ff">1</span>
+    <span style="color:#f92672">topologyKey</span>: <span style="color:#ae81ff">node</span>
+    <span style="color:#f92672">whenUnsatisfiable</span>: <span style="color:#ae81ff">DoNotSchedule</span>
+    <span style="color:#f92672">labelSelector</span>:
+      <span style="color:#f92672">matchLabels</span>:
+        <span style="color:#f92672">foo</span>: <span style="color:#ae81ff">bar</span>
+  <span style="color:#f92672">containers</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">pause</span>
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8s.gcr.io/pause:3.1</span>
+</code></pre></div><p>还是假设有四个节点,和上面的例子一样, 只不过在这个yaml中存在两个<code>topologySpreadConstraints</code> 约束 , 首先判定第一个约束, 那么<code>mypod</code>只能调度到zoneB中,接着判定第二约束.</p>
+<p>假设将<code>mypod</code>调度到node3 ,zoneB中 node3数量为2 , node4数量为0 .</p>
+<p>2-0 =2 &gt;1 , 所以不满足约束. 所以只会调度到node4上.</p>
+<h2 id="隐性约定">
+  隐性约定
+  <a class="anchor" href="#%e9%9a%90%e6%80%a7%e7%ba%a6%e5%ae%9a">#</a>
+</h2>
+<ul>
+<li>拓扑约束只限定在相同的namespace中的Pod</li>
+<li>假设有四个节点,三个节点有zone 标签 , 还有一个节点没有任何标签
+<ul>
+<li>位于空标签节点的Pod不会参与maxSkew的计算</li>
+<li>新的Pod并不会调度到空标签节点上.</li>
+</ul>
+</li>
+<li><code>topologySpreadConstraints</code> 与亲和性同时作用</li>
+</ul>
+</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#分布式约束yaml模板">分布式约束YAML模板</a></li>
+    <li><a href="#样例">样例</a>
+      <ul>
+        <li><a href="#单个-topologyspreadconstraint-约束">单个 TopologySpreadConstraint 约束</a></li>
+        <li><a href="#多个-topologyspreadconstraint-约束">多个 TopologySpreadConstraint 约束</a></li>
+      </ul>
+    </li>
+    <li><a href="#隐性约定">隐性约定</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

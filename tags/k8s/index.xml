@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>k8s on Oliver&#39;s Blog</title>
+    <link>https://0x0034.github.io/tags/k8s/</link>
+    <description>Recent content in k8s on Oliver&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 26 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://0x0034.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pod拓扑分布式约束</title>
+      <link>https://0x0034.github.io/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/</link>
+      <pubDate>Mon, 26 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0034.github.io/posts/pod%E6%8B%93%E6%89%91%E5%88%86%E5%B8%83%E5%BC%8F%E7%BA%A6%E6%9D%9F/</guid>
+      <description>Pod拓扑分布式约束 #   约束字段: topologySpreadConstraints
+结构信息: Pod.spec.topologySpreadConstraints
+拓扑分布式约束在1.19.+的版本才会默认启用
+ 分布式约束YAML模板 #  apiVersion: v1 kind: Pod metadata: name: mypod spec: # 定义分布式约束 topologySpreadConstraints: # 限制节点间匹配Pod的最大差值 - maxSkew: &amp;lt;integer&amp;gt; # 限制节点而使用的约束标签的键,当节点存在同一个label,会将这两个节点认为是一个拓扑域 topologyKey: &amp;lt;string&amp;gt; # 当不满足时执行的动作 # DoNotSchedule（默认）告诉调度器不要调度。 # ScheduleAnyway 告诉调度器仍然继续调度，只是根据如何能将偏差最小化来对 节点进行排序。 whenUnsatisfiable: &amp;lt;string&amp;gt; # 匹配Pod使用的标签 labelSelector: &amp;lt;object&amp;gt; 样例 #  单个 TopologySpreadConstraint 约束 #  YAML样例one-constraint.yaml
+kind: Pod apiVersion: v1 metadata: name: mypod labels: foo: bar spec: topologySpreadConstraints: # 节点间的最大差值为1 - maxSkew: 1 # 指定选择Pod的key topologyKey: zone # 当不满足时,禁止调度 whenUnsatisfiable: DoNotSchedule labelSelector: # 匹配Pod的标签为 foo:bar  matchLabels: foo: bar containers: - name: pause image: k8s.</description>
+    </item>
+    
+    <item>
+      <title>k8s核心数据结构</title>
+      <link>https://0x0034.github.io/posts/k8s%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0034.github.io/posts/k8s%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+      <description>核心数据结构 #  Group,Version,Resource 核心数据结构详情如下
+资源组数据结构字段说明如下:
+ Name : 资源组名称 Version: 资源组下所支持的资源版本 PerferredVersio: 当一个资源组存在多个资源版本时,首选版本  资源版本数据结构字段说明如下:
+  Versions: 所支持的资源版本列表
+  资源数据结构字段说明如下:
+ Name: 资源名称 SingularName: 资源的单数名称. 这个必须由小写字母组成,默认使用资源种类(Kind) 的小写形式进行命名. Namespaced: 资源是否拥有所属命名空间 Group: 资源所所在的资源组名称 Version: 资源所在的资源版本 Kind: 资源种类 Verbs: 资源可操作的方法列表 ShortNames: 资源的简称,例如pod简称为po  </description>
+    </item>
+    
+  </channel>
+</rss>
