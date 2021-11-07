@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
     <!-- title -->
 
 
@@ -12,9 +12,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="author" content="John Doe">
+    <meta name="author" content="0x0034">
     <meta name="renderer" content="webkit">
-    <meta name="copyright" content="John Doe">
+    <meta name="copyright" content="0x0034">
     
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
@@ -23,8 +23,8 @@
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="https://0x0034.github.io/archives/2021/11/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:locale">
+<meta property="article:author" content="0x0034">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -428,16 +428,55 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2021/11/07/hello-world/">
+            <a class="abstract-title" href="/2021/11/07/k8s%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83-md/">
                 
-                <span class="abstract-title-text">Hello World</span>
+                <span class="abstract-title-text">k8s灰度发布.md</span>
             </a>
             <div class="abstract-content">
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
+                灰度发布解决方案双Deployment滚动发布略
+就绪态解决方案文件名称test-rolling.yaml
+12345678910111213141516171819202122232425262728293031323334353637383940414243apiVersion: apps/v1kind: Deploymentmetadata:  name: nginx-deployment  labels:    app: nginxspec:  replicas: 2  selector:    matchLabels:      app: nginx  template:   ...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2021/11/07">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/11/07</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/">
+                
+                <span class="abstract-title-text">chartmuseum使用</span>
+            </a>
+            <div class="abstract-content">
+                Chartmuseum 基本操作
+Chartmuseum 基本操作
+安装Helm Plugin
+添加Helm repo
+Push charts
+使用自定义版本推送
+推送tgz包
+强制推送
+推送到指定URL
 
-More info: Writing
-Run server1$ hexo ...
+
+
+安装Helm Plugin1helm plugin install https://github.com/chartmuseum/helm-push
+
+添加Helm repo1helm repo add &#123;&#123; repo_name &#125;&#125; &#123;&#123; url &#125;&#125; --username &#123;&#123;...
             </div>
             <!-- read more -->
             
@@ -477,13 +516,6 @@ Run server1$ hexo ...
             
         
     
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                    
-                    <img class="profile-qr" src="/assets/example_qr.png" />
-                </span>
-            
         
     
         
@@ -560,14 +592,21 @@ Run server1$ hexo ...
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
     
     
     
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 1
+        Total : 2
         </div>
         <!-- search  -->
         
@@ -584,7 +623,13 @@ Run server1$ hexo ...
         
         <li class="archive-post-item">
             <span class="archive-post-date">11/07</span>
-            <a class="archive-post-title" href="/2021/11/07/hello-world/">Hello World</a>
+            <a class="archive-post-title" href="/2021/11/07/k8s%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83-md/">k8s灰度发布.md</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span>
+            <a class="archive-post-title" href="/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/">chartmuseum使用</a>
         </li>
     
     </div>
@@ -616,7 +661,7 @@ Run server1$ hexo ...
         <script>
     var siteMeta = {
         root: "/",
-        author: "John Doe"
+        author: "0x0034"
     }
 </script>
 
