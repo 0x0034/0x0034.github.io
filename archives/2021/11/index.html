@@ -428,6 +428,40 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2021/11/08/K8s%E4%B8%ADjava%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/">
+                
+                <span class="abstract-title-text">K8s中java内存参数配置</span>
+            </a>
+            <div class="abstract-content">
+                k8s中java动态内存配置内存配置建议
+条件限制: 本示例中使用Java8 , Java8的版本需要大于等于8u191,小于8u191请设置xms,xmx
+
+
+JVM最大堆 = 容器limit内存* 1/2
+JVM最大堆 * 125% &lt;= 容器request
+
+参数介绍Java 8u191 以上版本使用-XX:MaxRAMPercentage、-XX:MinRAMPercentage 两个参数. -XX:MaxRAMPercentage 是堆栈最大使用宿主内存的参数, 接受的值为浮点型. 即如果最大堆栈大小为容器limit的1/2,则设置为-XX:MaxRAMPercentag...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2021/11/08">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/11/08</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2021/11/07/k8s%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/">
                 
                 <span class="abstract-title-text">k8s灰度发布.md</span>
@@ -597,7 +631,14 @@ Push charts
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
         
         
     
@@ -606,7 +647,7 @@ Push charts
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 2
+        Total : 3
         </div>
         <!-- search  -->
         
@@ -620,6 +661,12 @@ Push charts
             <div class="archive-year"> 2021 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span>
+            <a class="archive-post-title" href="/2021/11/08/K8s%E4%B8%ADjava%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/">K8s中java内存参数配置</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">11/07</span>
