@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="0x0034">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="0x0034">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="源码分析 流程分析 template.go 入口文件 runInstall 方法 RunWithContext 方法   涉及文件及内容   入口文件helm&#x2F;cmd&#x2F;template.go样例命令helm template &amp;#123;&amp;#123;chart_name&amp;#125;&amp;#125;  源码分析template 也是复用 helm&#x2F;install.go 中runInstall()方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="helm template 源码分析">
+<meta property="og:url" content="https://0x0034.github.io/2021/12/16/helm-template-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="源码分析 流程分析 template.go 入口文件 runInstall 方法 RunWithContext 方法   涉及文件及内容   入口文件helm&#x2F;cmd&#x2F;template.go样例命令helm template &amp;#123;&amp;#123;chart_name&amp;#125;&amp;#125;  源码分析template 也是复用 helm&#x2F;install.go 中runInstall()方">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-12-16T12:55:43.000Z">
+<meta property="article:modified_time" content="2021-12-16T12:55:43.558Z">
+<meta property="article:author" content="0x0034">
+<meta property="article:tag" content="helm">
+<meta property="article:tag" content="helm3">
+<meta property="article:tag" content="源码">
+<meta property="article:tag" content="go">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>helm template 源码分析 · 0x0034&#39;s Blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20210823" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20210823" as="style">
+    <link rel="stylesheet" href="/css/dark.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="/css/mobile.css?v=20210823" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20210823" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20210823" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>0x0034's Blog.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">0x0034&#39;s Blog.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">helm template 源码分析</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                helm template 源码分析
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="helm">helm</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="helm3">helm3</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="源码">源码</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="go">go</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.8k</span>阅读时长: <span class="post-count reading-time">16 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2021/12/16</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <!-- markdownlint-disable MD010 MD007 MD029-->
+
+<ul>
+<li><a href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90">源码分析</a></li>
+<li><a href="#%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90">流程分析</a><ul>
+<li><a href="#templatego-%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6">template.go 入口文件</a></li>
+<li><a href="#runinstall-%E6%96%B9%E6%B3%95">runInstall 方法</a></li>
+<li><a href="#runwithcontext-%E6%96%B9%E6%B3%95">RunWithContext 方法</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B6%89%E5%8F%8A%E6%96%87%E4%BB%B6%E5%8F%8A%E5%86%85%E5%AE%B9">涉及文件及内容</a></li>
+</ul>
+<blockquote>
+<p>入口文件<code>helm/cmd/template.go</code><br>样例命令<code>helm template &#123;&#123;chart_name&#125;&#125;</code></p>
+</blockquote>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><code>template</code> 也是复用 <code>helm/install.go</code> 中<code>runInstall()</code>方法 , 而<code>template</code> 与 <code>install</code> 方法最大的不同是,设置了<code>client.DryRun = true</code>, 这个会让 <code>RunWithContext</code> 这个直接return,并且将<code>manifest</code>也就是最终渲染出来的Yaml输出到<code>os.Stdout</code>,也就是输出到屏幕.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> i.DryRun &#123;</span><br><span class="line">	rel.Info.Description = <span class="string">&quot;Dry run complete&quot;</span></span><br><span class="line">	<span class="keyword">return</span> rel, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h2><h3 id="template-go-入口文件"><a href="#template-go-入口文件" class="headerlink" title="template.go 入口文件"></a>template.go 入口文件</h3><p><code>template.go</code>文件:</p>
+<ol>
+<li>设置DryRun参数为<code>true</code></li>
+<li>设置Replace参数为<code>true</code></li>
+<li>运行<code>runInstall</code>方法渲染Yaml</li>
+<li>将存放Yaml的<code>manifest</code>输出给<code>os.Stdout</code></li>
+</ol>
+<h3 id="runInstall-方法"><a href="#runInstall-方法" class="headerlink" title="runInstall 方法"></a>runInstall 方法</h3><p>流程如下:</p>
+<ol>
+<li><p><code>name, chart, err := client.NameAndChart(args)</code></p>
+<ul>
+<li>分离参数,返回自定义资源名称<code>name</code> 和 chart路径<code>chart</code></li>
+</ul>
+</li>
+<li><p><code>cp, err := client.ChartPathOptions.LocateChart(chart, settings)</code></p>
+<ul>
+<li>转换<code>chart</code>路劲为绝对路径<code>cp</code></li>
+</ul>
+</li>
+<li><p><code>chartRequested, err := loader.Load(cp)</code></p>
+<ul>
+<li>将绝对路径<code>cp</code>中<code>template</code>目录文件转化为<code>*chart.Chart</code>对象.</li>
+<li><code>chart.Chart</code>结构体如下:</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">type</span> Chart <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// Raw 包含最初包含在图表存档中的文件的原始内容。</span></span><br><span class="line">	<span class="comment">// 这不应该被使用，除非在像“helm show values”这样的特殊情况下，我们想要显示原始值、注释等。</span></span><br><span class="line">	Raw []*File <span class="string">`json:&quot;-&quot;`</span></span><br><span class="line">	<span class="comment">// Metadata 是chartfile的内容</span></span><br><span class="line">	Metadata *Metadata <span class="string">`json:&quot;metadata&quot;`</span></span><br><span class="line">	<span class="comment">// Lock 是 Chart.lock的内容</span></span><br><span class="line">	Lock *Lock <span class="string">`json:&quot;lock&quot;`</span></span><br><span class="line">	<span class="comment">// 对应chart 的 Templates </span></span><br><span class="line">	Templates []*File <span class="string">`json:&quot;templates&quot;`</span></span><br><span class="line">	<span class="comment">// Values 是 chart 的默认配置</span></span><br><span class="line">	Values <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125; <span class="string">`json:&quot;values&quot;`</span></span><br><span class="line">	<span class="comment">// Schema 是一个可选的 JSON 模式，用于在Values上强加结构</span></span><br><span class="line">	Schema []<span class="keyword">byte</span> <span class="string">`json:&quot;schema&quot;`</span></span><br><span class="line">	<span class="comment">// Files 是 chart 中的杂项文件</span></span><br><span class="line">	<span class="comment">// 例如:  README, LICENSE, etc.</span></span><br><span class="line">	Files []*File <span class="string">`json:&quot;files&quot;`</span></span><br><span class="line"></span><br><span class="line">	parent       *Chart</span><br><span class="line">	dependencies []*Chart</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><code>return client.RunWithContext(ctx, chartRequested, vals)</code></li>
+</ol>
+<h3 id="RunWithContext-方法"><a href="#RunWithContext-方法" class="headerlink" title="RunWithContext 方法"></a>RunWithContext 方法</h3><ol>
+<li><p><code>valuesToRender, err := chartutil.ToRenderValues(chrt, vals, options, caps)</code></p>
+<ul>
+<li>将<code>value.yaml</code>内容转化为<code>map[string]interface&#123;&#125;</code></li>
+</ul>
+</li>
+<li><p><code>rel.Hooks, manifestDoc, rel.Info.Notes, err = i.cfg.renderResources(chrt, valuesToRender, i.ReleaseName, i.OutputDir, i.SubNotes, i.UseReleaseName, i.IncludeCRDs, i.PostRenderer, i.DryRun)</code></p>
+<ul>
+<li>将<code>valuesToRender</code> 中的内容渲染到<code>chrt.template</code>文件中,最终输出为<code>manifestDoc</code></li>
+</ul>
+</li>
+<li><p>判断DryRun,直接将文件返回到<code>os.Stdout</code></p>
+</li>
+</ol>
+<h2 id="涉及文件及内容"><a href="#涉及文件及内容" class="headerlink" title="涉及文件及内容"></a>涉及文件及内容</h2><p><code>newTemplateCmd</code>方法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newTemplateCmd</span><span class="params">(cfg *action.Configuration, out io.Writer)</span> *<span class="title">cobra</span>.<span class="title">Command</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> validate <span class="keyword">bool</span></span><br><span class="line">	<span class="keyword">var</span> includeCrds <span class="keyword">bool</span></span><br><span class="line">	<span class="keyword">var</span> skipTests <span class="keyword">bool</span></span><br><span class="line">	client := action.NewInstall(cfg)</span><br><span class="line">	valueOpts := &amp;values.Options&#123;&#125;</span><br><span class="line">	<span class="keyword">var</span> kubeVersion <span class="keyword">string</span></span><br><span class="line">	<span class="keyword">var</span> extraAPIs []<span class="keyword">string</span></span><br><span class="line">	<span class="keyword">var</span> showFiles []<span class="keyword">string</span></span><br><span class="line"></span><br><span class="line">	cmd := &amp;cobra.Command&#123;</span><br><span class="line">		Use:   <span class="string">&quot;template [NAME] [CHART]&quot;</span>,</span><br><span class="line">		Short: <span class="string">&quot;locally render templates&quot;</span>,</span><br><span class="line">		Long:  templateDesc,</span><br><span class="line">		Args:  require.MinimumNArgs(<span class="number">1</span>),</span><br><span class="line">		ValidArgsFunction: <span class="function"><span class="keyword">func</span><span class="params">(cmd *cobra.Command, args []<span class="keyword">string</span>, toComplete <span class="keyword">string</span>)</span> <span class="params">([]<span class="keyword">string</span>, cobra.ShellCompDirective)</span></span> &#123;</span><br><span class="line">			<span class="keyword">return</span> compInstall(args, toComplete, client)</span><br><span class="line">		&#125;,</span><br><span class="line">		RunE: <span class="function"><span class="keyword">func</span><span class="params">(_ *cobra.Command, args []<span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> kubeVersion != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">				parsedKubeVersion, err := chartutil.ParseKubeVersion(kubeVersion)</span><br><span class="line">				<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">					<span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;invalid kube version &#x27;%s&#x27;: %s&quot;</span>, kubeVersion, err)</span><br><span class="line">				&#125;</span><br><span class="line">				client.KubeVersion = parsedKubeVersion</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			client.DryRun = <span class="literal">true</span></span><br><span class="line">			client.ReleaseName = <span class="string">&quot;RELEASE-NAME&quot;</span></span><br><span class="line">			client.Replace = <span class="literal">true</span> <span class="comment">// Skip the name check</span></span><br><span class="line">			client.ClientOnly = !validate</span><br><span class="line">			client.APIVersions = chartutil.VersionSet(extraAPIs)</span><br><span class="line">			client.IncludeCRDs = includeCrds</span><br><span class="line">			rel, err := runInstall(args, client, valueOpts, out)</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; !settings.Debug &#123;</span><br><span class="line">				<span class="keyword">if</span> rel != <span class="literal">nil</span> &#123;</span><br><span class="line">					<span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;%w\n\nUse --debug flag to render out invalid YAML&quot;</span>, err)</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> err</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// We ignore a potential error here because, when the --debug flag was specified,</span></span><br><span class="line">			<span class="comment">// we always want to print the YAML, even if it is not valid. The error is still returned afterwards.</span></span><br><span class="line">			<span class="keyword">if</span> rel != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">var</span> manifests bytes.Buffer</span><br><span class="line">				fmt.Fprintln(&amp;manifests, strings.TrimSpace(rel.Manifest))</span><br><span class="line">				<span class="keyword">if</span> !client.DisableHooks &#123;</span><br><span class="line">					fileWritten := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">bool</span>)</span><br><span class="line">					<span class="keyword">for</span> _, m := <span class="keyword">range</span> rel.Hooks &#123;</span><br><span class="line">						<span class="keyword">if</span> skipTests &amp;&amp; isTestHook(m) &#123;</span><br><span class="line">							<span class="keyword">continue</span></span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">if</span> client.OutputDir == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">							fmt.Fprintf(&amp;manifests, <span class="string">&quot;---\n# Source: %s\n%s\n&quot;</span>, m.Path, m.Manifest)</span><br><span class="line">						&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">							newDir := client.OutputDir</span><br><span class="line">							<span class="keyword">if</span> client.UseReleaseName &#123;</span><br><span class="line">								newDir = filepath.Join(client.OutputDir, client.ReleaseName)</span><br><span class="line">							&#125;</span><br><span class="line">							err = writeToFile(newDir, m.Path, m.Manifest, fileWritten[m.Path])</span><br><span class="line">							<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">								<span class="keyword">return</span> err</span><br><span class="line">							&#125;</span><br><span class="line">							fileWritten[m.Path] = <span class="literal">true</span></span><br><span class="line">						&#125;</span><br><span class="line"></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="comment">// if we have a list of files to render, then check that each of the</span></span><br><span class="line">				<span class="comment">// provided files exists in the chart.</span></span><br><span class="line">				<span class="keyword">if</span> <span class="built_in">len</span>(showFiles) &gt; <span class="number">0</span> &#123;</span><br><span class="line">					<span class="comment">// This is necessary to ensure consistent manifest ordering when using --show-only</span></span><br><span class="line">					<span class="comment">// with globs or directory names.</span></span><br><span class="line">					splitManifests := releaseutil.SplitManifests(manifests.String())</span><br><span class="line">					manifestsKeys := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">0</span>, <span class="built_in">len</span>(splitManifests))</span><br><span class="line">					<span class="keyword">for</span> k := <span class="keyword">range</span> splitManifests &#123;</span><br><span class="line">						manifestsKeys = <span class="built_in">append</span>(manifestsKeys, k)</span><br><span class="line">					&#125;</span><br><span class="line">					sort.Sort(releaseutil.BySplitManifestsOrder(manifestsKeys))</span><br><span class="line"></span><br><span class="line">					manifestNameRegex := regexp.MustCompile(<span class="string">&quot;# Source: [^/]+/(.+)&quot;</span>)</span><br><span class="line">					<span class="keyword">var</span> manifestsToRender []<span class="keyword">string</span></span><br><span class="line">					<span class="keyword">for</span> _, f := <span class="keyword">range</span> showFiles &#123;</span><br><span class="line">						missing := <span class="literal">true</span></span><br><span class="line">						<span class="comment">// Use linux-style filepath separators to unify user&#x27;s input path</span></span><br><span class="line">						f = filepath.ToSlash(f)</span><br><span class="line">						<span class="keyword">for</span> _, manifestKey := <span class="keyword">range</span> manifestsKeys &#123;</span><br><span class="line">							manifest := splitManifests[manifestKey]</span><br><span class="line">							submatch := manifestNameRegex.FindStringSubmatch(manifest)</span><br><span class="line">							<span class="keyword">if</span> <span class="built_in">len</span>(submatch) == <span class="number">0</span> &#123;</span><br><span class="line">								<span class="keyword">continue</span></span><br><span class="line">							&#125;</span><br><span class="line">							manifestName := submatch[<span class="number">1</span>]</span><br><span class="line">							<span class="comment">// manifest.Name is rendered using linux-style filepath separators on Windows as</span></span><br><span class="line">							<span class="comment">// well as macOS/linux.</span></span><br><span class="line">							manifestPathSplit := strings.Split(manifestName, <span class="string">&quot;/&quot;</span>)</span><br><span class="line">							<span class="comment">// manifest.Path is connected using linux-style filepath separators on Windows as</span></span><br><span class="line">							<span class="comment">// well as macOS/linux</span></span><br><span class="line">							manifestPath := strings.Join(manifestPathSplit, <span class="string">&quot;/&quot;</span>)</span><br><span class="line"></span><br><span class="line">							<span class="comment">// if the filepath provided matches a manifest path in the</span></span><br><span class="line">							<span class="comment">// chart, render that manifest</span></span><br><span class="line">							<span class="keyword">if</span> matched, _ := filepath.Match(f, manifestPath); !matched &#123;</span><br><span class="line">								<span class="keyword">continue</span></span><br><span class="line">							&#125;</span><br><span class="line">							manifestsToRender = <span class="built_in">append</span>(manifestsToRender, manifest)</span><br><span class="line">							missing = <span class="literal">false</span></span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">if</span> missing &#123;</span><br><span class="line">							<span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;could not find template %s in chart&quot;</span>, f)</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">for</span> _, m := <span class="keyword">range</span> manifestsToRender &#123;</span><br><span class="line">						fmt.Fprintf(out, <span class="string">&quot;---\n%s\n&quot;</span>, m)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					fmt.Fprintf(out, <span class="string">&quot;%s&quot;</span>, manifests.String())</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	f := cmd.Flags()</span><br><span class="line">	addInstallFlags(cmd, f, client, valueOpts)</span><br><span class="line">	f.StringArrayVarP(&amp;showFiles, <span class="string">&quot;show-only&quot;</span>, <span class="string">&quot;s&quot;</span>, []<span class="keyword">string</span>&#123;&#125;, <span class="string">&quot;only show manifests rendered from the given templates&quot;</span>)</span><br><span class="line">	f.StringVar(&amp;client.OutputDir, <span class="string">&quot;output-dir&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;writes the executed templates to files in output-dir instead of stdout&quot;</span>)</span><br><span class="line">	f.BoolVar(&amp;validate, <span class="string">&quot;validate&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;validate your manifests against the Kubernetes cluster you are currently pointing at. This is the same validation performed on an install&quot;</span>)</span><br><span class="line">	f.BoolVar(&amp;includeCrds, <span class="string">&quot;include-crds&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;include CRDs in the templated output&quot;</span>)</span><br><span class="line">	f.BoolVar(&amp;skipTests, <span class="string">&quot;skip-tests&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;skip tests from templated output&quot;</span>)</span><br><span class="line">	f.BoolVar(&amp;client.IsUpgrade, <span class="string">&quot;is-upgrade&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;set .Release.IsUpgrade instead of .Release.IsInstall&quot;</span>)</span><br><span class="line">	f.StringVar(&amp;kubeVersion, <span class="string">&quot;kube-version&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;Kubernetes version used for Capabilities.KubeVersion&quot;</span>)</span><br><span class="line">	f.StringArrayVarP(&amp;extraAPIs, <span class="string">&quot;api-versions&quot;</span>, <span class="string">&quot;a&quot;</span>, []<span class="keyword">string</span>&#123;&#125;, <span class="string">&quot;Kubernetes api versions used for Capabilities.APIVersions&quot;</span>)</span><br><span class="line">	f.BoolVar(&amp;client.UseReleaseName, <span class="string">&quot;release-name&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;use release name in the output-dir path.&quot;</span>)</span><br><span class="line">	bindPostRenderFlag(cmd, &amp;client.PostRenderer)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> cmd</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>runInstall</code> 方法如下:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">runInstall</span><span class="params">(args []<span class="keyword">string</span>, client *action.Install, valueOpts *values.Options, out io.Writer)</span> <span class="params">(*release.Release, error)</span></span> &#123;</span><br><span class="line">	debug(<span class="string">&quot;Original chart version: %q&quot;</span>, client.Version)</span><br><span class="line">	<span class="keyword">if</span> client.Version == <span class="string">&quot;&quot;</span> &amp;&amp; client.Devel &#123;</span><br><span class="line">		debug(<span class="string">&quot;setting version to &gt;0.0.0-0&quot;</span>)</span><br><span class="line">		client.Version = <span class="string">&quot;&gt;0.0.0-0&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// name: 自定义资源名称</span></span><br><span class="line">	<span class="comment">// chart: charts路径, </span></span><br><span class="line">	name, chart, err := client.NameAndChart(args)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	client.ReleaseName = name</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err := checkOCI(chart); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 转换chart路径为绝对路径</span></span><br><span class="line">	cp, err := client.ChartPathOptions.LocateChart(chart, settings)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	debug(<span class="string">&quot;CHART PATH: %s\n&quot;</span>, cp)</span><br><span class="line"></span><br><span class="line">	p := getter.All(settings)</span><br><span class="line">	<span class="comment">// 判断 -f values.yaml 并序列化values.yaml 文件</span></span><br><span class="line">	vals, err := valueOpts.MergeValues(p)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Check chart dependencies to make sure all are present in /charts</span></span><br><span class="line">	<span class="comment">// 序列化charts中文件</span></span><br><span class="line">	chartRequested, err := loader.Load(cp)</span><br><span class="line">	<span class="comment">// loader.Load 返回类型 *chart.Chart</span></span><br><span class="line">	<span class="comment">// Chart结构体 包含 Templates []*File `json:&quot;templates&quot;`</span></span><br><span class="line">	<span class="comment">// 其中包含了template目录下的文件名和文件内容</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 校验chart 是否可安装</span></span><br><span class="line">	<span class="keyword">if</span> err := checkIfInstallable(chartRequested); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> chartRequested.Metadata.Deprecated &#123;</span><br><span class="line">		warning(<span class="string">&quot;This chart is deprecated&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> req := chartRequested.Metadata.Dependencies; req != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="comment">// If CheckDependencies returns an error, we have unfulfilled dependencies.</span></span><br><span class="line">		<span class="comment">// As of Helm 2.4.0, this is treated as a stopping condition:</span></span><br><span class="line">		<span class="comment">// https://github.com/helm/helm/issues/2209</span></span><br><span class="line">		<span class="keyword">if</span> err := action.CheckDependencies(chartRequested, req); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			err = errors.Wrap(err, <span class="string">&quot;An error occurred while checking for chart dependencies. You may need to run `helm dependency build` to fetch missing dependencies&quot;</span>)</span><br><span class="line">			<span class="keyword">if</span> client.DependencyUpdate &#123;</span><br><span class="line">				man := &amp;downloader.Manager&#123;</span><br><span class="line">					Out:              out,</span><br><span class="line">					ChartPath:        cp,</span><br><span class="line">					Keyring:          client.ChartPathOptions.Keyring,</span><br><span class="line">					SkipUpdate:       <span class="literal">false</span>,</span><br><span class="line">					Getters:          p,</span><br><span class="line">					RepositoryConfig: settings.RepositoryConfig,</span><br><span class="line">					RepositoryCache:  settings.RepositoryCache,</span><br><span class="line">					Debug:            settings.Debug,</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> err := man.Update(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">// Reload the chart with the updated Chart.lock file.</span></span><br><span class="line">				<span class="keyword">if</span> chartRequested, err = loader.Load(cp); err != <span class="literal">nil</span> &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">nil</span>, errors.Wrap(err, <span class="string">&quot;failed reloading chart after repo update&quot;</span>)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	client.Namespace = settings.Namespace()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Create context and prepare the handle of SIGTERM</span></span><br><span class="line">	ctx := context.Background()</span><br><span class="line">	ctx, cancel := context.WithCancel(ctx)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Set up channel on which to send signal notifications.</span></span><br><span class="line">	<span class="comment">// We must use a buffered channel or risk missing the signal</span></span><br><span class="line">	<span class="comment">// if we&#x27;re not ready to receive when the signal is sent.</span></span><br><span class="line">	cSignal := <span class="built_in">make</span>(<span class="keyword">chan</span> os.Signal, <span class="number">2</span>)</span><br><span class="line">	signal.Notify(cSignal, os.Interrupt, syscall.SIGTERM)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		&lt;-cSignal</span><br><span class="line">		fmt.Fprintf(out, <span class="string">&quot;Release %s has been cancelled.\n&quot;</span>, args[<span class="number">0</span>])</span><br><span class="line">		cancel()</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="comment">// 安装k8s资源</span></span><br><span class="line">	<span class="keyword">return</span> client.RunWithContext(ctx, chartRequested, vals)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>RunWithContext</code> 方法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i *Install)</span>  <span class="title">RunWithContext</span><span class="params">(ctx context.Context, chrt *chart.Chart, vals <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(*release.Release, error)</span></span> &#123;</span><br><span class="line">	<span class="comment">// Check reachability of cluster unless in client-only mode (e.g. `helm template` without `--validate`)</span></span><br><span class="line">	<span class="comment">// 检查apiserver是否可访问</span></span><br><span class="line">	<span class="keyword">if</span> !i.ClientOnly &#123;</span><br><span class="line">		<span class="keyword">if</span> err := i.cfg.KubeClient.IsReachable(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 名称是否可用</span></span><br><span class="line">	<span class="keyword">if</span> err := i.availableName(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 处理依赖</span></span><br><span class="line">	<span class="keyword">if</span> err := chartutil.ProcessDependencies(chrt, vals); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Pre-install anything in the crd/ directory. We do this before Helm</span></span><br><span class="line">	<span class="comment">// contacts the upstream server and builds the capabilities object.</span></span><br><span class="line">	<span class="keyword">if</span> crds := chrt.CRDObjects(); !i.ClientOnly &amp;&amp; !i.SkipCRDs &amp;&amp; <span class="built_in">len</span>(crds) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="comment">// On dry run, bail here</span></span><br><span class="line">		<span class="keyword">if</span> i.DryRun &#123;</span><br><span class="line">			i.cfg.Log(<span class="string">&quot;WARNING: This chart or one of its subcharts contains CRDs. Rendering may fail or contain inaccuracies.&quot;</span>)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> err := i.installCRDs(crds); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> i.ClientOnly &#123;</span><br><span class="line">		<span class="comment">// Add mock objects in here so it doesn&#x27;t use Kube API server</span></span><br><span class="line">		<span class="comment">// NOTE(bacongobbler): used for `helm template`</span></span><br><span class="line">		i.cfg.Capabilities = chartutil.DefaultCapabilities.Copy()</span><br><span class="line">		<span class="keyword">if</span> i.KubeVersion != <span class="literal">nil</span> &#123;</span><br><span class="line">			i.cfg.Capabilities.KubeVersion = *i.KubeVersion</span><br><span class="line">		&#125;</span><br><span class="line">		i.cfg.Capabilities.APIVersions = <span class="built_in">append</span>(i.cfg.Capabilities.APIVersions, i.APIVersions...)</span><br><span class="line">		i.cfg.KubeClient = &amp;kubefake.PrintingKubeClient&#123;Out: ioutil.Discard&#125;</span><br><span class="line"></span><br><span class="line">		mem := driver.NewMemory()</span><br><span class="line">		mem.SetNamespace(i.Namespace)</span><br><span class="line">		i.cfg.Releases = storage.Init(mem)</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> !i.ClientOnly &amp;&amp; <span class="built_in">len</span>(i.APIVersions) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		i.cfg.Log(<span class="string">&quot;API Version list given outside of client only mode, this list will be ignored&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Make sure if Atomic is set, that wait is set as well. This makes it so</span></span><br><span class="line">	<span class="comment">// the user doesn&#x27;t have to specify both</span></span><br><span class="line">	i.Wait = i.Wait || i.Atomic</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 获取Kube version 和 APIVersion</span></span><br><span class="line">	caps, err := i.cfg.getCapabilities()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// special case for helm template --is-upgrade</span></span><br><span class="line">	isUpgrade := i.IsUpgrade &amp;&amp; i.DryRun</span><br><span class="line">	options := chartutil.ReleaseOptions&#123;</span><br><span class="line">		Name:      i.ReleaseName,</span><br><span class="line">		Namespace: i.Namespace,</span><br><span class="line">		Revision:  <span class="number">1</span>,</span><br><span class="line">		IsInstall: !isUpgrade,</span><br><span class="line">		IsUpgrade: isUpgrade,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 组合go template对象</span></span><br><span class="line">	valuesToRender, err := chartutil.ToRenderValues(chrt, vals, options, caps)</span><br><span class="line">	fmt.Println(valuesToRender)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建release, 向kubernetes 写入一个secret 或者 configmap</span></span><br><span class="line">	rel := i.createRelease(chrt, vals)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> manifestDoc *bytes.Buffer</span><br><span class="line">	<span class="comment">// 渲染资源</span></span><br><span class="line">	<span class="comment">// Hooks: 钩子</span></span><br><span class="line">	<span class="comment">// mainfestDoc: 具体的Yaml</span></span><br><span class="line">	<span class="comment">// Note: note文件</span></span><br><span class="line">	rel.Hooks, manifestDoc, rel.Info.Notes, err = i.cfg.renderResources(chrt, valuesToRender, i.ReleaseName, i.OutputDir, i.SubNotes, i.UseReleaseName, i.IncludeCRDs, i.PostRenderer, i.DryRun)</span><br><span class="line">	<span class="comment">// Even for errors, attach this if available</span></span><br><span class="line">	<span class="keyword">if</span> manifestDoc != <span class="literal">nil</span> &#123;</span><br><span class="line">		rel.Manifest = manifestDoc.String()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Check error from render</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		rel.SetStatus(release.StatusFailed, fmt.Sprintf(<span class="string">&quot;failed to render resource: %s&quot;</span>, err.Error()))</span><br><span class="line">		<span class="comment">// Return a release with partial data so that the client can show debugging information.</span></span><br><span class="line">		<span class="keyword">return</span> rel, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Mark this release as in-progress</span></span><br><span class="line">	rel.SetStatus(release.StatusPendingInstall, <span class="string">&quot;Initial install underway&quot;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> toBeAdopted kube.ResourceList</span><br><span class="line">	<span class="comment">// 使用mainfest 创建resource资源</span></span><br><span class="line">	resources, err := i.cfg.KubeClient.Build(bytes.NewBufferString(rel.Manifest), !i.DisableOpenAPIValidation)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.Wrap(err, <span class="string">&quot;unable to build kubernetes objects from release manifest&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// It is safe to use &quot;force&quot; here because these are resources currently rendered by the chart.</span></span><br><span class="line">	err = resources.Visit(setMetadataVisitor(rel.Name, rel.Namespace, <span class="literal">true</span>))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Install requires an extra validation step of checking that resources</span></span><br><span class="line">	<span class="comment">// don&#x27;t already exist before we actually create resources. If we continue</span></span><br><span class="line">	<span class="comment">// forward and create the release object with resources that already exist,</span></span><br><span class="line">	<span class="comment">// we&#x27;ll end up in a state where we will delete those resources upon</span></span><br><span class="line">	<span class="comment">// deleting the release because the manifest will be pointing at that</span></span><br><span class="line">	<span class="comment">// resource</span></span><br><span class="line">	<span class="keyword">if</span> !i.ClientOnly &amp;&amp; !isUpgrade &amp;&amp; <span class="built_in">len</span>(resources) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="comment">// 判断资源是否冲突</span></span><br><span class="line">		toBeAdopted, err = existingResourceConflict(resources, rel.Name, rel.Namespace)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, errors.Wrap(err, <span class="string">&quot;rendered manifests contain a resource that already exists. Unable to continue with install&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Bail out here if it is a dry run</span></span><br><span class="line">	<span class="keyword">if</span> i.DryRun &#123;</span><br><span class="line">		rel.Info.Description = <span class="string">&quot;Dry run complete&quot;</span></span><br><span class="line">		<span class="keyword">return</span> rel, <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> i.CreateNamespace &#123;</span><br><span class="line">		ns := &amp;v1.Namespace&#123;</span><br><span class="line">			TypeMeta: metav1.TypeMeta&#123;</span><br><span class="line">				APIVersion: <span class="string">&quot;v1&quot;</span>,</span><br><span class="line">				Kind:       <span class="string">&quot;Namespace&quot;</span>,</span><br><span class="line">			&#125;,</span><br><span class="line">			ObjectMeta: metav1.ObjectMeta&#123;</span><br><span class="line">				Name: i.Namespace,</span><br><span class="line">				Labels: <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">					<span class="string">&quot;name&quot;</span>: i.Namespace,</span><br><span class="line">				&#125;,</span><br><span class="line">			&#125;,</span><br><span class="line">		&#125;</span><br><span class="line">		buf, err := yaml.Marshal(ns)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">		resourceList, err := i.cfg.KubeClient.Build(bytes.NewBuffer(buf), <span class="literal">true</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> _, err := i.cfg.KubeClient.Create(resourceList); err != <span class="literal">nil</span> &amp;&amp; !apierrors.IsAlreadyExists(err) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// If Replace is true, we need to supercede the last release.</span></span><br><span class="line">	<span class="keyword">if</span> i.Replace &#123;</span><br><span class="line">		<span class="keyword">if</span> err := i.replaceRelease(rel); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Store the release in history before continuing (new in Helm 3). We always know</span></span><br><span class="line">	<span class="comment">// that this is a create operation.</span></span><br><span class="line">	<span class="keyword">if</span> err := i.cfg.Releases.Create(rel); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="comment">// We could try to recover gracefully here, but since nothing has been installed</span></span><br><span class="line">		<span class="comment">// yet, this is probably safer than trying to continue when we know storage is</span></span><br><span class="line">		<span class="comment">// not working.</span></span><br><span class="line">		<span class="keyword">return</span> rel, err</span><br><span class="line">	&#125;</span><br><span class="line">	rChan := <span class="built_in">make</span>(<span class="keyword">chan</span> resultMessage)</span><br><span class="line">	<span class="keyword">go</span> i.performInstall(rChan, rel, toBeAdopted, resources)</span><br><span class="line">	<span class="keyword">go</span> i.handleContext(ctx, rChan, rel)</span><br><span class="line">	result := &lt;-rChan</span><br><span class="line">	<span class="comment">//start preformInstall go routine</span></span><br><span class="line">	<span class="keyword">return</span> result.r, result.e</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://0x0034.github.io">0x0034</a>
+            <p>原文链接：<a href="https://0x0034.github.io/2021/12/16/helm-template-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">https://0x0034.github.io/2021/12/16/helm-template-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</a>
+            <p>发表日期：<a href="https://0x0034.github.io/2021/12/16/helm-template-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">December 16th 2021, 8:55:43 pm</a>
+            <p>更新日期：<a href="https://0x0034.github.io/2021/12/16/helm-template-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">December 16th 2021, 8:55:43 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2021/12/12/tesla-client/" title="tesla-client">
+                    <div class="prevTitle">tesla-client</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:wanxialianwei@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/0x0034" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">源码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#template-go-%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">template.go 入口文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#runInstall-%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">runInstall 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RunWithContext-%E6%96%B9%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text">RunWithContext 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%89%E5%8F%8A%E6%96%87%E4%BB%B6%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">涉及文件及内容</span></a></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 7
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2021 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span>
+            <a class="archive-post-title" href="/2021/12/16/helm-template-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">helm template 源码分析</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span>
+            <a class="archive-post-title" href="/2021/12/12/tesla-client/">tesla-client</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span>
+            <a class="archive-post-title" href="/2021/12/09/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90%E5%8A%A0%E9%80%9F/">开发资源加速</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span>
+            <a class="archive-post-title" href="/2021/12/09/Chaos-Enginnering/">Chaos Enginnering</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span>
+            <a class="archive-post-title" href="/2021/11/08/K8s%E4%B8%ADjava%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/">K8s中java内存参数配置</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span>
+            <a class="archive-post-title" href="/2021/11/07/k8s%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/">k8s灰度发布.md</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span>
+            <a class="archive-post-title" href="/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/">chartmuseum使用</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="kubernetes">
+                <span class="iconfont-archer">&#xe606;</span>
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm3">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="源码">
+                <span class="iconfont-archer">&#xe606;</span>
+                源码
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="go">
+                <span class="iconfont-archer">&#xe606;</span>
+                go
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMeta = {
+        root: "/",
+        author: "0x0034"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20210823"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20210823"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20210823" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>
