@@ -428,6 +428,73 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/">
+                
+                <span class="abstract-title-text">记一次kubernetes iowait激增导致的宕机</span>
+            </a>
+            <div class="abstract-content">
+                
+问题描述: 在安装erda的时候.三台机器的iowait 激增, 每个cpu的iowait 都达到了99% . 导致k8s组件宕机. 
+
+节点配置
+
+
+节点名称
+cpu
+内存
+磁盘大小
+ip
+
+
+
+master/node1
+4
+12G
+20GB
+192.168.1.221
+
+
+node2
+4
+12G
+20GB
+192.168.1.222
+
+
+node3
+4
+12G
+20GB
+192.168.1.223
+
+
+
+问题排查
+使用pidstat , vmstat 观察机器状况, 观察是否存在IO激增的情况. 或者过多的中断和上下文切换.
+
+
+排查下来, 机器的cpu 和, 文件读写非常的正常....
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/01/16">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/16</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/01/04/%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
                 
                 <span class="abstract-title-text">内存问题排查</span>
@@ -1054,7 +1121,14 @@ Push charts
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
         
         
         
@@ -1077,7 +1151,7 @@ Push charts
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 9
+        Total : 10
         </div>
         <!-- search  -->
         
@@ -1091,6 +1165,12 @@ Push charts
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span>
+            <a class="archive-post-title" href="/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/">记一次kubernetes iowait激增导致的宕机</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">01/04</span>
