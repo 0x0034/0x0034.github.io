@@ -443,21 +443,61 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/01/24/CentOS-7-8-%E5%AE%89%E8%A3%85fail2ban-iptables%E9%A2%84%E9%98%B2%E7%88%86%E7%A0%B4/">
+                
+                <span class="abstract-title-text">CentOS 7/8 安装fail2ban+iptables预防爆破</span>
+            </a>
+            <div class="abstract-content">
+                fail2ban安装epel
+CentOS7
+
+1wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+
+CentOS8
+
+123yum install -y https://mirrors.aliyun.com/epel/epel-release-latest-8.noarch.rpmsed -i &#x27;s|^#baseurl=https://download.example/pub|baseurl=https://mirrors.aliyun.com|&#x27; /etc/...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/01/24">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/24</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/01/24/Linux-bond%E6%A8%A1%E5%BC%8F-%E4%B8%A2%E5%8C%85/">
                 
                 <span class="abstract-title-text">Linux bond模式 丢包</span>
             </a>
             <div class="abstract-content">
                 
+排查思路
+思路1: 网络阻塞导致的丢包
+思路2: dmesg排查
+思路3: 禁止mac地址学习
+
+
+
+
 问题描述: 物理机存在双网卡Bond, 宿主机Ping 内部桥接虚拟机IP丢包严重.
 
 
 
 排查思路思路1: 网络阻塞导致的丢包查看网络连接数. 在我们的环境中存在大量的timewait.(当时timewait 高达几万).
-1cat /proc/net/nf_conntrack | awk &#x27;/^.*tcp.*$/ &#123;count[$6]++&#125; END &#123;for(state in count) print state, count[state]&#125;&#x27;
-
-优化将如下内容追加到/etc/sysctl.conf 中
-123456789...
+1cat /proc/net/nf_conntrack | awk &#x27;/^.*tcp.*$/ &#123;count[$6]++&#125; END &#123;for(state in count) print state, count[state]...
             </div>
             <!-- read more -->
             
@@ -924,75 +964,6 @@ Clone加速123456789101112131415161718192021# 方法一：手动...
         </article>
         <div class="index-post-divider"></div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/12/09/Chaos-Enginnering/">
-                
-                <span class="abstract-title-text">Chaos Enginnering</span>
-            </a>
-            <div class="abstract-content">
-                
-
-
-简述
-起源
-目的
-混沌工程与故障注入,故障测试的关系
-社区现状
-
-
-原则
-遵循步骤
-高级原则
-建立一个围绕稳定状态行为的假说
-多样化真实世界的事件
-在生产环境中运行实验
-持续自动化运行实验
-最小化爆炸半径
-
-
-
-
-混沌工程变量
-ChaosBlade
-场景大图
-示例使用
-OS层
-CPU
-内存
-磁盘
-
-
-JVM
-prepare jvm
-create jvm
-
-
-
-
-
-
-
-简述起源Netflix工程师创建了Chaos Monkey，使用该工具可以在整个系统中在随机位置引发故障。正如GitHub上的工具维护者所说，“Chaos Monkey会随机终止在生产环境中运行的虚拟机实例和容器。”通...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2021/12/09">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/12/09</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
     <!-- paginator  -->
     
         <nav class="page-nav">
@@ -1236,7 +1207,20 @@ create jvm
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1281,7 +1265,7 @@ create jvm
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 13
+        Total : 14
         </div>
         <!-- search  -->
         
@@ -1295,6 +1279,12 @@ create jvm
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/24</span>
+            <a class="archive-post-title" href="/2022/01/24/CentOS-7-8-%E5%AE%89%E8%A3%85fail2ban-iptables%E9%A2%84%E9%98%B2%E7%88%86%E7%A0%B4/">CentOS 7/8 安装fail2ban+iptables预防爆破</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">01/24</span>
