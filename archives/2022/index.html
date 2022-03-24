@@ -428,6 +428,80 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">
+                
+                <span class="abstract-title-text">ingress部署</span>
+            </a>
+            <div class="abstract-content">
+                
+部署ingress
+优化方案
+使用hostNetwork
+修改工作负载,并在master上运行ingress
+测试
+
+
+ingress-nginx.yaml
+
+部署ingress这边没啥好说, 复制下面的ingress-nginx.yaml , 然后kubectl apply -f ingress-nginx.yaml就可以了
+优化方案这边首先说一下背景, 我们的集群是在云上, node连接apiserver,都是走slb, 所以我们希望复用slb.
+下面来说方案.
+使用hostNetwork首先ingress部署使用hostNetwork网络模式,即ingress 容器的80,443...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/25">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/25</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">
+                
+                <span class="abstract-title-text">flannel部署问题</span>
+            </a>
+            <div class="abstract-content">
+                问题描述在部署Flannel的过程中, 发现flannel部署成功, 但是总是突然的Error, 然后使用如下命令. 得到报错
+1kubectl logs kube-flannel-ds-hnkvp -n kube-system
+
+报错信息:
+123...Failed to create SubnetManager: error retrieving pod spec dial tcp 10.0.0.1:443: i/o timeout...
+
+修正办法最后排查到,是因为云上的多网卡环境, Flannel没有走内网IP的网卡,
+遂在flannel.yaml中添加--iface=网卡如下配...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/25">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/25</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/01/24/CentOS-7-8-%E5%AE%89%E8%A3%85fail2ban-iptables%E9%A2%84%E9%98%B2%E7%88%86%E7%A0%B4/">
                 
                 <span class="abstract-title-text">CentOS 7/8 安装fail2ban+iptables预防爆破</span>
@@ -1014,7 +1088,33 @@ t
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1067,7 +1167,7 @@ t
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 14
+        Total : 16
         </div>
         <!-- search  -->
         
@@ -1081,6 +1181,18 @@ t
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">01/24</span>
