@@ -443,6 +443,83 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/01/02/pidstat-%E8%AF%A6%E8%A7%A3/">
+                
+                <span class="abstract-title-text">pidstat 详解</span>
+            </a>
+            <div class="abstract-content">
+                
+功能
+命令参数
+输出字段含义
+使用案例
+统计进程内存和线程的使用情况(以人类可阅读的方式)
+统计进程IO
+进程上下文切换
+查看指定进程和他的派生线程的状态
+
+
+
+功能pidstat命令用于监视当前由Linux内核管理的单个任务。
+它为使用选项-p选择的每个任务或Linux内核管理的每个任务（如果使用了选项-p ALL）写入标准输出。
+不选择任何任务相当于指定-p ALL，但报告中将只显示活动任务（统计值非零的任务）。
+命令参数
+
+
+参数
+用途/含义
+
+
+
+u
+默认参数, 显示进程的CPU利用率.
+
+
+R
+报告实时优先级和调度策略信息。
+
+
+s
+报告堆栈利用率。
+
+
+t
+选定任务关联的线...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/01/03">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/02</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="性能分析">性能分析</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="工具">工具</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="pidstat">pidstat</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2021/12/16/helm-template-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
                 
                 <span class="abstract-title-text">helm template 源码分析</span>
@@ -1004,7 +1081,20 @@ Push charts
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1073,7 +1163,7 @@ Push charts
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 16
+        Total : 17
         </div>
         <!-- search  -->
         
@@ -1097,6 +1187,12 @@ Push charts
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
