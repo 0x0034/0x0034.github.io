@@ -19,18 +19,26 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://0x0034.github.io/archives/2022/01/index.html">
+    <meta name="description" content="使用Helm安装Percona XtraDB Cluster 预备条件 安装 使用自定义参数安装 Percona XtraDB Cluster    使用Helm安装Percona XtraDB Cluster预备条件安装 添加 Percona 的 Helm 图表存储库并使用它使您的 Helm 客户端保持最新：  12helm repo add percona https:&#x2F;&#x2F;percona.g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="percona-xtradb-cluster-operator-文档-安装">
+<meta property="og:url" content="https://0x0034.github.io/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用Helm安装Percona XtraDB Cluster 预备条件 安装 使用自定义参数安装 Percona XtraDB Cluster    使用Helm安装Percona XtraDB Cluster预备条件安装 添加 Percona 的 Helm 图表存储库并使用它使您的 Helm 客户端保持最新：  12helm repo add percona https:&#x2F;&#x2F;percona.g">
 <meta property="og:locale">
+<meta property="article:published_time" content="2022-03-29T05:46:20.000Z">
+<meta property="article:modified_time" content="2022-03-29T05:46:20.068Z">
 <meta property="article:author" content="0x0034">
+<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="percona-xtradb-cluster-operator">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="operator">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>0x0034&#39;s Blog</title>
+    <title>percona-xtradb-cluster-operator-文档-安装 · 0x0034&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -217,6 +225,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -246,6 +256,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">0x0034&#39;s Blog.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">percona-xtradb-cluster-operator-文档-安装</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- fixed footer -->
@@ -272,24 +293,85 @@
 
 
 
+    height:50vh;
+
 ">
     
     <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                percona-xtradb-cluster-operator-文档-安装
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="percona-xtradb-cluster-operator">percona-xtradb-cluster-operator</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="mysql">mysql</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="operator">operator</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">298</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/03/29</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -419,436 +501,92 @@
 
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
+                <main class="main post-page">
+    <article class="article-entry">
+        <ul>
+<li><a href="#%E4%BD%BF%E7%94%A8helm%E5%AE%89%E8%A3%85percona-xtradb-cluster">使用Helm安装Percona XtraDB Cluster</a><ul>
+<li><a href="#%E9%A2%84%E5%A4%87%E6%9D%A1%E4%BB%B6">预备条件</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0%E5%AE%89%E8%A3%85-percona-xtradb-cluster">使用自定义参数安装 Percona XtraDB Cluster</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="使用Helm安装Percona-XtraDB-Cluster"><a href="#使用Helm安装Percona-XtraDB-Cluster" class="headerlink" title="使用Helm安装Percona XtraDB Cluster"></a>使用Helm安装Percona XtraDB Cluster</h2><h3 id="预备条件"><a href="#预备条件" class="headerlink" title="预备条件"></a>预备条件</h3><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li>添加 Percona 的 Helm 图表存储库并使用它使您的 Helm 客户端保持最新：</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add percona https://percona.github.io/percona<span class="literal">-helm</span><span class="literal">-charts</span>/</span><br><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>基于 Percona XtraDB Cluster 安装 Percona Distribution for MySQL Operator：</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install my<span class="literal">-op</span> percona/pxc<span class="literal">-operator</span></span><br></pre></td></tr></table></figure>
+
+<p>其中my-op 为你为创建 <code>percona/pxc-operator</code> 这个Helm charts 定义的名字, 可以为任意你喜欢的值.</p>
+<blockquote>
+<p>如果没有明确指定，helm将使用默认命名空间(<code>default</code>)。<br>要使用不同的命名空间，请使用如下参数<code>--namespace my-namespace </code></p>
+</blockquote>
+<ol start="3">
+<li>安装 Percona XtraDB 集群</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install my<span class="literal">-db</span> percona/pxc<span class="literal">-db</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用自定义参数安装-Percona-XtraDB-Cluster"><a href="#使用自定义参数安装-Percona-XtraDB-Cluster" class="headerlink" title="使用自定义参数安装 Percona XtraDB Cluster"></a>使用自定义参数安装 Percona XtraDB Cluster</h3><p>上面的命令使用默认参数安装 Percona XtraDB Cluster 。自定义选项可以作为参数传递给Helm。与chart一起传递的选项可以是任何<code>operator</code>的自定义资源选项。<code>helm install--set key=value[,key=value]</code>. </p>
+<p>以下示例将在 pxc命名空间中部署 Percona XtraDB Cluster Cluster，禁用备份和 20 Gi 存储：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">helm install my<span class="literal">-db</span> percona/pxc<span class="literal">-db</span> -<span class="literal">-namespace</span> pxc \</span><br><span class="line">  -<span class="literal">-set</span> pxc.volumeSpec.resources.requests.storage=<span class="number">20</span><span class="built_in">Gi</span> \</span><br><span class="line">  -<span class="literal">-set</span> backup.enabled=false</span><br></pre></td></tr></table></figure>
+
+    </article>
+    <!-- license -->
     
-        
-        
-        
-        
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://0x0034.github.io">0x0034</a>
+            <p>原文链接：<a href="https://0x0034.github.io/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/">https://0x0034.github.io/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/</a>
+            <p>发表日期：<a href="https://0x0034.github.io/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/">March 29th 2022, 1:46:20 pm</a>
+            <p>更新日期：<a href="https://0x0034.github.io/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/">March 29th 2022, 1:46:20 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/24/CentOS-7-8-%E5%AE%89%E8%A3%85fail2ban-iptables%E9%A2%84%E9%98%B2%E7%88%86%E7%A0%B4/">
-                
-                <span class="abstract-title-text">CentOS 7/8 安装fail2ban+iptables预防爆破</span>
-            </a>
-            <div class="abstract-content">
-                fail2ban安装epel
-CentOS7
-
-1wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
-
-
-CentOS8
-
-123yum install -y https://mirrors.aliyun.com/epel/epel-release-latest-8.noarch.rpmsed -i &#x27;s|^#baseurl=https://download.example/pub|baseurl=https://mirrors.aliyun.com|&#x27; /etc/...
-            </div>
-            <!-- read more -->
+        </li>
+        <li class="previous">
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/25">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/24</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" title="K8s node节点无法启动Pod 问题解决">
+                    <div class="prevTitle">K8s node节点无法启动Pod 问题解决</div>
+                </a>
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/24/Linux-bond%E6%A8%A1%E5%BC%8F-%E4%B8%A2%E5%8C%85/">
-                
-                <span class="abstract-title-text">Linux bond模式 丢包</span>
-            </a>
-            <div class="abstract-content">
-                
-排查思路
-思路1: 网络阻塞导致的丢包
-思路2: dmesg排查
-思路3: 禁止mac地址学习
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
 
 
-
-
-问题描述: 物理机存在双网卡Bond, 宿主机Ping 内部桥接虚拟机IP丢包严重.
-
-
-
-排查思路思路1: 网络阻塞导致的丢包查看网络连接数. 在我们的环境中存在大量的timewait.(当时timewait 高达几万).
-1cat /proc/net/nf_conntrack | awk &#x27;/^.*tcp.*$/ &#123;count[$6]++&#125; END &#123;for(state in count) print state, count[state]...
-            </div>
-            <!-- read more -->
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/25">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/24</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
+
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/17/kvm-qcow2%E7%A3%81%E7%9B%98%E7%A6%BB%E7%BA%BF%E6%89%A9%E5%AE%B9/">
-                
-                <span class="abstract-title-text">kvm qcow2磁盘离线扩容</span>
-            </a>
-            <div class="abstract-content">
-                
-准备操作
-关闭指定虚拟机
-寻找img文件路径
-移动qcow2 镜像
 
-
-开始扩容
-创建新的磁盘镜像
-检查原镜像信息
-resize磁盘
-
-
-启动,验证扩容
-检查扩容
-启动虚拟机,检查
-
-
-去除镜像空洞
-虚拟机在/etc/fstab 中写入错误无法启动的恢复流程
-查看虚拟机镜像的磁盘分区
-挂载镜像分区
-根据需求修改系统文件
-卸载分区
-
-
-
-
-以 tmp_ka30 虚拟机为例, 源机器磁盘大小40GB
-
-准备操作关闭指定虚拟机
-qcow2的磁盘扩容,貌似不能在线扩容,如果有能在线扩容的方法,&#x77;&#x61;&#x6e;&#120;&#105;&#x61;&#x6c;&#105;&#9...
-            </div>
-            <!-- read more -->
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/03/01">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/17/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A3%81%E7%9B%98%E7%83%AD%E6%89%A9%E5%AE%B9/">
-                
-                <span class="abstract-title-text">云主机磁盘热扩容</span>
-            </a>
-            <div class="abstract-content">
-                
-安装growpart工具和resize2fs工具
-使用growpart 磁盘分区扩容
-resize2fs 扩容文件系统
-
-
-
-注: 
-
-这里扩容的是ext4文件系统
-我的设备号是/dev/vda1 请根据实际情况扩容
-
-
-安装growpart工具和resize2fs工具1yum install -y cloud-utils-growpart xfsprogs
-
-使用growpart 磁盘分区扩容12# 表示为 /dev/dva 的第一个分区扩容 /dev/vda1growpart /dev/vda 1    
-
-resize2fs 扩容文件系统1resize2fs /dev/vda1
-            </div>
-            <!-- read more -->
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+
+        </div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/">
-                
-                <span class="abstract-title-text">记一次kubernetes iowait激增导致的宕机</span>
-            </a>
-            <div class="abstract-content">
-                
-问题描述: 在安装erda的时候.三台机器的iowait 激增, 每个cpu的iowait 都达到了99% . 导致k8s组件宕机. 
-
-节点配置
-
-
-节点名称
-cpu
-内存
-磁盘大小
-ip
-
-
-
-master/node1
-4
-12G
-20GB
-192.168.1.221
-
-
-node2
-4
-12G
-20GB
-192.168.1.222
-
-
-node3
-4
-12G
-20GB
-192.168.1.223
-
-
-
-问题排查
-使用pidstat , vmstat 观察机器状况, 观察是否存在IO激增的情况. 或者过多的中断和上下文切换.
-
-
-排查下来, 机器的cpu 和, 文件读写非常的正常....
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/16">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/16</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/04/%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
-                
-                <span class="abstract-title-text">内存问题排查</span>
-            </a>
-            <div class="abstract-content">
-                内存性能分析性能指标
-常见内存参数
-top
-VIRT: 进程虚拟内存的大小，只要是进程申请过的内存，即便还没有真正分配物理内存，也会计算在内。虚拟内存通常不会全部分配为物理内存,通常情况下,没个进程的虚拟内存比常驻内存大很多.
-RES 是常驻内存的大小，也就是进程实际使用的物理内存大小，但不包括 Swap 和共享内存。
-SHR 是共享内存的大小，比如与其他进程共同使用的共享内存、加载的动态链接库以及程序的代码段等。
-%MEM 是进程使用物理内存占系统总内存的百分比。
-
-
-free
-Buffer: 是对磁盘数据读写的缓存
-Cache: 是文件数据读写的缓存
-
-
-
-
-分析思路
-主要分析思路为...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/04">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/04</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/03/cpu-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
-                
-                <span class="abstract-title-text">cpu 性能优化</span>
-            </a>
-            <div class="abstract-content">
-                
-性能分析
-CPU使用率
-平均负载
-上下文切换
-缓存命中率
-
-
-排查思路
-方法论
-评估优化效果
-多个问题,怎么抉择
-多种优化方案,如何抉择
-
-
-
-开头先膜拜gregg巨佬,并附上他的图:
-
-性能分析
-CPU使用率
-CPU 使用率描述了非空闲时间占总CPU时间的百分比, 然后根据CPU上运行的任务的不同, 又可划分为: 用户CPU, 系统/内核CPU , 等待IO CPU, 软/硬中断CPU使用.
-
-CPU使用率包括:
-
-用户 CPU 使用率: 包括用户态 CPU 使用率（user）和低优先级用户态 CPU 使用率（nice），表示 CPU 在用户态运行的时间百分比。用户 CPU 使用率高...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/03">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/03</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="CPU性能优化">CPU性能优化</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/02/pidstat-%E8%AF%A6%E8%A7%A3/">
-                
-                <span class="abstract-title-text">pidstat 详解</span>
-            </a>
-            <div class="abstract-content">
-                
-功能
-命令参数
-输出字段含义
-使用案例
-统计进程内存和线程的使用情况(以人类可阅读的方式)
-统计进程IO
-进程上下文切换
-查看指定进程和他的派生线程的状态
-
-
-
-功能pidstat命令用于监视当前由Linux内核管理的单个任务。
-它为使用选项-p选择的每个任务或Linux内核管理的每个任务（如果使用了选项-p ALL）写入标准输出。
-不选择任何任务相当于指定-p ALL，但报告中将只显示活动任务（统计值非零的任务）。
-命令参数
-
-
-参数
-用途/含义
-
-
-
-u
-默认参数, 显示进程的CPU利用率.
-
-
-R
-报告实时优先级和调度策略信息。
-
-
-s
-报告堆栈利用率。
-
-
-t
-选定任务关联的线...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/03">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/02</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="性能分析">性能分析</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具">工具</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="pidstat">pidstat</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-    <!-- paginator  -->
+    <!-- Mathjax -->
     
 </main>
 
@@ -932,6 +670,23 @@ t
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Helm%E5%AE%89%E8%A3%85Percona-XtraDB-Cluster"><span class="toc-number">1.</span> <span class="toc-text">使用Helm安装Percona XtraDB Cluster</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%A4%87%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">预备条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0%E5%AE%89%E8%A3%85-Percona-XtraDB-Cluster"><span class="toc-number">1.3.</span> <span class="toc-text">使用自定义参数安装 Percona XtraDB Cluster</span></a></li></ol></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -1379,6 +1134,8 @@ t
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20210823" async></script>
         
         <!-- mermaid -->
         

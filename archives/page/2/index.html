@@ -428,6 +428,67 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/01/03/cpu-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                
+                <span class="abstract-title-text">cpu 性能优化</span>
+            </a>
+            <div class="abstract-content">
+                
+性能分析
+CPU使用率
+平均负载
+上下文切换
+缓存命中率
+
+
+排查思路
+方法论
+评估优化效果
+多个问题,怎么抉择
+多种优化方案,如何抉择
+
+
+
+开头先膜拜gregg巨佬,并附上他的图:
+
+性能分析
+CPU使用率
+CPU 使用率描述了非空闲时间占总CPU时间的百分比, 然后根据CPU上运行的任务的不同, 又可划分为: 用户CPU, 系统/内核CPU , 等待IO CPU, 软/硬中断CPU使用.
+
+CPU使用率包括:
+
+用户 CPU 使用率: 包括用户态 CPU 使用率（user）和低优先级用户态 CPU 使用率（nice），表示 CPU 在用户态运行的时间百分比。用户 CPU 使用率高...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/01/03">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/03</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CPU性能优化">CPU性能优化</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/01/02/pidstat-%E8%AF%A6%E8%A7%A3/">
                 
                 <span class="abstract-title-text">pidstat 详解</span>
@@ -993,7 +1054,22 @@ Push charts
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1070,7 +1146,7 @@ Push charts
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 17
+        Total : 18
         </div>
         <!-- search  -->
         
@@ -1084,6 +1160,12 @@ Push charts
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span>
+            <a class="archive-post-title" href="/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/">percona-xtradb-cluster-operator-文档-安装</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
@@ -1259,6 +1341,21 @@ Push charts
             <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
                 pidstat
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
+                <span class="iconfont-archer">&#xe606;</span>
+                percona-xtradb-cluster-operator
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mysql">
+                <span class="iconfont-archer">&#xe606;</span>
+                mysql
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="operator">
+                <span class="iconfont-archer">&#xe606;</span>
+                operator
             </span>
         
     </div>

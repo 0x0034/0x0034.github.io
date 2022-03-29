@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://0x0034.github.io/archives/2022/01/index.html">
+<meta property="og:url" content="https://0x0034.github.io/tags/mysql/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale">
 <meta property="article:author" content="0x0034">
@@ -428,418 +428,46 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2022/01/24/CentOS-7-8-%E5%AE%89%E8%A3%85fail2ban-iptables%E9%A2%84%E9%98%B2%E7%88%86%E7%A0%B4/">
+            <a class="abstract-title" href="/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/">
                 
-                <span class="abstract-title-text">CentOS 7/8 安装fail2ban+iptables预防爆破</span>
+                <span class="abstract-title-text">percona-xtradb-cluster-operator-文档-安装</span>
             </a>
             <div class="abstract-content">
-                fail2ban安装epel
-CentOS7
+                
+使用Helm安装Percona XtraDB Cluster
+预备条件
+安装
+使用自定义参数安装 Percona XtraDB Cluster
 
-1wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 
 
-CentOS8
+使用Helm安装Percona XtraDB Cluster预备条件安装
+添加 Percona 的 Helm 图表存储库并使用它使您的 Helm 客户端保持最新：
 
-123yum install -y https://mirrors.aliyun.com/epel/epel-release-latest-8.noarch.rpmsed -i &#x27;s|^#baseurl=https://download.example/pub|baseurl=https://mirrors.aliyun.com|&#x27; /etc/...
+12helm repo add percona https://percona.github.io/percona-helm-charts/helm repo update
+
+
+基于 Percona XtraDB Cluster 安装 Percona Distribution...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/25">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/24</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/24/Linux-bond%E6%A8%A1%E5%BC%8F-%E4%B8%A2%E5%8C%85/">
-                
-                <span class="abstract-title-text">Linux bond模式 丢包</span>
-            </a>
-            <div class="abstract-content">
-                
-排查思路
-思路1: 网络阻塞导致的丢包
-思路2: dmesg排查
-思路3: 禁止mac地址学习
-
-
-
-
-问题描述: 物理机存在双网卡Bond, 宿主机Ping 内部桥接虚拟机IP丢包严重.
-
-
-
-排查思路思路1: 网络阻塞导致的丢包查看网络连接数. 在我们的环境中存在大量的timewait.(当时timewait 高达几万).
-1cat /proc/net/nf_conntrack | awk &#x27;/^.*tcp.*$/ &#123;count[$6]++&#125; END &#123;for(state in count) print state, count[state]...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/25">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/24</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/17/kvm-qcow2%E7%A3%81%E7%9B%98%E7%A6%BB%E7%BA%BF%E6%89%A9%E5%AE%B9/">
-                
-                <span class="abstract-title-text">kvm qcow2磁盘离线扩容</span>
-            </a>
-            <div class="abstract-content">
-                
-准备操作
-关闭指定虚拟机
-寻找img文件路径
-移动qcow2 镜像
-
-
-开始扩容
-创建新的磁盘镜像
-检查原镜像信息
-resize磁盘
-
-
-启动,验证扩容
-检查扩容
-启动虚拟机,检查
-
-
-去除镜像空洞
-虚拟机在/etc/fstab 中写入错误无法启动的恢复流程
-查看虚拟机镜像的磁盘分区
-挂载镜像分区
-根据需求修改系统文件
-卸载分区
-
-
-
-
-以 tmp_ka30 虚拟机为例, 源机器磁盘大小40GB
-
-准备操作关闭指定虚拟机
-qcow2的磁盘扩容,貌似不能在线扩容,如果有能在线扩容的方法,&#x77;&#x61;&#x6e;&#120;&#105;&#x61;&#x6c;&#105;&#9...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/03/01">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/17/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A3%81%E7%9B%98%E7%83%AD%E6%89%A9%E5%AE%B9/">
-                
-                <span class="abstract-title-text">云主机磁盘热扩容</span>
-            </a>
-            <div class="abstract-content">
-                
-安装growpart工具和resize2fs工具
-使用growpart 磁盘分区扩容
-resize2fs 扩容文件系统
-
-
-
-注: 
-
-这里扩容的是ext4文件系统
-我的设备号是/dev/vda1 请根据实际情况扩容
-
-
-安装growpart工具和resize2fs工具1yum install -y cloud-utils-growpart xfsprogs
-
-使用growpart 磁盘分区扩容12# 表示为 /dev/dva 的第一个分区扩容 /dev/vda1growpart /dev/vda 1    
-
-resize2fs 扩容文件系统1resize2fs /dev/vda1
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/">
-                
-                <span class="abstract-title-text">记一次kubernetes iowait激增导致的宕机</span>
-            </a>
-            <div class="abstract-content">
-                
-问题描述: 在安装erda的时候.三台机器的iowait 激增, 每个cpu的iowait 都达到了99% . 导致k8s组件宕机. 
-
-节点配置
-
-
-节点名称
-cpu
-内存
-磁盘大小
-ip
-
-
-
-master/node1
-4
-12G
-20GB
-192.168.1.221
-
-
-node2
-4
-12G
-20GB
-192.168.1.222
-
-
-node3
-4
-12G
-20GB
-192.168.1.223
-
-
-
-问题排查
-使用pidstat , vmstat 观察机器状况, 观察是否存在IO激增的情况. 或者过多的中断和上下文切换.
-
-
-排查下来, 机器的cpu 和, 文件读写非常的正常....
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/16">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/16</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/04/%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
-                
-                <span class="abstract-title-text">内存问题排查</span>
-            </a>
-            <div class="abstract-content">
-                内存性能分析性能指标
-常见内存参数
-top
-VIRT: 进程虚拟内存的大小，只要是进程申请过的内存，即便还没有真正分配物理内存，也会计算在内。虚拟内存通常不会全部分配为物理内存,通常情况下,没个进程的虚拟内存比常驻内存大很多.
-RES 是常驻内存的大小，也就是进程实际使用的物理内存大小，但不包括 Swap 和共享内存。
-SHR 是共享内存的大小，比如与其他进程共同使用的共享内存、加载的动态链接库以及程序的代码段等。
-%MEM 是进程使用物理内存占系统总内存的百分比。
-
-
-free
-Buffer: 是对磁盘数据读写的缓存
-Cache: 是文件数据读写的缓存
-
-
-
-
-分析思路
-主要分析思路为...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/04">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/04</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/03/cpu-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
-                
-                <span class="abstract-title-text">cpu 性能优化</span>
-            </a>
-            <div class="abstract-content">
-                
-性能分析
-CPU使用率
-平均负载
-上下文切换
-缓存命中率
-
-
-排查思路
-方法论
-评估优化效果
-多个问题,怎么抉择
-多种优化方案,如何抉择
-
-
-
-开头先膜拜gregg巨佬,并附上他的图:
-
-性能分析
-CPU使用率
-CPU 使用率描述了非空闲时间占总CPU时间的百分比, 然后根据CPU上运行的任务的不同, 又可划分为: 用户CPU, 系统/内核CPU , 等待IO CPU, 软/硬中断CPU使用.
-
-CPU使用率包括:
-
-用户 CPU 使用率: 包括用户态 CPU 使用率（user）和低优先级用户态 CPU 使用率（nice），表示 CPU 在用户态运行的时间百分比。用户 CPU 使用率高...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/03">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/03</span>
+                <div class="abstract-date" title="Last updated: 2022/03/29">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/29</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="CPU性能优化">CPU性能优化</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="percona-xtradb-cluster-operator">percona-xtradb-cluster-operator</a>
     
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+        <a class="post-tag" href="javascript:void(0);" data-tags="mysql">mysql</a>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/02/pidstat-%E8%AF%A6%E8%A7%A3/">
-                
-                <span class="abstract-title-text">pidstat 详解</span>
-            </a>
-            <div class="abstract-content">
-                
-功能
-命令参数
-输出字段含义
-使用案例
-统计进程内存和线程的使用情况(以人类可阅读的方式)
-统计进程IO
-进程上下文切换
-查看指定进程和他的派生线程的状态
-
-
-
-功能pidstat命令用于监视当前由Linux内核管理的单个任务。
-它为使用选项-p选择的每个任务或Linux内核管理的每个任务（如果使用了选项-p ALL）写入标准输出。
-不选择任何任务相当于指定-p ALL，但报告中将只显示活动任务（统计值非零的任务）。
-命令参数
-
-
-参数
-用途/含义
-
-
-
-u
-默认参数, 显示进程的CPU利用率.
-
-
-R
-报告实时优先级和调度策略信息。
-
-
-s
-报告堆栈利用率。
-
-
-t
-选定任务关联的线...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/03">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/02</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="性能分析">性能分析</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具">工具</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="pidstat">pidstat</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="operator">operator</a>
     
 </div>
 
