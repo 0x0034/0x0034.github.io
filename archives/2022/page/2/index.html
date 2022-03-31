@@ -428,6 +428,50 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/01/04/%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
+                
+                <span class="abstract-title-text">内存问题排查</span>
+            </a>
+            <div class="abstract-content">
+                内存性能分析性能指标
+常见内存参数
+top
+VIRT: 进程虚拟内存的大小，只要是进程申请过的内存，即便还没有真正分配物理内存，也会计算在内。虚拟内存通常不会全部分配为物理内存,通常情况下,没个进程的虚拟内存比常驻内存大很多.
+RES 是常驻内存的大小，也就是进程实际使用的物理内存大小，但不包括 Swap 和共享内存。
+SHR 是共享内存的大小，比如与其他进程共同使用的共享内存、加载的动态链接库以及程序的代码段等。
+%MEM 是进程使用物理内存占系统总内存的百分比。
+
+
+free
+Buffer: 是对磁盘数据读写的缓存
+Cache: 是文件数据读写的缓存
+
+
+
+
+分析思路
+主要分析思路为...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/01/04">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/04</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/01/03/cpu-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
                 
                 <span class="abstract-title-text">cpu 性能优化</span>
@@ -749,7 +793,22 @@ t
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -836,7 +895,7 @@ t
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 18
+        Total : 19
         </div>
         <!-- search  -->
         
@@ -850,6 +909,12 @@ t
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/31</span>
+            <a class="archive-post-title" href="/2022/03/31/Virsh-%E5%AD%98%E5%82%A8%E6%B1%A0%E8%BF%81%E7%A7%BB/">Virsh 存储池迁移</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/29</span>
