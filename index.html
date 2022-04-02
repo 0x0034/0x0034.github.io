@@ -443,6 +443,48 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/04/02/pmm-server%E5%AE%89%E8%A3%85/">
+                
+                <span class="abstract-title-text">pmm-server安装</span>
+            </a>
+            <div class="abstract-content">
+                
+Docker 启动Pmm-server
+等待健康检查Ready
+修改内置的Grafana密码
+
+Docker 启动Pmm-server123456# 拉取镜像docker pull registry.cn-hangzhou.aliyuncs.com/lcc-middleware/pmm-server:2# 创建存储卷docker create --volume /srv --name pmm-data registry.cn-hangzhou.aliyuncs.com/lcc-middleware/pmm-server:2 /bin/true# 运行docker run --detac...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/04/02">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/02</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="pmm-server">pmm-server</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="安装文档">安装文档</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/03/31/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%A4%87%E4%BB%BD/">
                 
                 <span class="abstract-title-text">percona-xtradb-cluster-operator-文档-备份</span>
@@ -819,54 +861,10 @@ qcow2的磁盘扩容,貌似不能在线扩容,如果有能在线扩容的方法,
         </article>
         <div class="index-post-divider"></div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/17/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A3%81%E7%9B%98%E7%83%AD%E6%89%A9%E5%AE%B9/">
-                
-                <span class="abstract-title-text">云主机磁盘热扩容</span>
-            </a>
-            <div class="abstract-content">
-                
-安装growpart工具和resize2fs工具
-使用growpart 磁盘分区扩容
-resize2fs 扩容文件系统
-
-
-
-注: 
-
-这里扩容的是ext4文件系统
-我的设备号是/dev/vda1 请根据实际情况扩容
-
-
-安装growpart工具和resize2fs工具1yum install -y cloud-utils-growpart xfsprogs
-
-使用growpart 磁盘分区扩容12# 表示为 /dev/dva 的第一个分区扩容 /dev/vda1growpart /dev/vda 1    
-
-resize2fs 扩容文件系统1resize2fs /dev/vda1
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
     <!-- paginator  -->
     
         <nav class="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &gt;</a>
+            <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">NEXT &gt;</a>
         </nav>
     
 </main>
@@ -1141,7 +1139,22 @@ resize2fs 扩容文件系统1resize2fs /dev/vda1
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1248,7 +1261,7 @@ resize2fs 扩容文件系统1resize2fs /dev/vda1
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 20
+        Total : 21
         </div>
         <!-- search  -->
         
@@ -1262,6 +1275,12 @@ resize2fs 扩容文件系统1resize2fs /dev/vda1
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span>
+            <a class="archive-post-title" href="/2022/04/02/pmm-server%E5%AE%89%E8%A3%85/">pmm-server安装</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/31</span>
@@ -1470,6 +1489,16 @@ resize2fs 扩容文件系统1resize2fs /dev/vda1
             <span class="sidebar-tag-name" data-tags="operator">
                 <span class="iconfont-archer">&#xe606;</span>
                 operator
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="pmm-server">
+                <span class="iconfont-archer">&#xe606;</span>
+                pmm-server
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="安装文档">
+                <span class="iconfont-archer">&#xe606;</span>
+                安装文档
             </span>
         
     </div>
