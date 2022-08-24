@@ -19,22 +19,22 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="问题描述: 在安装erda的时候.三台机器的iowait 激增, 每个cpu的iowait 都达到了99% . 导致k8s组件宕机.   节点配置   节点名称 cpu 内存 磁盘大小 ip    master&#x2F;node1 4 12G 20GB 192.168.1.221   node2 4 12G 20GB 192.168.1.222   node3 4 12G 20GB 192.168.1.">
+    <meta name="description" content="强制卸载NFS磁盘12345678910umount -lf &#x2F;mnt  &amp;#123;&amp;#123; device &amp;#125;&amp;#125;## 参数释义-f     Force unmount (in case of an unreachable NFS system).  (Requires kernel 2.1.116 or later.)-l     Lazy  unmount. Detac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次kubernetes iowait激增导致的宕机">
-<meta property="og:url" content="https://0x0034.github.io/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/index.html">
+<meta property="og:title" content="强制卸载nfs磁盘">
+<meta property="og:url" content="https://0x0034.github.io/2022/08/24/%E5%BC%BA%E5%88%B6%E5%8D%B8%E8%BD%BDnfs%E7%A3%81%E7%9B%98/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="问题描述: 在安装erda的时候.三台机器的iowait 激增, 每个cpu的iowait 都达到了99% . 导致k8s组件宕机.   节点配置   节点名称 cpu 内存 磁盘大小 ip    master&#x2F;node1 4 12G 20GB 192.168.1.221   node2 4 12G 20GB 192.168.1.222   node3 4 12G 20GB 192.168.1.">
+<meta property="og:description" content="强制卸载NFS磁盘12345678910umount -lf &#x2F;mnt  &amp;#123;&amp;#123; device &amp;#125;&amp;#125;## 参数释义-f     Force unmount (in case of an unreachable NFS system).  (Requires kernel 2.1.116 or later.)-l     Lazy  unmount. Detac">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-01-16T08:00:42.000Z">
-<meta property="article:modified_time" content="2022-01-16T08:06:35.860Z">
+<meta property="article:published_time" content="2022-08-24T03:28:05.000Z">
+<meta property="article:modified_time" content="2022-08-24T03:28:05.945Z">
 <meta property="article:author" content="0x0034">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>记一次kubernetes iowait激增导致的宕机 · 0x0034&#39;s Blog</title>
+    <title>强制卸载nfs磁盘 · 0x0034&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -259,7 +259,7 @@
                 <a href="/">0x0034&#39;s Blog.</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">记一次kubernetes iowait激增导致的宕机</a>
+                <a href="#" class="post-name">强制卸载nfs磁盘</a>
             </div>
         </div>
     
@@ -305,7 +305,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                记一次kubernetes iowait激增导致的宕机
+                强制卸载nfs磁盘
             <!-- 404 -->
             
         </h1>
@@ -324,13 +324,13 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">905</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">68</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2022/01/16</span>
+                    <span class="post-intro-time">2022/08/24</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -485,84 +485,16 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <blockquote>
-<p>问题描述: 在安装erda的时候.三台机器的iowait 激增, 每个cpu的iowait 都达到了99% . 导致k8s组件宕机. </p>
-</blockquote>
-<h2 id="节点配置"><a href="#节点配置" class="headerlink" title="节点配置"></a>节点配置</h2><table>
-<thead>
-<tr>
-<th align="center">节点名称</th>
-<th align="center">cpu</th>
-<th align="left">内存</th>
-<th align="center">磁盘大小</th>
-<th align="center">ip</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">master/node1</td>
-<td align="center">4</td>
-<td align="left">12G</td>
-<td align="center">20GB</td>
-<td align="center">192.168.1.221</td>
-</tr>
-<tr>
-<td align="center">node2</td>
-<td align="center">4</td>
-<td align="left">12G</td>
-<td align="center">20GB</td>
-<td align="center">192.168.1.222</td>
-</tr>
-<tr>
-<td align="center">node3</td>
-<td align="center">4</td>
-<td align="left">12G</td>
-<td align="center">20GB</td>
-<td align="center">192.168.1.223</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h2><ol>
-<li>使用pidstat , vmstat 观察机器状况, 观察是否存在IO激增的情况. 或者过多的中断和上下文切换.</li>
-</ol>
-<blockquote>
-<p>排查下来, 机器的cpu 和, 文件读写非常的正常. 无果.</p>
-</blockquote>
-<ol start="2">
-<li>观察容器.</li>
-</ol>
-<blockquote>
-<p>docker ps -a , 发现容器已经都exit 了. 怀疑资源不够,或者异常的api server 访问. 导致etcd 和apisever 挂掉. 抓包, 监听端口. 一样没有什么问题. 无果</p>
-</blockquote>
-<ol start="3">
-<li>检查kubelet</li>
-</ol>
-<p>使用如下命令,查看kubelet日志.</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看节点kubelet 日志</span></span><br><span class="line">journalctl <span class="literal">-u</span> kubelet <span class="operator">-f</span> <span class="literal">-n</span> <span class="number">1000</span></span><br></pre></td></tr></table></figure>
-
-<p>发现如下信息.</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I0714 <span class="number">18</span>:<span class="number">03</span>:<span class="number">20.883489</span>   <span class="number">51179</span> image_gc_manager.go:<span class="number">300</span>] [<span class="type">imageGCManager</span>]: Disk usage on image filesystem is at <span class="number">86</span>% which is over the high threshold (<span class="number">85</span>%). Trying to free <span class="number">72470076620</span> bytes down to the low threshold (<span class="number">1</span>%).</span><br></pre></td></tr></table></figure>
-
-<p>得到结果. 是helm 启动erda的时候在拉取erda镜像. 然后我们剥离helm 中所有的erda镜像,观测镜像的总容量大小.如下:</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="literal">-ux</span></span><br><span class="line">images=(</span><br><span class="line">registry.erda.cloud/erda/addon<span class="literal">-cassandra</span>:<span class="number">3.11</span>.<span class="number">10</span></span><br><span class="line">registry.erda.cloud/erda/addon<span class="literal">-elasticsearch</span>:<span class="number">6.2</span>.<span class="number">4</span></span><br><span class="line">registry.erda.cloud/erda/addon<span class="literal">-kafka</span>:<span class="number">1.1</span>.<span class="number">0</span><span class="literal">-20210323</span><span class="literal">-be01a9b</span></span><br><span class="line">registry.erda.cloud/erda/addon<span class="literal">-kms</span>:<span class="number">1.3</span>.<span class="number">0</span><span class="literal">-alpha</span><span class="literal">-20210903152500</span><span class="literal">-a3196f34</span></span><br><span class="line">registry.erda.cloud/erda/addon<span class="literal">-redis</span>:<span class="number">3.2</span>.<span class="number">12</span></span><br><span class="line">registry.erda.cloud/erda/addon<span class="literal">-registry</span>:<span class="number">2.7</span>.<span class="number">1</span></span><br><span class="line">registry.erda.cloud/erda/addon<span class="literal">-sonar</span>:<span class="number">8.4</span>.<span class="number">2</span></span><br><span class="line">registry.erda.cloud/erda/addon<span class="literal">-zookeeper</span>:<span class="number">3.4</span>.<span class="number">13</span><span class="literal">-monitor</span></span><br><span class="line">registry.erda.cloud/erda/cassandra<span class="literal">-bootstrap</span>:<span class="number">0.1</span>.<span class="number">8</span></span><br><span class="line">registry.erda.cloud/erda/cassandra<span class="literal">-operator</span>:v1.<span class="number">1.3</span><span class="literal">-release</span></span><br><span class="line">registry.erda.cloud/erda/cluster<span class="literal">-agent</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-beta</span><span class="literal">-20211116024920</span><span class="literal">-02583bd</span></span><br><span class="line">registry.erda.cloud/erda/dice<span class="literal">-operator</span>:<span class="number">1.4</span><span class="literal">-20211112</span><span class="literal">-d62460f</span></span><br><span class="line">registry.erda.cloud/erda/erda<span class="literal">-analyzer</span><span class="literal">-alert</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-beta</span><span class="literal">-20211112020036</span><span class="literal">-634eb50</span></span><br><span class="line">registry.erda.cloud/erda/erda<span class="literal">-analyzer</span><span class="literal">-error</span><span class="literal">-insight</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-beta</span><span class="literal">-20211112020033</span><span class="literal">-634eb50</span></span><br><span class="line">registry.erda.cloud/erda/erda<span class="literal">-analyzer</span><span class="literal">-metrics</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-beta</span><span class="literal">-20211112020033</span><span class="literal">-634eb50</span></span><br><span class="line">registry.erda.cloud/erda/erda<span class="literal">-analyzer</span><span class="literal">-tracing</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-beta</span><span class="literal">-20211112020036</span><span class="literal">-634eb50</span></span><br><span class="line">registry.erda.cloud/erda/erda<span class="literal">-etcd</span>:<span class="number">3.3</span>.<span class="number">15</span><span class="literal">-0</span></span><br><span class="line">registry.erda.cloud/erda/erda<span class="literal">-filebeat</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-stable</span><span class="literal">-20211112020101</span><span class="literal">-dc879c8</span></span><br><span class="line">registry.erda.cloud/erda/erda<span class="literal">-mysql</span>:<span class="number">5.7</span>.<span class="number">34</span></span><br><span class="line">registry.erda.cloud/erda/erda<span class="literal">-telegraf</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-beta</span><span class="literal">-20211109113637</span><span class="literal">-5ba162c</span></span><br><span class="line">registry.erda.cloud/erda/erda:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-beta</span><span class="literal">-20211116024928</span><span class="literal">-02583bd</span></span><br><span class="line">registry.erda.cloud/erda/etcd_ssl_gen:<span class="number">20210903</span><span class="literal">-4e40b2f</span></span><br><span class="line">registry.erda.cloud/erda/init<span class="literal">-image</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-20211116</span></span><br><span class="line">registry.erda.cloud/erda/instaclustr<span class="literal">-icarus</span>:<span class="number">1.0</span>.<span class="number">9</span></span><br><span class="line">registry.erda.cloud/erda/kubedb<span class="literal">-busybox</span>:<span class="number">1.0</span>.<span class="number">0</span></span><br><span class="line">registry.erda.cloud/erda/redis<span class="literal">-operator</span>:<span class="number">1.0</span>.<span class="number">0</span><span class="literal">-20200723</span><span class="literal">-1a7a9f14</span></span><br><span class="line">registry.erda.cloud/erda/uc:dice<span class="literal">-1</span>.<span class="number">1</span><span class="literal">-20210630</span><span class="literal">-f4d63b99</span></span><br><span class="line">registry.erda.cloud/erda/ui<span class="literal">-ce</span>:<span class="number">1.4</span>.<span class="number">0</span><span class="literal">-beta</span><span class="literal">-20211116062633</span><span class="literal">-f08ddf0</span></span><br><span class="line">registry.erda.cloud/erda/volume<span class="literal">-provisioner</span>:<span class="number">1.0</span>.<span class="number">0</span><span class="literal">-20210416</span><span class="literal">-1a3758f</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> imageName <span class="keyword">in</span> <span class="variable">$</span>&#123;images[<span class="selector-tag">@</span>]&#125;; <span class="keyword">do</span></span><br><span class="line">    docker pull <span class="variable">$</span>&#123;imageName&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Kubelet 垃圾回收（Garbage Collection）是一个非常有用的功能，它负责自动清理节点上的无用镜像和容器。Kubelet 每隔 1 分钟进行一次容器清理，每隔 5 分钟进行一次镜像清理（截止到 v1.15 版本，垃圾回收间隔时间还都是在源码中固化的，不可自定义配置）。如果节点上已经运行了 Kubelet，不建议再额外运行其它的垃圾回收工具，因为这些工具可能错误地清理掉 Kubelet 认为本应保留的镜像或容器，从而可能造成不可预知的问题。</p>
-</blockquote>
-<p>erda 镜像总体积大小为14G , 加上 系统2G, 以及kubernetes 组件镜像的大小. 已经超过20G的<code>85%</code> , 所以被kubelet的垃圾回收机制导致了回收. 当 kubelet 注意到某个资源耗尽时，它会继续回收该资源，直到回收到你所指定的数量为止。然后重复的docker pull 导致iowait 飚高. </p>
-<p>至于docker pull 做了什么,看这里</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Max_Cong/article/details/102664791">https://blog.csdn.net/Max_Cong/article/details/102664791</a></p>
-<p>为了验证此类情况, 先进行镜像预热, 问题解决.</p>
-<hr>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>还能干啥,20G够干啥. 只能扩容了.</p>
+        <h2 id="强制卸载NFS磁盘"><a href="#强制卸载NFS磁盘" class="headerlink" title="强制卸载NFS磁盘"></a>强制卸载NFS磁盘</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">umount <span class="literal">-lf</span> /mnt  &#123;&#123; device &#125;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 参数释义</span></span><br><span class="line"><span class="operator">-f</span>     Force unmount (<span class="keyword">in</span> case of an unreachable NFS system).  (Requires kernel <span class="number">2.1</span>.<span class="number">116</span> or later.)</span><br><span class="line"></span><br><span class="line"><span class="literal">-l</span>     Lazy  unmount. Detach the filesystem from the filesystem hierarchy now, and cleanup all references to the filesystem as soon as</span><br><span class="line"></span><br><span class="line">              it is not busy anymore.  (Requires kernel <span class="number">2.4</span>.<span class="number">11</span> or later.)</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="https://0x0034.github.io">0x0034</a>
-            <p>原文链接：<a href="https://0x0034.github.io/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/">https://0x0034.github.io/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/</a>
-            <p>发表日期：<a href="https://0x0034.github.io/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/">January 16th 2022, 4:00:42 pm</a>
-            <p>更新日期：<a href="https://0x0034.github.io/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/">January 16th 2022, 4:06:35 pm</a>
+            <p>原文链接：<a href="https://0x0034.github.io/2022/08/24/%E5%BC%BA%E5%88%B6%E5%8D%B8%E8%BD%BDnfs%E7%A3%81%E7%9B%98/">https://0x0034.github.io/2022/08/24/%E5%BC%BA%E5%88%B6%E5%8D%B8%E8%BD%BDnfs%E7%A3%81%E7%9B%98/</a>
+            <p>发表日期：<a href="https://0x0034.github.io/2022/08/24/%E5%BC%BA%E5%88%B6%E5%8D%B8%E8%BD%BDnfs%E7%A3%81%E7%9B%98/">August 24th 2022, 11:28:05 am</a>
+            <p>更新日期：<a href="https://0x0034.github.io/2022/08/24/%E5%BC%BA%E5%88%B6%E5%8D%B8%E8%BD%BDnfs%E7%A3%81%E7%9B%98/">August 24th 2022, 11:28:05 am</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -570,17 +502,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2022/01/17/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A3%81%E7%9B%98%E7%83%AD%E6%89%A9%E5%AE%B9/" title="云主机磁盘热扩容">
-                    <div class="nextTitle">云主机磁盘热扩容</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/01/04/%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/" title="内存问题排查">
-                    <div class="prevTitle">内存问题排查</div>
+                <a href="/2022/07/31/vagrant%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="vagrant创建虚拟机">
+                    <div class="prevTitle">vagrant创建虚拟机</div>
                 </a>
             
         </li>
@@ -711,7 +638,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">节点配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="toc-number">2.</span> <span class="toc-text">问题排查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E5%8D%B8%E8%BD%BDNFS%E7%A3%81%E7%9B%98"><span class="toc-number">1.</span> <span class="toc-text">强制卸载NFS磁盘</span></a></li></ol>
             </div>
         
         <!-- sidebar -->

@@ -428,6 +428,40 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">
+                
+                <span class="abstract-title-text">flannel部署问题</span>
+            </a>
+            <div class="abstract-content">
+                问题描述在部署Flannel的过程中, 发现flannel部署成功, 但是总是突然的Error, 然后使用如下命令. 得到报错
+1kubectl logs kube-flannel-ds-hnkvp -n kube-system
+
+报错信息:
+123...Failed to create SubnetManager: error retrieving pod spec dial tcp 10.0.0.1:443: i/o timeout...
+
+修正办法最后排查到,是因为云上的多网卡环境, Flannel没有走内网IP的网卡,
+遂在flannel.yaml中添加--iface=网卡如下配...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/25">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/25</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/01/24/CentOS-7-8-%E5%AE%89%E8%A3%85fail2ban-iptables%E9%A2%84%E9%98%B2%E7%88%86%E7%A0%B4/">
                 
                 <span class="abstract-title-text">CentOS 7/8 安装fail2ban+iptables预防爆破</span>
@@ -904,59 +938,6 @@ RunWithContext 方法
         </article>
         <div class="index-post-divider"></div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/12/09/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90%E5%8A%A0%E9%80%9F/">
-                
-                <span class="abstract-title-text">开发资源加速</span>
-            </a>
-            <div class="abstract-content">
-                
-Github资源加速
-Clone加速
-Release 加速
-Raw 文件加速
-
-
-Golang 国内加速
-Go 1.13 及以上（推荐）
-macOS 或 Linux
-
-
-Maven 加速
-阿里云
-腾讯云
-
-
-pip
-CentOS Yum加速
-Ubuntu apt加速
-alpine apk加速
-参考文章
-
-Github资源加速
-你还在为github限速而烦恼吗? 你还在为没有机场而烦恼吗? 你还在为回到家下载源慢,不想卷而烦恼吗?注: 仅面向没有机场的普通开发者, 有机场的大佬请当没看到.
-
-Clone加速123456789101112131415161718192021# 方法一：手动...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2021/12/16">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/12/09</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
     <!-- paginator  -->
     
         <nav class="page-nav">
@@ -1177,7 +1158,22 @@ Clone加速123456789101112131415161718192021# 方法一：手动...
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1324,7 +1320,7 @@ Clone加速123456789101112131415161718192021# 方法一：手动...
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 24
+        Total : 25
         </div>
         <!-- search  -->
         
@@ -1338,6 +1334,12 @@ Clone加速123456789101112131415161718192021# 方法一：手动...
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/24</span>
+            <a class="archive-post-title" href="/2022/08/24/%E5%BC%BA%E5%88%B6%E5%8D%B8%E8%BD%BDnfs%E7%A3%81%E7%9B%98/">强制卸载nfs磁盘</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">07/31</span>
