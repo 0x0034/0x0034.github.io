@@ -428,6 +428,263 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/04/02/pmm-server%E5%AE%89%E8%A3%85/">
+                
+                <span class="abstract-title-text">pmm-server安装</span>
+            </a>
+            <div class="abstract-content">
+                
+Docker 启动Pmm-server
+等待健康检查Ready
+修改内置的Grafana密码
+
+Docker 启动Pmm-server123456# 拉取镜像docker pull registry.cn-hangzhou.aliyuncs.com/lcc-middleware/pmm-server:2# 创建存储卷docker create --volume /srv --name pmm-data registry.cn-hangzhou.aliyuncs.com/lcc-middleware/pmm-server:2 /bin/true# 运行docker run --detac...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/04/02">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/02</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="pmm-server">pmm-server</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="安装文档">安装文档</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/03/31/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%A4%87%E4%BB%BD/">
+                
+                <span class="abstract-title-text">percona-xtradb-cluster-operator-文档-备份</span>
+            </a>
+            <div class="abstract-content">
+                Operator 通常将 Percona XtraDB 集群备份存储在 Kubernetes 集群外部的Amazon S3 或 S3 兼容存储上：
+但是也可以在 Kubernetes 集群内的Persistent Volumes上存储备份：
+Operator 允许以两种方式进行备份。 计划备份在 deploy/cr.yaml 文件中配置为在适当的时间自动执行。 可以随时手动进行按需备份。
+
+模板yaml: https://github.com/percona/percona-xtradb-cluster-operator/blob/main/deploy/cr.yaml
+
+
+计划备份
+按...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/31">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/31</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="percona-xtradb-cluster-operator">percona-xtradb-cluster-operator</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="mysql">mysql</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="operator">operator</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/03/31/Virsh-%E5%AD%98%E5%82%A8%E6%B1%A0%E8%BF%81%E7%A7%BB/">
+                
+                <span class="abstract-title-text">Virsh 存储池迁移</span>
+            </a>
+            <div class="abstract-content">
+                新建存储池
+创建存储池定义文件ssd500-pool
+
+123456789101112131415&lt;pool type=&#x27;dir&#x27;&gt;  &lt;!-- 存储池名称 --&gt;   &lt;name&gt;ssd500-pool&lt;/name&gt;  &lt;source&gt;  &lt;/source&gt;  &lt;target&gt;    &lt;!--存储池实际存储目录--&gt;     &lt;path&gt;/ssd500g/kvm/&lt;/path&gt;    &lt;permissions&gt;      &lt;mod...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/31">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/31</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/">
+                
+                <span class="abstract-title-text">percona-xtradb-cluster-operator-文档-安装</span>
+            </a>
+            <div class="abstract-content">
+                
+使用Helm安装Percona XtraDB Cluster
+预备条件
+安装
+使用自定义参数安装 Percona XtraDB Cluster
+
+
+
+使用Helm安装Percona XtraDB Cluster预备条件安装
+添加 Percona 的 Helm 图表存储库并使用它使您的 Helm 客户端保持最新：
+
+12helm repo add percona https://percona.github.io/percona-helm-charts/helm repo update
+
+
+基于 Percona XtraDB Cluster 安装 Percona Distribution...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/29">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/29</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="percona-xtradb-cluster-operator">percona-xtradb-cluster-operator</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="mysql">mysql</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="operator">operator</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+                
+                <span class="abstract-title-text">K8s node节点无法启动Pod 问题解决</span>
+            </a>
+            <div class="abstract-content">
+                
+问题描述
+解决办法
+重置kubeadm
+停止kubelet 和 docker
+清空CNI 和 kubelet 文件
+关闭CNI,flannel,docker网桥
+重启Docker和kubelet
+Node重新加入集群
+
+
+检查节点加入
+
+问题描述问题出现的原因是,Master崩了,然后没有办法只能重装集群, 但是节点都没有重装系统, 还存在一定的残留. 报错信息如下所示.
+1network: failed to set bridge addr: &quot;cni0&quot; already has an IP address different from 10.244.3.1/24...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/25">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/25</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">
+                
+                <span class="abstract-title-text">ingress部署</span>
+            </a>
+            <div class="abstract-content">
+                
+部署ingress
+优化方案
+使用hostNetwork
+修改工作负载,并在master上运行ingress
+测试
+
+
+ingress-nginx.yaml
+
+部署ingress这边没啥好说, 复制下面的ingress-nginx.yaml , 然后kubectl apply -f ingress-nginx.yaml就可以了
+优化方案这边首先说一下背景, 我们的集群是在云上, node连接apiserver,都是走slb, 所以我们希望复用slb.
+下面来说方案.
+使用hostNetwork首先ingress部署使用hostNetwork网络模式,即ingress 容器的80,443...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/25">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/25</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">
                 
                 <span class="abstract-title-text">flannel部署问题</span>
@@ -589,303 +846,10 @@ qcow2的磁盘扩容,貌似不能在线扩容,如果有能在线扩容的方法,
         </article>
         <div class="index-post-divider"></div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/17/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A3%81%E7%9B%98%E7%83%AD%E6%89%A9%E5%AE%B9/">
-                
-                <span class="abstract-title-text">云主机磁盘热扩容</span>
-            </a>
-            <div class="abstract-content">
-                
-安装growpart工具和resize2fs工具
-使用growpart 磁盘分区扩容
-resize2fs 扩容文件系统
-
-
-
-注: 
-
-这里扩容的是ext4文件系统
-我的设备号是/dev/vda1 请根据实际情况扩容
-
-
-安装growpart工具和resize2fs工具1yum install -y cloud-utils-growpart xfsprogs
-
-使用growpart 磁盘分区扩容12# 表示为 /dev/dva 的第一个分区扩容 /dev/vda1growpart /dev/vda 1    
-
-resize2fs 扩容文件系统1resize2fs /dev/vda1
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/16/%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes-iowait%E6%BF%80%E5%A2%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E5%AE%95%E6%9C%BA/">
-                
-                <span class="abstract-title-text">记一次kubernetes iowait激增导致的宕机</span>
-            </a>
-            <div class="abstract-content">
-                
-问题描述: 在安装erda的时候.三台机器的iowait 激增, 每个cpu的iowait 都达到了99% . 导致k8s组件宕机. 
-
-节点配置
-
-
-节点名称
-cpu
-内存
-磁盘大小
-ip
-
-
-
-master/node1
-4
-12G
-20GB
-192.168.1.221
-
-
-node2
-4
-12G
-20GB
-192.168.1.222
-
-
-node3
-4
-12G
-20GB
-192.168.1.223
-
-
-
-问题排查
-使用pidstat , vmstat 观察机器状况, 观察是否存在IO激增的情况. 或者过多的中断和上下文切换.
-
-
-排查下来, 机器的cpu 和, 文件读写非常的正常....
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/16">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/16</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/04/%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
-                
-                <span class="abstract-title-text">内存问题排查</span>
-            </a>
-            <div class="abstract-content">
-                内存性能分析性能指标
-常见内存参数
-top
-VIRT: 进程虚拟内存的大小，只要是进程申请过的内存，即便还没有真正分配物理内存，也会计算在内。虚拟内存通常不会全部分配为物理内存,通常情况下,没个进程的虚拟内存比常驻内存大很多.
-RES 是常驻内存的大小，也就是进程实际使用的物理内存大小，但不包括 Swap 和共享内存。
-SHR 是共享内存的大小，比如与其他进程共同使用的共享内存、加载的动态链接库以及程序的代码段等。
-%MEM 是进程使用物理内存占系统总内存的百分比。
-
-
-free
-Buffer: 是对磁盘数据读写的缓存
-Cache: 是文件数据读写的缓存
-
-
-
-
-分析思路
-主要分析思路为...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/04">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/04</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/03/cpu-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
-                
-                <span class="abstract-title-text">cpu 性能优化</span>
-            </a>
-            <div class="abstract-content">
-                
-性能分析
-CPU使用率
-平均负载
-上下文切换
-缓存命中率
-
-
-排查思路
-方法论
-评估优化效果
-多个问题,怎么抉择
-多种优化方案,如何抉择
-
-
-
-开头先膜拜gregg巨佬,并附上他的图:
-
-性能分析
-CPU使用率
-CPU 使用率描述了非空闲时间占总CPU时间的百分比, 然后根据CPU上运行的任务的不同, 又可划分为: 用户CPU, 系统/内核CPU , 等待IO CPU, 软/硬中断CPU使用.
-
-CPU使用率包括:
-
-用户 CPU 使用率: 包括用户态 CPU 使用率（user）和低优先级用户态 CPU 使用率（nice），表示 CPU 在用户态运行的时间百分比。用户 CPU 使用率高...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/03">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/03</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="CPU性能优化">CPU性能优化</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/01/02/pidstat-%E8%AF%A6%E8%A7%A3/">
-                
-                <span class="abstract-title-text">pidstat 详解</span>
-            </a>
-            <div class="abstract-content">
-                
-功能
-命令参数
-输出字段含义
-使用案例
-统计进程内存和线程的使用情况(以人类可阅读的方式)
-统计进程IO
-进程上下文切换
-查看指定进程和他的派生线程的状态
-
-
-
-功能pidstat命令用于监视当前由Linux内核管理的单个任务。
-它为使用选项-p选择的每个任务或Linux内核管理的每个任务（如果使用了选项-p ALL）写入标准输出。
-不选择任何任务相当于指定-p ALL，但报告中将只显示活动任务（统计值非零的任务）。
-命令参数
-
-
-参数
-用途/含义
-
-
-
-u
-默认参数, 显示进程的CPU利用率.
-
-
-R
-报告实时优先级和调度策略信息。
-
-
-s
-报告堆栈利用率。
-
-
-t
-选定任务关联的线...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/03">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/02</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="linux">linux</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="性能分析">性能分析</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="工具">工具</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="pidstat">pidstat</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
     <!-- paginator  -->
     
         <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/archives/2022/">&lt; PREV</a><a class="page-number" href="/archives/2022/">1</a><span class="page-number current">2</span>
+            <a class="extend prev" rel="prev" href="/archives/2022/">&lt; PREV</a><a class="page-number" href="/archives/2022/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2022/page/3/">3</a><a class="extend next" rel="next" href="/archives/2022/page/3/">NEXT &gt;</a>
         </nav>
     
 </main>
@@ -1107,7 +1071,97 @@ t
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1264,7 +1318,7 @@ t
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 25
+        Total : 31
         </div>
         <!-- search  -->
         
@@ -1278,6 +1332,42 @@ t
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span>
+            <a class="archive-post-title" href="/2022/11/27/iptables%E5%AF%BC%E8%87%B4%E8%AE%BF%E9%97%AE%E6%9F%90%E4%B8%AA%E8%8A%82%E7%82%B9Pod%E4%B8%8D%E9%80%9A/">iptables导致访问某个节点Pod不通</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span>
+            <a class="archive-post-title" href="/2022/11/27/%E6%9E%84%E5%BB%BAcentos-jre%E6%9C%80%E5%B0%8F%E5%8C%96%E9%95%9C%E5%83%8F/">构建centos jre最小化镜像</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span>
+            <a class="archive-post-title" href="/2022/11/27/Intel-Mac%E8%A7%A3%E5%86%B3vscode-%E6%89%93%E5%AD%97%E5%8D%A1%E9%A1%BF/">Intel Mac解决vscode 打字卡顿</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span>
+            <a class="archive-post-title" href="/2022/11/27/MySQL-%E8%87%AA%E5%BB%BA%E9%85%8D%E7%BD%AE/">MySQL 自建配置</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span>
+            <a class="archive-post-title" href="/2022/11/27/ssh%E5%85%8D%E5%AF%86%E8%84%9A%E6%9C%AC/">ssh免密脚本</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span>
+            <a class="archive-post-title" href="/2022/11/27/xfs-repair-%E4%BF%AE%E5%A4%8D%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">xfs_repair 修复文件系统</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">08/24</span>
@@ -1526,6 +1616,56 @@ t
             <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
                 安装文档
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ssh">
+                <span class="iconfont-archer">&#xe606;</span>
+                ssh
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="通用脚本">
+                <span class="iconfont-archer">&#xe606;</span>
+                通用脚本
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="centos">
+                <span class="iconfont-archer">&#xe606;</span>
+                centos
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="xfs_repair">
+                <span class="iconfont-archer">&#xe606;</span>
+                xfs_repair
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="docker">
+                <span class="iconfont-archer">&#xe606;</span>
+                docker
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="jre">
+                <span class="iconfont-archer">&#xe606;</span>
+                jre
             </span>
         
     </div>
