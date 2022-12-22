@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://0x0034.github.io/archives/2021/11/index.html">
+<meta property="og:url" content="https://0x0034.github.io/tags/ubuntu/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale">
 <meta property="article:author" content="0x0034">
@@ -428,123 +428,47 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2021/11/08/K8s%E4%B8%ADjava%E5%86%85%E5%AD%98%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/">
+            <a class="abstract-title" href="/2022/12/22/%E5%90%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%89%93%E5%BC%80Docker-REMOTE-API/">
                 
-                <span class="abstract-title-text">K8s中java内存参数配置</span>
+                <span class="abstract-title-text">各操作系统打开Docker REMOTE  API</span>
             </a>
             <div class="abstract-content">
-                k8s中java动态内存配置内存配置建议
-条件限制: 本示例中使用Java8 , Java8的版本需要大于等于8u191,小于8u191请设置xms,xmx
+                警告因为Docker Remote API 默认是不存在加密的,所以请确保在网络安全的环境下进行下列操作.
+推荐环境如下:
+
+纯内网环境
+外网:
+启用TLS认证
+启用白名单
 
 
-JVM最大堆 = 容器limit内存* 1/2
-JVM最大堆 * 125% &lt;= 容器request
 
-参数介绍Java 8u191 以上版本使用-XX:MaxRAMPercentage、-XX:MinRAMPercentage 两个参数. -XX:MaxRAMPercentage 是堆栈最大使用宿主内存的参数, 接受的值为浮点型. 即如果最大堆栈大小为容器limit的1/2,则设置为-XX:MaxRAMPercentag...
+MacOSdocker for mac 不支持远程访问,需要依赖scoat, 原理图如下所示: 
+
+
+以下两个方法同理, 但是更推荐使用容器的方式启动, 便于管理
+
+基于容器转发1234567docker run -d --restart=always \  -p 0.0.0.0:2375:2375 \  --name=socat \  -v /var/run/docker.sock:/var/run/dock...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2021/11/09">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/11/08</span>
+                <div class="abstract-date" title="Last updated: 2022/12/22">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/22</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="centos">centos</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="java">java</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="docker remote api">docker remote api</a>
     
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+        <a class="post-tag" href="javascript:void(0);" data-tags="macos">macos</a>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/11/07/k8s%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/">
-                
-                <span class="abstract-title-text">k8s灰度发布.md</span>
-            </a>
-            <div class="abstract-content">
-                灰度发布解决方案双Deployment滚动发布略
-就绪态解决方案文件名称test-rolling.yaml
-123456789101112131415161718192021222324252627282930313233343536373839404142apiVersion: apps/v1kind: Deploymentmetadata:  name: nginx-deployment  labels:    app: nginxspec:  replicas: 2  selector:    matchLabels:      app: nginx  template:    m...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2021/11/09">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/11/07</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/">
-                
-                <span class="abstract-title-text">chartmuseum使用</span>
-            </a>
-            <div class="abstract-content">
-                Chartmuseum 基本操作
-Chartmuseum 基本操作
-安装Helm Plugin
-添加Helm repo
-Push charts
-使用自定义版本推送
-推送tgz包
-强制推送
-推送到指定URL
-
-
-
-安装Helm Plugin1helm plugin install https://github.com/chartmuseum/helm-push
-
-添加Helm repo1helm repo add &#123;&#123; repo_name &#125;&#125; &#123;&#123; url &#125;&#125; --username &#123;&#123;...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2021/11/09">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/11/07</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="helm">helm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="chartmuseum">chartmuseum</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="ubuntu">ubuntu</a>
     
 </div>
 

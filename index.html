@@ -443,6 +443,62 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/12/22/%E5%90%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%89%93%E5%BC%80Docker-REMOTE-API/">
+                
+                <span class="abstract-title-text">各操作系统打开Docker REMOTE  API</span>
+            </a>
+            <div class="abstract-content">
+                警告因为Docker Remote API 默认是不存在加密的,所以请确保在网络安全的环境下进行下列操作.
+推荐环境如下:
+
+纯内网环境
+外网:
+启用TLS认证
+启用白名单
+
+
+
+MacOSdocker for mac 不支持远程访问,需要依赖scoat, 原理图如下所示: 
+
+
+以下两个方法同理, 但是更推荐使用容器的方式启动, 便于管理
+
+基于容器转发1234567docker run -d --restart=always \  -p 0.0.0.0:2375:2375 \  --name=socat \  -v /var/run/docker.sock:/var/run/dock...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/12/22">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/22</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="centos">centos</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="docker remote api">docker remote api</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="macos">macos</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="ubuntu">ubuntu</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/11/27/iptables%E5%AF%BC%E8%87%B4%E8%AE%BF%E9%97%AE%E6%9F%90%E4%B8%AA%E8%8A%82%E7%82%B9Pod%E4%B8%8D%E9%80%9A/">
                 
                 <span class="abstract-title-text">iptables导致访问某个节点Pod不通</span>
@@ -802,59 +858,6 @@ Ping &gt; 1s
         </article>
         <div class="index-post-divider"></div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/04/02/percona-xtradb-cluster-operator-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/">
-                
-                <span class="abstract-title-text">percona-xtradb-cluster-operator 集群安装</span>
-            </a>
-            <div class="abstract-content">
-                
-Prepare
-安装Helm
-克隆percona-helm-charts这个项目
-
-
-安装pxc-operator
-安装pxc-db
-更换私有仓库
-选择MySQL版本
-(可选) 开启pmm-client
-密码及其他配置
-备份配置
-密码配置
-
-
-安装集群
-集群启动, 校验集群
-查看集群资源状态
-连接MySQL
-
-
-
-
-容灾验证
-
-Prepare安装Helm1234567cd /tmprm -rf linux-amd64wget https://get.helm.sh/helm-v3.8.1-linux-amd64.tar.gztar xzvf helm-v3.8.1-linux-amd6...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/04/02">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/02</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
     <!-- paginator  -->
     
         <nav class="page-nav">
@@ -1188,7 +1191,22 @@ Prepare安装Helm1234567cd /tmprm -rf linux-amd64wget https://get.helm.sh/helm-v
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1405,7 +1423,7 @@ Prepare安装Helm1234567cd /tmprm -rf linux-amd64wget https://get.helm.sh/helm-v
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 32
         </div>
         <!-- search  -->
         
@@ -1419,6 +1437,12 @@ Prepare安装Helm1234567cd /tmprm -rf linux-amd64wget https://get.helm.sh/helm-v
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span>
+            <a class="archive-post-title" href="/2022/12/22/%E5%90%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%89%93%E5%BC%80Docker-REMOTE-API/">各操作系统打开Docker REMOTE  API</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">11/27</span>
@@ -1753,6 +1777,21 @@ Prepare安装Helm1234567cd /tmprm -rf linux-amd64wget https://get.helm.sh/helm-v
             <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
                 jre
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="docker remote api">
+                <span class="iconfont-archer">&#xe606;</span>
+                docker remote api
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="macos">
+                <span class="iconfont-archer">&#xe606;</span>
+                macos
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ubuntu">
+                <span class="iconfont-archer">&#xe606;</span>
+                ubuntu
             </span>
         
     </div>

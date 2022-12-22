@@ -428,6 +428,62 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/12/22/%E5%90%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%89%93%E5%BC%80Docker-REMOTE-API/">
+                
+                <span class="abstract-title-text">各操作系统打开Docker REMOTE  API</span>
+            </a>
+            <div class="abstract-content">
+                警告因为Docker Remote API 默认是不存在加密的,所以请确保在网络安全的环境下进行下列操作.
+推荐环境如下:
+
+纯内网环境
+外网:
+启用TLS认证
+启用白名单
+
+
+
+MacOSdocker for mac 不支持远程访问,需要依赖scoat, 原理图如下所示: 
+
+
+以下两个方法同理, 但是更推荐使用容器的方式启动, 便于管理
+
+基于容器转发1234567docker run -d --restart=always \  -p 0.0.0.0:2375:2375 \  --name=socat \  -v /var/run/docker.sock:/var/run/dock...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/12/22">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/12/22</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="centos">centos</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="docker remote api">docker remote api</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="macos">macos</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="ubuntu">ubuntu</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/11/27/%E6%9E%84%E5%BB%BAcentos-jre%E6%9C%80%E5%B0%8F%E5%8C%96%E9%95%9C%E5%83%8F/">
                 
                 <span class="abstract-title-text">构建centos jre最小化镜像</span>
@@ -762,7 +818,22 @@ xfs_repair 修复文件系统123456789101112131415# 1. 使用virsh console 进�
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -979,7 +1050,7 @@ xfs_repair 修复文件系统123456789101112131415# 1. 使用virsh console 进�
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 32
         </div>
         <!-- search  -->
         
@@ -993,6 +1064,12 @@ xfs_repair 修复文件系统123456789101112131415# 1. 使用virsh console 进�
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span>
+            <a class="archive-post-title" href="/2022/12/22/%E5%90%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%89%93%E5%BC%80Docker-REMOTE-API/">各操作系统打开Docker REMOTE  API</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">11/27</span>
@@ -1327,6 +1404,21 @@ xfs_repair 修复文件系统123456789101112131415# 1. 使用virsh console 进�
             <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
                 jre
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="docker remote api">
+                <span class="iconfont-archer">&#xe606;</span>
+                docker remote api
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="macos">
+                <span class="iconfont-archer">&#xe606;</span>
+                macos
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ubuntu">
+                <span class="iconfont-archer">&#xe606;</span>
+                ubuntu
             </span>
         
     </div>

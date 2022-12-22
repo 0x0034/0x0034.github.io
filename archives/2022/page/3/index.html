@@ -428,6 +428,64 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/01/17/kvm-qcow2%E7%A3%81%E7%9B%98%E7%A6%BB%E7%BA%BF%E6%89%A9%E5%AE%B9/">
+                
+                <span class="abstract-title-text">kvm qcow2磁盘离线扩容</span>
+            </a>
+            <div class="abstract-content">
+                
+准备操作
+关闭指定虚拟机
+寻找img文件路径
+移动qcow2 镜像
+
+
+开始扩容
+创建新的磁盘镜像
+检查原镜像信息
+resize磁盘
+
+
+启动,验证扩容
+检查扩容
+启动虚拟机,检查
+
+
+去除镜像空洞
+虚拟机在/etc/fstab 中写入错误无法启动的恢复流程
+查看虚拟机镜像的磁盘分区
+挂载镜像分区
+根据需求修改系统文件
+卸载分区
+
+
+
+
+以 tmp_ka30 虚拟机为例, 源机器磁盘大小40GB
+
+准备操作关闭指定虚拟机
+qcow2的磁盘扩容,貌似不能在线扩容,如果有能在线扩容的方法,&#x77;&#x61;&#x6e;&#120;&#105;&#x61;&#x6c;&#105;&#9...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/01">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/01/17/%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%A3%81%E7%9B%98%E7%83%AD%E6%89%A9%E5%AE%B9/">
                 
                 <span class="abstract-title-text">云主机磁盘热扩容</span>
@@ -969,7 +1027,22 @@ t
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1186,7 +1259,7 @@ t
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 32
         </div>
         <!-- search  -->
         
@@ -1200,6 +1273,12 @@ t
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span>
+            <a class="archive-post-title" href="/2022/12/22/%E5%90%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%89%93%E5%BC%80Docker-REMOTE-API/">各操作系统打开Docker REMOTE  API</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">11/27</span>
@@ -1534,6 +1613,21 @@ t
             <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
                 jre
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="docker remote api">
+                <span class="iconfont-archer">&#xe606;</span>
+                docker remote api
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="macos">
+                <span class="iconfont-archer">&#xe606;</span>
+                macos
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ubuntu">
+                <span class="iconfont-archer">&#xe606;</span>
+                ubuntu
             </span>
         
     </div>
