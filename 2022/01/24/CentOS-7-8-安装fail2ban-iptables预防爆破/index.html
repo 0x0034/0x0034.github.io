@@ -485,7 +485,7 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h2 id="fail2ban"><a href="#fail2ban" class="headerlink" title="fail2ban"></a>fail2ban</h2><h3 id="安装epel"><a href="#安装epel" class="headerlink" title="安装epel"></a>安装epel</h3><ul>
+        <h2><span id="fail2ban">fail2ban</span></h2><h3><span id="安装epel">安装epel</span></h3><ul>
 <li>CentOS7</li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">wget</span> <span class="literal">-O</span> /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel<span class="literal">-7</span>.repo</span><br></pre></td></tr></table></figure>
@@ -495,9 +495,9 @@
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install <span class="literal">-y</span> https://mirrors.aliyun.com/epel/epel<span class="literal">-release</span><span class="literal">-latest</span><span class="literal">-8</span>.noarch.rpm</span><br><span class="line">sed <span class="literal">-i</span> <span class="string">&#x27;s|^#baseurl=https://download.example/pub|baseurl=https://mirrors.aliyun.com|&#x27;</span> /etc/yum.repos.d/epel*</span><br><span class="line">sed <span class="literal">-i</span> <span class="string">&#x27;s|^metalink|#metalink|&#x27;</span> /etc/yum.repos.d/epel*</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装fail2ban"><a href="#安装fail2ban" class="headerlink" title="安装fail2ban"></a>安装fail2ban</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum install <span class="literal">-y</span> fail2ban</span><br><span class="line"><span class="built_in">cp</span> /etc/fail2ban/jail.conf /etc/fail2ban/jail.local</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;EOF &gt; /etc/fail2ban/jail.local</span><br><span class="line">[<span class="type">ssh</span>-<span class="type">iptables</span>]</span><br><span class="line"> ignoreip = <span class="number">127.0</span>.<span class="number">0.1</span>/<span class="number">8</span> <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span></span><br><span class="line"> enabled  = true</span><br><span class="line"> <span class="keyword">filter</span>   = sshd</span><br><span class="line"> action   = iptables[<span class="type">name</span>=<span class="type">SSH</span>, <span class="type">port</span>=<span class="number">22</span>, <span class="type">protocol</span>=<span class="type">tcp</span>]</span><br><span class="line"> logpath  = /var/log/secure</span><br><span class="line"> maxretry = <span class="number">3</span></span><br><span class="line"> findtime  = <span class="number">300</span> </span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">systemctl enable -<span class="literal">-now</span> fail2ban</span><br></pre></td></tr></table></figure>
+<h3><span id="安装fail2ban">安装fail2ban</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">yum install <span class="literal">-y</span> fail2ban</span><br><span class="line"><span class="built_in">cp</span> /etc/fail2ban/jail.conf /etc/fail2ban/jail.local</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;EOF &gt; /etc/fail2ban/jail.local</span><br><span class="line">[<span class="type">ssh</span>-<span class="type">iptables</span>]</span><br><span class="line"> ignoreip = <span class="number">127.0</span>.<span class="number">0.1</span>/<span class="number">8</span> <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span></span><br><span class="line"> enabled  = true</span><br><span class="line"> <span class="keyword">filter</span>   = sshd</span><br><span class="line"> action   = iptables[<span class="type">name</span>=<span class="type">SSH</span>, <span class="type">port</span>=<span class="number">22</span>, <span class="type">protocol</span>=<span class="type">tcp</span>]</span><br><span class="line"> logpath  = /var/log/secure</span><br><span class="line"> maxretry = <span class="number">3</span></span><br><span class="line"> findtime  = <span class="number">300</span> </span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">systemctl enable -<span class="literal">-now</span> fail2ban</span><br></pre></td></tr></table></figure>
 
-<h3 id="使用fail2ban"><a href="#使用fail2ban" class="headerlink" title="使用fail2ban"></a>使用fail2ban</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看ssh-iptables状态</span></span><br><span class="line">fail2ban<span class="literal">-client</span> status ssh<span class="literal">-iptables</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消IP ban</span></span><br><span class="line">fail2ban<span class="literal">-client</span> <span class="built_in">set</span> ssh<span class="literal">-iptables</span> unbanip <span class="number">23.34</span>.<span class="number">45.56</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># IP ban</span></span><br><span class="line">fail2ban<span class="literal">-client</span> <span class="built_in">set</span> ssh<span class="literal">-iptables</span> banip <span class="number">23.34</span>.<span class="number">45.56</span></span><br></pre></td></tr></table></figure>
+<h3><span id="使用fail2ban">使用fail2ban</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看ssh-iptables状态</span></span><br><span class="line">fail2ban<span class="literal">-client</span> status ssh<span class="literal">-iptables</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消IP ban</span></span><br><span class="line">fail2ban<span class="literal">-client</span> <span class="built_in">set</span> ssh<span class="literal">-iptables</span> unbanip <span class="number">23.34</span>.<span class="number">45.56</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># IP ban</span></span><br><span class="line">fail2ban<span class="literal">-client</span> <span class="built_in">set</span> ssh<span class="literal">-iptables</span> banip <span class="number">23.34</span>.<span class="number">45.56</span></span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license -->
@@ -655,7 +655,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#fail2ban"><span class="toc-number">1.</span> <span class="toc-text">fail2ban</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85epel"><span class="toc-number">1.1.</span> <span class="toc-text">安装epel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85fail2ban"><span class="toc-number">1.2.</span> <span class="toc-text">安装fail2ban</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8fail2ban"><span class="toc-number">1.3.</span> <span class="toc-text">使用fail2ban</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">fail2ban</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">安装epel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">安装fail2ban</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">使用fail2ban</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1067,6 +1067,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1195,6 +1209,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1202,12 +1222,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1309,29 +1323,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1344,19 +1343,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1364,9 +1398,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1384,34 +1423,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1434,16 +1458,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1459,14 +1473,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

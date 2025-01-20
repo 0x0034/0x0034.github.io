@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://0x0034.github.io/tags/MySQL/index.html">
+<meta property="og:url" content="https://0x0034.github.io/tags/mysql/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale">
 <meta property="article:author" content="0x0034">
@@ -428,29 +428,95 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2022/11/27/MySQL-%E8%87%AA%E5%BB%BA%E9%85%8D%E7%BD%AE/">
+            <a class="abstract-title" href="/2022/03/31/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%A4%87%E4%BB%BD/">
                 
-                <span class="abstract-title-text">MySQL 自建配置</span>
+                <span class="abstract-title-text">percona-xtradb-cluster-operator-文档-备份</span>
             </a>
             <div class="abstract-content">
-                MySQL 自用优化配置
-适用于4c8g 机器.
+                Operator 通常将 Percona XtraDB 集群备份存储在 Kubernetes 集群外部的Amazon S3 或 S3 兼容存储上：
+但是也可以在 Kubernetes 集群内的Persistent Volumes上存储备份：
+Operator 允许以两种方式进行备份。 计划备份在 deploy/cr.yaml 文件中配置为在适当的时间自动执行。 可以随时手动进行按需备份。
 
-12345678910111213141516171819202122232425262728293031323334353637383940414243[mysqld]sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTIONskip_sslignore-db-dir=lost+founddatadir=...
+模板yaml: https://github.com/percona/percona-xtradb-cluster-operator/blob/main/deploy/cr.yaml
+
+
+计划备份
+按...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/11/27">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/11/27</span>
+                <div class="abstract-date" title="Last updated: 2022/03/31">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/31</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="MySQL">MySQL</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="percona-xtradb-cluster-operator">percona-xtradb-cluster-operator</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="mysql">mysql</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="operator">operator</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/03/29/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%AE%89%E8%A3%85/">
+                
+                <span class="abstract-title-text">percona-xtradb-cluster-operator-文档-安装</span>
+            </a>
+            <div class="abstract-content">
+                
+使用Helm安装Percona XtraDB Cluster
+预备条件
+安装
+使用自定义参数安装 Percona XtraDB Cluster
+
+
+
+使用Helm安装Percona XtraDB Cluster预备条件安装
+添加 Percona 的 Helm 图表存储库并使用它使您的 Helm 客户端保持最新：
+
+12helm repo add percona https://percona.github.io/percona-helm-charts/helm repo update
+
+
+基于 Percona XtraDB Cluster 安装 Percona Distribution...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/03/29">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/29</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="percona-xtradb-cluster-operator">percona-xtradb-cluster-operator</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="mysql">mysql</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="operator">operator</a>
     
 </div>
 
@@ -953,6 +1019,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1081,6 +1161,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1088,12 +1174,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1195,29 +1275,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1230,19 +1295,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1250,9 +1350,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1270,34 +1375,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1320,16 +1410,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1345,90 +1425,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
-            </span>
-        
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
-
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
-
-    </div>
-</div>
-
-        <!-- site-meta -->
-        <script>
-    var siteMeta = {
-        root: "/",
-        author: "0x0034"
-    }
-</script>
-
-        <!-- import experimental options here -->
-        <!-- Custom Font -->
-
-
-        <!-- main func -->
-        <script src="/scripts/main.js?v=20210823"></script>
-        <!-- dark mode -->
-        <script src="/scripts/dark.js?v=20210823"></script>
-        <!-- fancybox -->
-        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
-        <!-- algolia -->
-        
-        <!-- busuanzi -->
-        
-            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-        
-        <!-- CNZZ -->
-        
-        <!-- async load share.js -->
-        
-        <!-- mermaid -->
-        
-    </body>
-</html>
-        <span class="sidebar-tag-name" data-tags="docker remote api">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker remote api
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="macos">
-                <span class="iconfont-archer">&#xe606;</span>
-                macos
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="ubuntu">
-                <span class="iconfont-archer">&#xe606;</span>
-                ubuntu
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="node-exporter">
-                <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="prometheus">
-                <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

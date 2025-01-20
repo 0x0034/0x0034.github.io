@@ -515,42 +515,42 @@
 <blockquote>
 <p>以 tmp_ka30 虚拟机为例, 源机器磁盘大小40GB</p>
 </blockquote>
-<h2 id="准备操作"><a href="#准备操作" class="headerlink" title="准备操作"></a>准备操作</h2><h3 id="关闭指定虚拟机"><a href="#关闭指定虚拟机" class="headerlink" title="关闭指定虚拟机"></a>关闭指定虚拟机</h3><blockquote>
-<p>qcow2的磁盘扩容,貌似不能在线扩容,如果有能在线扩容的方法,<a href="mailto:&#x77;&#x61;&#x6e;&#120;&#105;&#x61;&#x6c;&#105;&#97;&#110;&#119;&#x65;&#105;&#x40;&#103;&#x61;&#x6d;&#x69;&#x2e;&#99;&#111;&#x6d;">&#x77;&#x61;&#x6e;&#120;&#105;&#x61;&#x6c;&#105;&#97;&#110;&#119;&#x65;&#105;&#x40;&#103;&#x61;&#x6d;&#x69;&#x2e;&#99;&#111;&#x6d;</a> 告诉我,感激不尽</p>
+<h2><span id="准备操作">准备操作</span></h2><h3><span id="关闭指定虚拟机">关闭指定虚拟机</span></h3><blockquote>
+<p>qcow2的磁盘扩容,貌似不能在线扩容,如果有能在线扩容的方法,<a href="mailto:&#x77;&#97;&#x6e;&#120;&#x69;&#x61;&#x6c;&#105;&#x61;&#110;&#119;&#x65;&#x69;&#x40;&#103;&#x61;&#x6d;&#x69;&#46;&#x63;&#x6f;&#109;">&#x77;&#97;&#x6e;&#120;&#x69;&#x61;&#x6c;&#105;&#x61;&#110;&#119;&#x65;&#x69;&#x40;&#103;&#x61;&#x6d;&#x69;&#46;&#x63;&#x6f;&#109;</a> 告诉我,感激不尽</p>
 </blockquote>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭指定虚拟机</span></span><br><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">tmp</span>]<span class="comment"># virsh stop  tmp_ka30</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机状态</span></span><br><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">tmp</span>]<span class="comment"># virsh list --all</span></span><br><span class="line"> Id    名称                         状态</span><br><span class="line">----------------------------------------------------</span><br><span class="line"> <span class="number">16</span>    k120<span class="literal">-anolis_ka29</span>               running</span><br><span class="line"> <span class="number">26</span>    daily<span class="literal">-anolis_ka28</span>              running</span><br><span class="line"> <span class="number">63</span>    h331<span class="literal">-anolis_ka28</span>               running</span><br><span class="line"> -     tmp_ka30                       关闭</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="寻找img文件路径"><a href="#寻找img文件路径" class="headerlink" title="寻找img文件路径"></a>寻找img文件路径</h3><p><code>/home/lib/libvirt/images/tmp_ka30.img</code> 就是本例的镜像文件路径</p>
+<h3><span id="寻找img文件路径">寻找img文件路径</span></h3><p><code>/home/lib/libvirt/images/tmp_ka30.img</code> 就是本例的镜像文件路径</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看qcow2 镜像路径</span></span><br><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">tmp</span>]<span class="comment"># virsh dumpxml tmp_ka30</span></span><br><span class="line">...</span><br><span class="line">&lt;emulator&gt;/usr/libexec/qemu<span class="literal">-kvm</span>&lt;/emulator&gt;</span><br><span class="line">    &lt;disk <span class="built_in">type</span>=<span class="string">&#x27;file&#x27;</span> device=<span class="string">&#x27;disk&#x27;</span>&gt;</span><br><span class="line">      &lt;driver name=<span class="string">&#x27;qemu&#x27;</span> <span class="built_in">type</span>=<span class="string">&#x27;qcow2&#x27;</span>/&gt;</span><br><span class="line">      &lt;source file=<span class="string">&#x27;/home/lib/libvirt/images/tmp_ka30.img&#x27;</span>/&gt;</span><br><span class="line">      &lt;backingStore/&gt;</span><br><span class="line">      &lt;target dev=<span class="string">&#x27;vda&#x27;</span> bus=<span class="string">&#x27;virtio&#x27;</span>/&gt;</span><br><span class="line">      &lt;alias name=<span class="string">&#x27;ua-box-volume-0&#x27;</span>/&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">&#x27;pci&#x27;</span> domain=<span class="string">&#x27;0x0000&#x27;</span> bus=<span class="string">&#x27;0x00&#x27;</span> slot=<span class="string">&#x27;0x03&#x27;</span> function=<span class="string">&#x27;0x0&#x27;</span>/&gt;</span><br><span class="line">    &lt;/disk&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="移动qcow2-镜像"><a href="#移动qcow2-镜像" class="headerlink" title="移动qcow2 镜像"></a>移动qcow2 镜像</h3><p><strong>一定要记得备份文件</strong>, 谨记. 问就是血泪教训.</p>
+<h3><span id="移动qcow2-镜像">移动qcow2 镜像</span></h3><p><strong>一定要记得备份文件</strong>, 谨记. 问就是血泪教训.</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># mv tmp_ka30.img tmp_ka30.img.origin</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="开始扩容"><a href="#开始扩容" class="headerlink" title="开始扩容"></a>开始扩容</h2><h3 id="创建新的磁盘镜像"><a href="#创建新的磁盘镜像" class="headerlink" title="创建新的磁盘镜像"></a>创建新的磁盘镜像</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># qemu-img create -f qcow2 tmp_ka30.img  50G</span></span><br><span class="line">Formatting <span class="string">&#x27;tmp_ka30.img&#x27;</span>, fmt=qcow2 size=<span class="number">53687091200</span> encryption=off cluster_size=<span class="number">65536</span> lazy_refcounts=off</span><br><span class="line"><span class="comment"># 检查磁盘镜像</span></span><br><span class="line"><span class="comment"># 显示qcow2文件虚拟容量50G，实际目前是空的稀疏文件，所以只占用了196K空间</span></span><br><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># qemu-img info tmp_ka30.img</span></span><br><span class="line">image: tmp_ka30.img</span><br><span class="line">file format: qcow2</span><br><span class="line">virtual size: <span class="number">50</span>G (<span class="number">53687091200</span> bytes)</span><br><span class="line">disk size: <span class="number">196</span>K</span><br><span class="line">cluster_size: <span class="number">65536</span></span><br><span class="line">Format specific information:</span><br><span class="line">    compat: <span class="number">1.1</span></span><br><span class="line">    lazy refcounts: false</span><br></pre></td></tr></table></figure>
+<h2><span id="开始扩容">开始扩容</span></h2><h3><span id="创建新的磁盘镜像">创建新的磁盘镜像</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># qemu-img create -f qcow2 tmp_ka30.img  50G</span></span><br><span class="line">Formatting <span class="string">&#x27;tmp_ka30.img&#x27;</span>, fmt=qcow2 size=<span class="number">53687091200</span> encryption=off cluster_size=<span class="number">65536</span> lazy_refcounts=off</span><br><span class="line"><span class="comment"># 检查磁盘镜像</span></span><br><span class="line"><span class="comment"># 显示qcow2文件虚拟容量50G，实际目前是空的稀疏文件，所以只占用了196K空间</span></span><br><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># qemu-img info tmp_ka30.img</span></span><br><span class="line">image: tmp_ka30.img</span><br><span class="line">file format: qcow2</span><br><span class="line">virtual size: <span class="number">50</span>G (<span class="number">53687091200</span> bytes)</span><br><span class="line">disk size: <span class="number">196</span>K</span><br><span class="line">cluster_size: <span class="number">65536</span></span><br><span class="line">Format specific information:</span><br><span class="line">    compat: <span class="number">1.1</span></span><br><span class="line">    lazy refcounts: false</span><br></pre></td></tr></table></figure>
 
-<h3 id="检查原镜像信息"><a href="#检查原镜像信息" class="headerlink" title="检查原镜像信息"></a>检查原镜像信息</h3><p>这一步的主要作用是确定要迁移的磁盘</p>
+<h3><span id="检查原镜像信息">检查原镜像信息</span></h3><p>这一步的主要作用是确定要迁移的磁盘</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># virt-filesystems -a tmp_ka30.img.origin --all --long -h</span></span><br><span class="line">Name       <span class="built_in">Type</span>        VFS   Label  MBR  Size  Parent</span><br><span class="line">/dev/sda1  filesystem  ext4  -      -    <span class="number">20</span>G   -</span><br><span class="line">/dev/sda1  partition   -     -      <span class="number">83</span>   <span class="number">20</span>G   /dev/sda</span><br><span class="line">/dev/sda   device      -     -      -    <span class="number">40</span>G   -</span><br></pre></td></tr></table></figure>
 
-<h3 id="resize磁盘"><a href="#resize磁盘" class="headerlink" title="resize磁盘"></a>resize磁盘</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># virt-resize tmp_ka30.img.origin tmp_ka30.img --expand /dev/sda1</span></span><br><span class="line">[   <span class="number">0.0</span>] Examining tmp_ka30.img.origin</span><br><span class="line">**********</span><br><span class="line"></span><br><span class="line">Summary of changes:</span><br><span class="line"></span><br><span class="line">/dev/sda1: This partition will be resized from <span class="number">20.0</span>G to <span class="number">50.0</span>G.  The</span><br><span class="line">filesystem ext4 on /dev/sda1 will be expanded <span class="keyword">using</span> the ‘resize2fs’</span><br><span class="line">method.</span><br><span class="line"></span><br><span class="line">**********</span><br><span class="line">[   <span class="number">2.5</span>] Setting up initial partition table on tmp_ka30.img</span><br><span class="line">[   <span class="number">2.7</span>] Copying /dev/sda1</span><br><span class="line"> <span class="number">100</span>% ⟦▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒⟧ <span class="number">00</span>:<span class="number">00</span></span><br><span class="line">[  <span class="number">70.5</span>] Expanding /dev/sda1 <span class="keyword">using</span> the ‘resize2fs’ method</span><br><span class="line"></span><br><span class="line">Resize operation completed with no errors.  Before deleting the old disk,</span><br><span class="line">carefully check that the resized disk boots and works correctly.</span><br></pre></td></tr></table></figure>
+<h3><span id="resize磁盘">resize磁盘</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># virt-resize tmp_ka30.img.origin tmp_ka30.img --expand /dev/sda1</span></span><br><span class="line">[   <span class="number">0.0</span>] Examining tmp_ka30.img.origin</span><br><span class="line">**********</span><br><span class="line"></span><br><span class="line">Summary of changes:</span><br><span class="line"></span><br><span class="line">/dev/sda1: This partition will be resized from <span class="number">20.0</span>G to <span class="number">50.0</span>G.  The</span><br><span class="line">filesystem ext4 on /dev/sda1 will be expanded <span class="keyword">using</span> the ‘resize2fs’</span><br><span class="line">method.</span><br><span class="line"></span><br><span class="line">**********</span><br><span class="line">[   <span class="number">2.5</span>] Setting up initial partition table on tmp_ka30.img</span><br><span class="line">[   <span class="number">2.7</span>] Copying /dev/sda1</span><br><span class="line"> <span class="number">100</span>% ⟦▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒⟧ <span class="number">00</span>:<span class="number">00</span></span><br><span class="line">[  <span class="number">70.5</span>] Expanding /dev/sda1 <span class="keyword">using</span> the ‘resize2fs’ method</span><br><span class="line"></span><br><span class="line">Resize operation completed with no errors.  Before deleting the old disk,</span><br><span class="line">carefully check that the resized disk boots and works correctly.</span><br></pre></td></tr></table></figure>
 
-<h2 id="启动-验证扩容"><a href="#启动-验证扩容" class="headerlink" title="启动,验证扩容"></a>启动,验证扩容</h2><h3 id="检查扩容"><a href="#检查扩容" class="headerlink" title="检查扩容"></a>检查扩容</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># virt-filesystems -a tmp_ka30.img --all --long -h</span></span><br><span class="line">Name       <span class="built_in">Type</span>        VFS   Label  MBR  Size  Parent</span><br><span class="line">/dev/sda1  filesystem  ext4  -      -    <span class="number">50</span>G   -</span><br><span class="line">/dev/sda1  partition   -     -      <span class="number">83</span>   <span class="number">50</span>G   /dev/sda</span><br><span class="line">/dev/sda   device      -     -      -    <span class="number">50</span>G   -</span><br></pre></td></tr></table></figure>
+<h2><span id="启动验证扩容">启动,验证扩容</span></h2><h3><span id="检查扩容">检查扩容</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">root</span>@<span class="type">jzbj</span> <span class="type">images</span>]<span class="comment"># virt-filesystems -a tmp_ka30.img --all --long -h</span></span><br><span class="line">Name       <span class="built_in">Type</span>        VFS   Label  MBR  Size  Parent</span><br><span class="line">/dev/sda1  filesystem  ext4  -      -    <span class="number">50</span>G   -</span><br><span class="line">/dev/sda1  partition   -     -      <span class="number">83</span>   <span class="number">50</span>G   /dev/sda</span><br><span class="line">/dev/sda   device      -     -      -    <span class="number">50</span>G   -</span><br></pre></td></tr></table></figure>
 
-<h3 id="启动虚拟机-检查"><a href="#启动虚拟机-检查" class="headerlink" title="启动虚拟机,检查"></a>启动虚拟机,检查</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">启动虚拟机 确认磁盘信息</span><br><span class="line">[<span class="type">root</span>@<span class="type">ka30</span> ~]<span class="comment"># df -h</span></span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">devtmpfs        <span class="number">964</span>M     <span class="number">0</span>  <span class="number">964</span>M   <span class="number">0</span>% /dev</span><br><span class="line">tmpfs           <span class="number">981</span>M     <span class="number">0</span>  <span class="number">981</span>M   <span class="number">0</span>% /dev/shm</span><br><span class="line">tmpfs           <span class="number">981</span>M  <span class="number">8.4</span>M  <span class="number">973</span>M   <span class="number">1</span>% /run</span><br><span class="line">tmpfs           <span class="number">981</span>M     <span class="number">0</span>  <span class="number">981</span>M   <span class="number">0</span>% /sys/fs/cgroup</span><br><span class="line">/dev/vda1        <span class="number">50</span>G  <span class="number">2.0</span>G   <span class="number">45</span>G   <span class="number">5</span>% /</span><br><span class="line">tmpfs           <span class="number">197</span>M     <span class="number">0</span>  <span class="number">197</span>M   <span class="number">0</span>% /run/user/<span class="number">1001</span></span><br></pre></td></tr></table></figure>
+<h3><span id="启动虚拟机检查">启动虚拟机,检查</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">启动虚拟机 确认磁盘信息</span><br><span class="line">[<span class="type">root</span>@<span class="type">ka30</span> ~]<span class="comment"># df -h</span></span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">devtmpfs        <span class="number">964</span>M     <span class="number">0</span>  <span class="number">964</span>M   <span class="number">0</span>% /dev</span><br><span class="line">tmpfs           <span class="number">981</span>M     <span class="number">0</span>  <span class="number">981</span>M   <span class="number">0</span>% /dev/shm</span><br><span class="line">tmpfs           <span class="number">981</span>M  <span class="number">8.4</span>M  <span class="number">973</span>M   <span class="number">1</span>% /run</span><br><span class="line">tmpfs           <span class="number">981</span>M     <span class="number">0</span>  <span class="number">981</span>M   <span class="number">0</span>% /sys/fs/cgroup</span><br><span class="line">/dev/vda1        <span class="number">50</span>G  <span class="number">2.0</span>G   <span class="number">45</span>G   <span class="number">5</span>% /</span><br><span class="line">tmpfs           <span class="number">197</span>M     <span class="number">0</span>  <span class="number">197</span>M   <span class="number">0</span>% /run/user/<span class="number">1001</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="去除镜像空洞"><a href="#去除镜像空洞" class="headerlink" title="去除镜像空洞"></a>去除镜像空洞</h2><blockquote>
+<h2><span id="去除镜像空洞">去除镜像空洞</span></h2><blockquote>
 <p>当磁盘的实际使用量和磁盘文件大小不一致的时候需要去除磁盘空洞</p>
 </blockquote>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 备份磁盘文件</span></span><br><span class="line"><span class="built_in">mv</span> tmp_ka30.img tmp_ka30.img.origin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 去除磁盘镜像空洞</span></span><br><span class="line"><span class="comment"># --tmp 的目的是 默认的tmp目录大小并不能支撑到镜像除去空洞, 所以需要指定一个足够大的磁盘来存储临时文件</span></span><br><span class="line"><span class="comment"># 当然, 如果磁盘足够大 当我没说</span></span><br><span class="line">virt<span class="literal">-sparsify</span> -<span class="literal">-tmp</span> /ssd1t/kvm/images/ tmp_ka30.img.origin <span class="operator">-f</span> qcow2  tmp_ka30.img</span><br></pre></td></tr></table></figure>
 
 <p>接着就是重启虚拟机来验证, 后面省略了.</p>
-<h2 id="虚拟机在-etc-fstab-中写入错误无法启动的恢复流程"><a href="#虚拟机在-etc-fstab-中写入错误无法启动的恢复流程" class="headerlink" title="虚拟机在/etc/fstab 中写入错误无法启动的恢复流程"></a>虚拟机在/etc/fstab 中写入错误无法启动的恢复流程</h2><h3 id="查看虚拟机镜像的磁盘分区"><a href="#查看虚拟机镜像的磁盘分区" class="headerlink" title="查看虚拟机镜像的磁盘分区"></a>查看虚拟机镜像的磁盘分区</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virt<span class="literal">-filesystems</span> <span class="literal">-a</span> tmp_ka30.img</span><br><span class="line"><span class="comment"># 输出: /dev/sda1 , 也就是本例中tmp_ka30.img镜像中的磁盘分区</span></span><br></pre></td></tr></table></figure>
+<h2><span id="虚拟机在etcfstab-中写入错误无法启动的恢复流程">虚拟机在/etc/fstab 中写入错误无法启动的恢复流程</span></h2><h3><span id="查看虚拟机镜像的磁盘分区">查看虚拟机镜像的磁盘分区</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virt<span class="literal">-filesystems</span> <span class="literal">-a</span> tmp_ka30.img</span><br><span class="line"><span class="comment"># 输出: /dev/sda1 , 也就是本例中tmp_ka30.img镜像中的磁盘分区</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="挂载镜像分区"><a href="#挂载镜像分区" class="headerlink" title="挂载镜像分区"></a>挂载镜像分区</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将tmp_ka30.img镜像的/dev/sda1磁盘分区 挂载到机器的/mnt/sysmount 目录上</span></span><br><span class="line">guestmount <span class="literal">-a</span> tmp_ka30.img <span class="literal">-m</span> /dev/sda1 /mnt/sysmount</span><br></pre></td></tr></table></figure>
+<h3><span id="挂载镜像分区">挂载镜像分区</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将tmp_ka30.img镜像的/dev/sda1磁盘分区 挂载到机器的/mnt/sysmount 目录上</span></span><br><span class="line">guestmount <span class="literal">-a</span> tmp_ka30.img <span class="literal">-m</span> /dev/sda1 /mnt/sysmount</span><br></pre></td></tr></table></figure>
 
-<h3 id="根据需求修改系统文件"><a href="#根据需求修改系统文件" class="headerlink" title="根据需求修改系统文件"></a>根据需求修改系统文件</h3><blockquote>
+<h3><span id="根据需求修改系统文件">根据需求修改系统文件</span></h3><blockquote>
 <p>这边就需要根据个人需求了, vm的文件系统已经挂载到/mnt/sysmount, 修改即可.</p>
 </blockquote>
-<h3 id="卸载分区"><a href="#卸载分区" class="headerlink" title="卸载分区"></a>卸载分区</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount mnt/sysmount</span><br></pre></td></tr></table></figure>
+<h3><span id="卸载分区">卸载分区</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount mnt/sysmount</span><br></pre></td></tr></table></figure>
 
 
     </article>
@@ -709,7 +709,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">准备操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E6%8C%87%E5%AE%9A%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">1.1.</span> <span class="toc-text">关闭指定虚拟机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEimg%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-number">1.2.</span> <span class="toc-text">寻找img文件路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8qcow2-%E9%95%9C%E5%83%8F"><span class="toc-number">1.3.</span> <span class="toc-text">移动qcow2 镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E6%89%A9%E5%AE%B9"><span class="toc-number">2.</span> <span class="toc-text">开始扩容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E7%A3%81%E7%9B%98%E9%95%9C%E5%83%8F"><span class="toc-number">2.1.</span> <span class="toc-text">创建新的磁盘镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%8E%9F%E9%95%9C%E5%83%8F%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.</span> <span class="toc-text">检查原镜像信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#resize%E7%A3%81%E7%9B%98"><span class="toc-number">2.3.</span> <span class="toc-text">resize磁盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-%E9%AA%8C%E8%AF%81%E6%89%A9%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">启动,验证扩容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%89%A9%E5%AE%B9"><span class="toc-number">3.1.</span> <span class="toc-text">检查扩容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA-%E6%A3%80%E6%9F%A5"><span class="toc-number">3.2.</span> <span class="toc-text">启动虚拟机,检查</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%BB%E9%99%A4%E9%95%9C%E5%83%8F%E7%A9%BA%E6%B4%9E"><span class="toc-number">4.</span> <span class="toc-text">去除镜像空洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%9C%A8-etc-fstab-%E4%B8%AD%E5%86%99%E5%85%A5%E9%94%99%E8%AF%AF%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%E7%9A%84%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">虚拟机在&#x2F;etc&#x2F;fstab 中写入错误无法启动的恢复流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%95%9C%E5%83%8F%E7%9A%84%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA"><span class="toc-number">5.1.</span> <span class="toc-text">查看虚拟机镜像的磁盘分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E9%95%9C%E5%83%8F%E5%88%86%E5%8C%BA"><span class="toc-number">5.2.</span> <span class="toc-text">挂载镜像分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E9%9C%80%E6%B1%82%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6"><span class="toc-number">5.3.</span> <span class="toc-text">根据需求修改系统文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD%E5%88%86%E5%8C%BA"><span class="toc-number">5.4.</span> <span class="toc-text">卸载分区</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">准备操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">关闭指定虚拟机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">寻找img文件路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">移动qcow2 镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">开始扩容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">创建新的磁盘镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">检查原镜像信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">resize磁盘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">启动,验证扩容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">检查扩容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">启动虚拟机,检查</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">去除镜像空洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">虚拟机在&#x2F;etc&#x2F;fstab 中写入错误无法启动的恢复流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">查看虚拟机镜像的磁盘分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">挂载镜像分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text">根据需求修改系统文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.4.</span> <span class="toc-text">卸载分区</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1121,6 +1121,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1249,6 +1263,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1256,12 +1276,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1363,29 +1377,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1398,19 +1397,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1418,9 +1452,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1438,34 +1477,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1488,16 +1512,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1513,14 +1527,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

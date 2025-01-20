@@ -506,7 +506,7 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>因为<code>Docker Remote API</code> 默认是不存在加密的,所以请确保在网络安全的环境下进行下列操作.</p>
+        <h2><span id="警告">警告</span></h2><p>因为<code>Docker Remote API</code> 默认是不存在加密的,所以请确保在网络安全的环境下进行下列操作.</p>
 <p>推荐环境如下:</p>
 <ul>
 <li>纯内网环境</li>
@@ -516,16 +516,16 @@
 </ul>
 </li>
 </ul>
-<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><p><code>docker for mac</code> 不支持远程访问,需要依赖scoat, 原理图如下所示: </p>
+<h2><span id="macos">MacOS</span></h2><p><code>docker for mac</code> 不支持远程访问,需要依赖scoat, 原理图如下所示: </p>
 <p><img src="https://raw.githubusercontent.com/0x0034/images/master/20221222094625.png" alt="socat原理图"></p>
 <blockquote>
 <p>以下两个方法同理, 但是更推荐使用容器的方式启动, 便于管理</p>
 </blockquote>
-<h3 id="基于容器转发"><a href="#基于容器转发" class="headerlink" title="基于容器转发"></a>基于容器转发</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run <span class="literal">-d</span> -<span class="literal">-restart</span>=always \</span><br><span class="line">  <span class="literal">-p</span> <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">2375</span>:<span class="number">2375</span> \</span><br><span class="line">  -<span class="literal">-name</span>=socat \</span><br><span class="line">  <span class="literal">-v</span> /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  alpine/socat \</span><br><span class="line">  tcp<span class="literal">-listen</span>:<span class="number">2375</span>,fork,reuseaddr unix<span class="literal">-connect</span>:/var/run/docker.sock </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3><span id="基于容器转发">基于容器转发</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run <span class="literal">-d</span> -<span class="literal">-restart</span>=always \</span><br><span class="line">  <span class="literal">-p</span> <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">2375</span>:<span class="number">2375</span> \</span><br><span class="line">  -<span class="literal">-name</span>=socat \</span><br><span class="line">  <span class="literal">-v</span> /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  alpine/socat \</span><br><span class="line">  tcp<span class="literal">-listen</span>:<span class="number">2375</span>,fork,reuseaddr unix<span class="literal">-connect</span>:/var/run/docker.sock </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="brew-安装socat-转发"><a href="#brew-安装socat-转发" class="headerlink" title="brew 安装socat 转发"></a>brew 安装socat 转发</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install socat</span><br><span class="line">socat tcp<span class="literal">-listen</span>:<span class="number">2375</span>,fork,reuseaddr unix<span class="literal">-connect</span>:/var/run/docker.sock</span><br></pre></td></tr></table></figure>
+<h3><span id="brew-安装socat-转发">brew 安装socat 转发</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install socat</span><br><span class="line">socat tcp<span class="literal">-listen</span>:<span class="number">2375</span>,fork,reuseaddr unix<span class="literal">-connect</span>:/var/run/docker.sock</span><br></pre></td></tr></table></figure>
 
-<h2 id="CentOS-Ubuntu"><a href="#CentOS-Ubuntu" class="headerlink" title="CentOS || Ubuntu"></a>CentOS || Ubuntu</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改docker Service文件</span></span><br><span class="line">vi <span class="variable">$</span>(systemctl <span class="built_in">cat</span> docker|grep docker.service| awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2><span id="centos-ubuntu">CentOS || Ubuntu</span></h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改docker Service文件</span></span><br><span class="line">vi <span class="variable">$</span>(systemctl <span class="built_in">cat</span> docker|grep docker.service| awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>在<code>ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</code> 后面追加入下内容</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">-H</span> tcp://<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">2375</span> <span class="literal">-H</span> unix:///var/run/docker.sock</span><br></pre></td></tr></table></figure>
@@ -534,7 +534,7 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon<span class="literal">-reload</span></span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h2><blockquote>
+<h2><span id="校验">校验</span></h2><blockquote>
 <p>自行替换实际IP地址</p>
 </blockquote>
 <p>以下方式二选一即可</p>
@@ -708,7 +708,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A"><span class="toc-number">1.</span> <span class="toc-text">警告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MacOS"><span class="toc-number">2.</span> <span class="toc-text">MacOS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%AE%B9%E5%99%A8%E8%BD%AC%E5%8F%91"><span class="toc-number">2.1.</span> <span class="toc-text">基于容器转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#brew-%E5%AE%89%E8%A3%85socat-%E8%BD%AC%E5%8F%91"><span class="toc-number">2.2.</span> <span class="toc-text">brew 安装socat 转发</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS-Ubuntu"><span class="toc-number">3.</span> <span class="toc-text">CentOS || Ubuntu</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%A1%E9%AA%8C"><span class="toc-number">4.</span> <span class="toc-text">校验</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">警告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">MacOS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">基于容器转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">brew 安装socat 转发</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">CentOS || Ubuntu</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">校验</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1120,6 +1120,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1248,6 +1262,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1255,12 +1275,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1362,29 +1376,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1397,19 +1396,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1417,9 +1451,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1437,34 +1476,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1487,16 +1511,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1512,14 +1526,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

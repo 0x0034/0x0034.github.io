@@ -27,7 +27,7 @@
 <meta property="og:description" content="Chartmuseum 基本操作 Chartmuseum 基本操作 安装Helm Plugin 添加Helm repo Push charts 使用自定义版本推送 推送tgz包 强制推送 推送到指定URL    安装Helm Plugin1helm plugin install https:&#x2F;&#x2F;github.com&#x2F;chartmuseum&#x2F;helm-push  添加Helm repo1helm r">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-11-07T12:43:05.000Z">
-<meta property="article:modified_time" content="2021-11-09T04:13:29.590Z">
+<meta property="article:modified_time" content="2022-03-30T01:30:20.049Z">
 <meta property="article:author" content="0x0034">
 <meta property="article:tag" content="helm">
 <meta property="article:tag" content="chartmuseum">
@@ -497,7 +497,7 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Chartmuseum-基本操作"><a href="#Chartmuseum-基本操作" class="headerlink" title="Chartmuseum 基本操作"></a>Chartmuseum 基本操作</h1><ul>
+        <h1><span id="chartmuseum-基本操作">Chartmuseum 基本操作</span></h1><ul>
 <li><a href="#chartmuseum-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">Chartmuseum 基本操作</a><ul>
 <li><a href="#%E5%AE%89%E8%A3%85helm-plugin">安装Helm Plugin</a></li>
 <li><a href="#%E6%B7%BB%E5%8A%A0helm-repo">添加Helm repo</a></li>
@@ -509,22 +509,22 @@
 </ul>
 </li>
 </ul>
-<h2 id="安装Helm-Plugin"><a href="#安装Helm-Plugin" class="headerlink" title="安装Helm Plugin"></a>安装Helm Plugin</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm plugin install https://github.com/chartmuseum/helm-push</span><br></pre></td></tr></table></figure>
+<h2><span id="安装helm-plugin">安装Helm Plugin</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm plugin install https://github.com/chartmuseum/helm-push</span><br></pre></td></tr></table></figure>
 
-<h2 id="添加Helm-repo"><a href="#添加Helm-repo" class="headerlink" title="添加Helm repo"></a>添加Helm repo</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add &#123;&#123; repo_name &#125;&#125; &#123;&#123; url &#125;&#125; --username &#123;&#123;username&#125;&#125; --password &#123;&#123;password&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="添加helm-repo">添加Helm repo</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add &#123;&#123; repo_name &#125;&#125; &#123;&#123; url &#125;&#125; --username &#123;&#123;username&#125;&#125; --password &#123;&#123;password&#125;&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Push-charts"><a href="#Push-charts" class="headerlink" title="Push charts"></a>Push charts</h2><blockquote>
+<h2><span id="push-charts">Push charts</span></h2><blockquote>
 <p>注: helm v3.7.0及以上版本使用 <code>cm-push</code>, 其余版本使用<code>push</code>  </p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push storagedb chartmuseum</span><br></pre></td></tr></table></figure>
 
-<h2 id="使用自定义版本推送"><a href="#使用自定义版本推送" class="headerlink" title="使用自定义版本推送"></a>使用自定义版本推送</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push storagedb/ --version=&quot;1.2.3&quot; chartmuseum</span><br></pre></td></tr></table></figure>
+<h2><span id="使用自定义版本推送">使用自定义版本推送</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push storagedb/ --version=&quot;1.2.3&quot; chartmuseum</span><br></pre></td></tr></table></figure>
 
-<h2 id="推送tgz包"><a href="#推送tgz包" class="headerlink" title="推送tgz包"></a>推送tgz包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push storagedb-1.2.3.tgz chartmuseum</span><br></pre></td></tr></table></figure>
+<h2><span id="推送tgz包">推送tgz包</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push storagedb-1.2.3.tgz chartmuseum</span><br></pre></td></tr></table></figure>
 
-<h2 id="强制推送"><a href="#强制推送" class="headerlink" title="强制推送"></a>强制推送</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push --force storagedb-1.2.3.tgz chartmuseum</span><br></pre></td></tr></table></figure>
+<h2><span id="强制推送">强制推送</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push --force storagedb-1.2.3.tgz chartmuseum</span><br></pre></td></tr></table></figure>
 
-<h2 id="推送到指定URL"><a href="#推送到指定URL" class="headerlink" title="推送到指定URL"></a>推送到指定URL</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push storagedb http://localhost:8080</span><br></pre></td></tr></table></figure>
+<h2><span id="推送到指定url">推送到指定URL</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm cm-push storagedb http://localhost:8080</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license -->
@@ -533,7 +533,7 @@
             <p>原文作者：<a href="https://0x0034.github.io">0x0034</a>
             <p>原文链接：<a href="https://0x0034.github.io/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/">https://0x0034.github.io/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/</a>
             <p>发表日期：<a href="https://0x0034.github.io/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/">November 7th 2021, 8:43:05 pm</a>
-            <p>更新日期：<a href="https://0x0034.github.io/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/">November 9th 2021, 12:13:29 pm</a>
+            <p>更新日期：<a href="https://0x0034.github.io/2021/11/07/chartmuseum%E4%BD%BF%E7%94%A8/">March 30th 2022, 9:30:20 am</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -677,7 +677,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Chartmuseum-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">Chartmuseum 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Helm-Plugin"><span class="toc-number">1.1.</span> <span class="toc-text">安装Helm Plugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0Helm-repo"><span class="toc-number">1.2.</span> <span class="toc-text">添加Helm repo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Push-charts"><span class="toc-number">1.3.</span> <span class="toc-text">Push charts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%89%88%E6%9C%AC%E6%8E%A8%E9%80%81"><span class="toc-number">1.4.</span> <span class="toc-text">使用自定义版本推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E9%80%81tgz%E5%8C%85"><span class="toc-number">1.5.</span> <span class="toc-text">推送tgz包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E6%8E%A8%E9%80%81"><span class="toc-number">1.6.</span> <span class="toc-text">强制推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E9%80%81%E5%88%B0%E6%8C%87%E5%AE%9AURL"><span class="toc-number">1.7.</span> <span class="toc-text">推送到指定URL</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Chartmuseum 基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">安装Helm Plugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">添加Helm repo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">Push charts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">使用自定义版本推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.5.</span> <span class="toc-text">推送tgz包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.6.</span> <span class="toc-text">强制推送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.7.</span> <span class="toc-text">推送到指定URL</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1089,6 +1089,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1217,6 +1231,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1224,12 +1244,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1331,29 +1345,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1366,19 +1365,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1386,9 +1420,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1406,34 +1445,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1456,16 +1480,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1481,14 +1495,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

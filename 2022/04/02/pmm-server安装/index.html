@@ -504,10 +504,10 @@
 <li><a href="#%E7%AD%89%E5%BE%85%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5ready">等待健康检查Ready</a></li>
 <li><a href="#%E4%BF%AE%E6%94%B9%E5%86%85%E7%BD%AE%E7%9A%84grafana%E5%AF%86%E7%A0%81">修改内置的Grafana密码</a></li>
 </ul>
-<h2 id="Docker-启动Pmm-server"><a href="#Docker-启动Pmm-server" class="headerlink" title="Docker 启动Pmm-server"></a>Docker 启动Pmm-server</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull registry.cn<span class="literal">-hangzhou</span>.aliyuncs.com/lcc<span class="literal">-middleware</span>/pmm<span class="literal">-server</span>:<span class="number">2</span></span><br><span class="line"><span class="comment"># 创建存储卷</span></span><br><span class="line">docker create -<span class="literal">-volume</span> /srv -<span class="literal">-name</span> pmm<span class="literal">-data</span> registry.cn<span class="literal">-hangzhou</span>.aliyuncs.com/lcc<span class="literal">-middleware</span>/pmm<span class="literal">-server</span>:<span class="number">2</span> /bin/true</span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">docker run -<span class="literal">-detach</span> -<span class="literal">-restart</span> always -<span class="literal">-publish</span> <span class="number">443</span>:<span class="number">443</span> -<span class="literal">-volumes</span><span class="literal">-from</span> pmm<span class="literal">-data</span> -<span class="literal">-name</span> pmm<span class="literal">-server</span> registry.cn<span class="literal">-hangzhou</span>.aliyuncs.com/lcc<span class="literal">-middleware</span>/pmm<span class="literal">-server</span>:<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h2><span id="docker-启动pmm-server">Docker 启动Pmm-server</span></h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull registry.cn<span class="literal">-hangzhou</span>.aliyuncs.com/lcc<span class="literal">-middleware</span>/pmm<span class="literal">-server</span>:<span class="number">2</span></span><br><span class="line"><span class="comment"># 创建存储卷</span></span><br><span class="line">docker create -<span class="literal">-volume</span> /srv -<span class="literal">-name</span> pmm<span class="literal">-data</span> registry.cn<span class="literal">-hangzhou</span>.aliyuncs.com/lcc<span class="literal">-middleware</span>/pmm<span class="literal">-server</span>:<span class="number">2</span> /bin/true</span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">docker run -<span class="literal">-detach</span> -<span class="literal">-restart</span> always -<span class="literal">-publish</span> <span class="number">443</span>:<span class="number">443</span> -<span class="literal">-volumes</span><span class="literal">-from</span> pmm<span class="literal">-data</span> -<span class="literal">-name</span> pmm<span class="literal">-server</span> registry.cn<span class="literal">-hangzhou</span>.aliyuncs.com/lcc<span class="literal">-middleware</span>/pmm<span class="literal">-server</span>:<span class="number">2</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="等待健康检查Ready"><a href="#等待健康检查Ready" class="headerlink" title="等待健康检查Ready"></a>等待健康检查Ready</h2><p>如下图所示:<br><img src="https://raw.githubusercontent.com/0x0034/images/master/20220402101936.png" alt="pmm-server ready"></p>
-<h2 id="修改内置的Grafana密码"><a href="#修改内置的Grafana密码" class="headerlink" title="修改内置的Grafana密码"></a>修改内置的Grafana密码</h2><p>做这一步的原因是, 如果不修改默认面面, pmm-client链接可能一直报错.</p>
+<h2><span id="等待健康检查ready">等待健康检查Ready</span></h2><p>如下图所示:<br><img src="https://raw.githubusercontent.com/0x0034/images/master/20220402101936.png" alt="pmm-server ready"></p>
+<h2><span id="修改内置的grafana密码">修改内置的Grafana密码</span></h2><p>做这一步的原因是, 如果不修改默认面面, pmm-client链接可能一直报错.</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 请替换newPassword和confirmNew键中的自定义密码</span></span><br><span class="line"> docker exec  `docker <span class="built_in">ps</span> <span class="literal">-a</span> |grep <span class="string">&quot; pmm-server&quot;</span>|grep <span class="string">&quot;(healthy)&quot;</span>|awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>` <span class="built_in">curl</span> <span class="literal">-X</span> PUT <span class="literal">-H</span> <span class="string">&quot;Content-Type: application/json&quot;</span> <span class="literal">-d</span> <span class="string">&#x27;&#123;&quot;oldPassword&quot;: &quot;admin&quot;,&quot;newPassword&quot;: &quot;newPassword&quot;,&quot;confirmNew&quot;: &quot;newPassword&quot;&#125;&#x27;</span> http://admin:admin@localhost:<span class="number">3000</span>/api/user/password</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
 
 
@@ -667,7 +667,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-%E5%90%AF%E5%8A%A8Pmm-server"><span class="toc-number">1.</span> <span class="toc-text">Docker 启动Pmm-server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%89%E5%BE%85%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5Ready"><span class="toc-number">2.</span> <span class="toc-text">等待健康检查Ready</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%86%85%E7%BD%AE%E7%9A%84Grafana%E5%AF%86%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">修改内置的Grafana密码</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Docker 启动Pmm-server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">等待健康检查Ready</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">修改内置的Grafana密码</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1079,6 +1079,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1207,6 +1221,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1214,12 +1234,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1321,29 +1335,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1356,19 +1355,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1376,9 +1410,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1396,34 +1435,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1446,16 +1470,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1471,14 +1485,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

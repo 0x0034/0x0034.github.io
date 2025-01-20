@@ -511,19 +511,19 @@
 </li>
 <li><a href="#%E5%AE%B9%E7%81%BE%E9%AA%8C%E8%AF%81">容灾验证</a></li>
 </ul>
-<h2 id="Prepare"><a href="#Prepare" class="headerlink" title="Prepare"></a>Prepare</h2><h3 id="安装Helm"><a href="#安装Helm" class="headerlink" title="安装Helm"></a>安装Helm</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> linux<span class="literal">-amd64</span></span><br><span class="line"><span class="built_in">wget</span> https://get.helm.sh/helm<span class="literal">-v3</span>.<span class="number">8.1</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br><span class="line">tar xzvf helm<span class="literal">-v3</span>.<span class="number">8.1</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> linux<span class="literal">-amd64</span></span><br><span class="line"><span class="built_in">mv</span> helm /usr/local/bin/</span><br><span class="line">chmod <span class="number">755</span> /usr/local/bin/helm</span><br></pre></td></tr></table></figure>
+<h2><span id="prepare">Prepare</span></h2><h3><span id="安装helm">安装Helm</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> linux<span class="literal">-amd64</span></span><br><span class="line"><span class="built_in">wget</span> https://get.helm.sh/helm<span class="literal">-v3</span>.<span class="number">8.1</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br><span class="line">tar xzvf helm<span class="literal">-v3</span>.<span class="number">8.1</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> linux<span class="literal">-amd64</span></span><br><span class="line"><span class="built_in">mv</span> helm /usr/local/bin/</span><br><span class="line">chmod <span class="number">755</span> /usr/local/bin/helm</span><br></pre></td></tr></table></figure>
 
-<h3 id="克隆percona-helm-charts这个项目"><a href="#克隆percona-helm-charts这个项目" class="headerlink" title="克隆percona-helm-charts这个项目"></a>克隆percona-helm-charts这个项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/</span><br><span class="line">git clone https://github.com/percona/percona-helm-charts.git</span><br><span class="line">cd percona-helm-charts</span><br></pre></td></tr></table></figure>
+<h3><span id="克隆percona-helm-charts这个项目">克隆percona-helm-charts这个项目</span></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/</span><br><span class="line">git clone https://github.com/percona/percona-helm-charts.git</span><br><span class="line">cd percona-helm-charts</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装pxc-operator"><a href="#安装pxc-operator" class="headerlink" title="安装pxc-operator"></a>安装pxc-operator</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> charts/pxc<span class="literal">-operator</span></span><br><span class="line"><span class="comment"># 替换镜像为自己仓库的镜像</span></span><br><span class="line">sed <span class="literal">-i</span> <span class="string">&#x27;s/^operatorImageRepository.*/operatorImageRepository:  registry.cn-hangzhou.aliyuncs.com\/lcc-middleware\/percona-xtradb-cluster-operator/g&#x27;</span> values.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># Helm 安装Operator</span></span><br><span class="line">helm install pxc<span class="literal">-operator</span> .</span><br></pre></td></tr></table></figure>
+<h2><span id="安装pxc-operator">安装pxc-operator</span></h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> charts/pxc<span class="literal">-operator</span></span><br><span class="line"><span class="comment"># 替换镜像为自己仓库的镜像</span></span><br><span class="line">sed <span class="literal">-i</span> <span class="string">&#x27;s/^operatorImageRepository.*/operatorImageRepository:  registry.cn-hangzhou.aliyuncs.com\/lcc-middleware\/percona-xtradb-cluster-operator/g&#x27;</span> values.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># Helm 安装Operator</span></span><br><span class="line">helm install pxc<span class="literal">-operator</span> .</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装pxc-db"><a href="#安装pxc-db" class="headerlink" title="安装pxc-db"></a>安装pxc-db</h2><blockquote>
+<h2><span id="安装pxc-db">安装pxc-db</span></h2><blockquote>
 <p>Note: MySQL 5.7 Binlog 不可用</p>
 </blockquote>
 <p>MySQL 5.7 和 MySQL 8.0 根据业务形态和需求选择安装即可.<br>其中<code>haproxy.enabled</code> 和 <code>proxysql.enabled</code> 字段不能同时为<code>true</code>,原因参见官方文档.</p>
-<h3 id="更换私有仓库"><a href="#更换私有仓库" class="headerlink" title="更换私有仓库"></a>更换私有仓库</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/percona<span class="literal">-helm</span><span class="literal">-charts</span>/pxc<span class="literal">-db</span>/</span><br><span class="line">sed <span class="literal">-i</span> <span class="string">&#x27;s/^operatorImageRepository.*/operatorImageRepository:  registry.cn-hangzhou.aliyuncs.com\/lcc-middleware\/percona-xtradb-cluster-operator/g&#x27;</span> production<span class="literal">-values</span>.yaml</span><br></pre></td></tr></table></figure>
+<h3><span id="更换私有仓库">更换私有仓库</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/percona<span class="literal">-helm</span><span class="literal">-charts</span>/pxc<span class="literal">-db</span>/</span><br><span class="line">sed <span class="literal">-i</span> <span class="string">&#x27;s/^operatorImageRepository.*/operatorImageRepository:  registry.cn-hangzhou.aliyuncs.com\/lcc-middleware\/percona-xtradb-cluster-operator/g&#x27;</span> production<span class="literal">-values</span>.yaml</span><br></pre></td></tr></table></figure>
 
-<h3 id="选择MySQL版本"><a href="#选择MySQL版本" class="headerlink" title="选择MySQL版本"></a>选择MySQL版本</h3><ul>
+<h3><span id="选择mysql版本">选择MySQL版本</span></h3><ul>
 <li>安装MySQL 5.7集群</li>
 </ul>
 <p>安装MySQL 5.7 需要修改<code>production-values.yaml</code>文件中如下的几个键值对:</p>
@@ -537,28 +537,28 @@
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">pxc:</span></span><br><span class="line">  <span class="comment"># 这个根据集群规模决定</span></span><br><span class="line">  <span class="attr">size:</span> <span class="number">1</span> </span><br><span class="line">  <span class="attr">image:</span></span><br><span class="line">    <span class="attr">repository:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/lcc-middleware/percona-xtradb-cluster</span></span><br><span class="line">    <span class="comment"># 使用MySQL 8.0</span></span><br><span class="line">    <span class="attr">tag:</span> <span class="number">8.0</span><span class="number">.23</span><span class="number">-14.1</span></span><br><span class="line">  <span class="comment"># imagePullPolicy: Always</span></span><br><span class="line">  <span class="attr">autoRecovery:</span> <span class="literal">true</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="可选-开启pmm-client"><a href="#可选-开启pmm-client" class="headerlink" title="(可选) 开启pmm-client"></a>(可选) 开启pmm-client</h3><blockquote>
+<h3><span id="可选-开启pmm-client">(可选) 开启pmm-client</span></h3><blockquote>
 <p>Note: 开启Pmm-client需要先安装pmm-server, 安装文档参考<a href="https://0x0034.github.io/2022/04/02/pmm-server%E5%AE%89%E8%A3%85/">Docker安装pmm-server</a> <a href="https://0x0034.github.io/2022/04/02/pmm-server%E5%AE%89%E8%A3%85/">https://0x0034.github.io/2022/04/02/pmm-server%E5%AE%89%E8%A3%85/</a></p>
 </blockquote>
 <p>修改<code>production-values.yaml</code>文件中的<code>pmm</code>部分, 修改内容及注释如下所示.</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">pmm:</span></span><br><span class="line">  <span class="comment"># 打开pmm功能</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span> </span><br><span class="line">  <span class="attr">image:</span></span><br><span class="line">    <span class="attr">repository:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/lcc-middleware/pmm-client</span></span><br><span class="line">    <span class="attr">tag:</span> <span class="number">2.23</span><span class="number">.0</span></span><br><span class="line">  <span class="comment"># 填入pmm-server的地址, 如果你是按照Noto中操作的话,填入宿主机的IP,如果有修改端口记得修改端口, .eq: 192.168.1.111:443</span></span><br><span class="line">  <span class="attr">serverHost:</span> <span class="string">xx.xx.xx.xx</span> </span><br><span class="line">  <span class="comment"># 建议填写admin@localhost</span></span><br><span class="line">  <span class="attr">serverUser:</span> <span class="string">admin@localhost</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">150M</span></span><br><span class="line">      <span class="attr">cpu:</span> <span class="string">300m</span></span><br><span class="line">    <span class="attr">limits:</span> &#123;&#125;</span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">secrets:</span></span><br><span class="line">  <span class="attr">passwords:</span></span><br><span class="line">    <span class="comment"># 这里写入pmmserver的admin@localhost的用户密码</span></span><br><span class="line">    <span class="attr">pmmserver:</span> <span class="string">entry-your-password</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="密码及其他配置"><a href="#密码及其他配置" class="headerlink" title="密码及其他配置"></a>密码及其他配置</h3><h4 id="备份配置"><a href="#备份配置" class="headerlink" title="备份配置"></a>备份配置</h4><blockquote>
+<h3><span id="密码及其他配置">密码及其他配置</span></h3><h4><span id="备份配置">备份配置</span></h4><blockquote>
 <p>Note: 备份的话默认做PV本地备份,这里不做赘述(家境贫寒,用不起S3)</p>
 </blockquote>
-<h4 id="密码配置"><a href="#密码配置" class="headerlink" title="密码配置"></a>密码配置</h4><p>修改<code>production-values.yaml</code>的<code>secrets</code>部分, 内容如下所示:</p>
+<h4><span id="密码配置">密码配置</span></h4><p>修改<code>production-values.yaml</code>的<code>secrets</code>部分, 内容如下所示:</p>
 <blockquote>
 <p>Note: 建议密码使用同一份, 别给自己找麻烦.</p>
 </blockquote>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">secrets:</span></span><br><span class="line">  <span class="comment">## You should be overriding these with your own.</span></span><br><span class="line">  <span class="attr">passwords:</span></span><br><span class="line">    <span class="comment"># 记得修改自己的密码</span></span><br><span class="line">    <span class="attr">root:</span> <span class="string">entry-your-password</span></span><br><span class="line">    <span class="attr">xtrabackup:</span> <span class="string">entry-your-password</span></span><br><span class="line">    <span class="attr">monitor:</span> <span class="string">entry-your-password</span></span><br><span class="line">    <span class="attr">clustercheck:</span> <span class="string">entry-your-password</span></span><br><span class="line">    <span class="attr">proxyadmin:</span> <span class="string">entry-your-password</span></span><br><span class="line">    <span class="attr">pmmserver:</span> <span class="string">entry-your-password</span></span><br><span class="line">    <span class="attr">operator:</span> <span class="string">entry-your-password</span></span><br><span class="line">    <span class="attr">replication:</span> <span class="string">entry-your-password</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="安装集群"><a href="#安装集群" class="headerlink" title="安装集群"></a>安装集群</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install prod <span class="operator">-f</span> production<span class="literal">-values</span>.yaml /opt/percona<span class="literal">-helm</span><span class="literal">-charts</span>/pxc<span class="literal">-db</span>/</span><br></pre></td></tr></table></figure>
+<h3><span id="安装集群">安装集群</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install prod <span class="operator">-f</span> production<span class="literal">-values</span>.yaml /opt/percona<span class="literal">-helm</span><span class="literal">-charts</span>/pxc<span class="literal">-db</span>/</span><br></pre></td></tr></table></figure>
 
-<h3 id="集群启动-校验集群"><a href="#集群启动-校验集群" class="headerlink" title="集群启动, 校验集群"></a>集群启动, 校验集群</h3><h4 id="查看集群资源状态"><a href="#查看集群资源状态" class="headerlink" title="查看集群资源状态"></a>查看集群资源状态</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods <span class="literal">-A</span> <span class="literal">-l</span> app.kubernetes.io/managed<span class="literal">-by</span>=percona<span class="literal">-xtradb</span><span class="literal">-cluster</span><span class="literal">-operator</span></span><br></pre></td></tr></table></figure>
+<h3><span id="集群启动-校验集群">集群启动, 校验集群</span></h3><h4><span id="查看集群资源状态">查看集群资源状态</span></h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods <span class="literal">-A</span> <span class="literal">-l</span> app.kubernetes.io/managed<span class="literal">-by</span>=percona<span class="literal">-xtradb</span><span class="literal">-cluster</span><span class="literal">-operator</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="连接MySQL"><a href="#连接MySQL" class="headerlink" title="连接MySQL"></a>连接MySQL</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取endpoint</span></span><br><span class="line">export mysqlHost=<span class="variable">$</span>(kubectl get pxc|grep production |awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br><span class="line"><span class="comment"># 需要自行安装MySQL-client</span></span><br><span class="line"><span class="comment"># password: 这个就需要写为自己定义的密码</span></span><br><span class="line">mysql <span class="literal">-u</span> root <span class="literal">-h</span> <span class="variable">$mysqlHost</span> <span class="literal">-pentry</span><span class="literal">-your</span><span class="literal">-password</span></span><br></pre></td></tr></table></figure>
+<h4><span id="连接mysql">连接MySQL</span></h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取endpoint</span></span><br><span class="line">export mysqlHost=<span class="variable">$</span>(kubectl get pxc|grep production |awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br><span class="line"><span class="comment"># 需要自行安装MySQL-client</span></span><br><span class="line"><span class="comment"># password: 这个就需要写为自己定义的密码</span></span><br><span class="line">mysql <span class="literal">-u</span> root <span class="literal">-h</span> <span class="variable">$mysqlHost</span> <span class="literal">-pentry</span><span class="literal">-your</span><span class="literal">-password</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="容灾验证"><a href="#容灾验证" class="headerlink" title="容灾验证"></a>容灾验证</h2><p>待定</p>
+<h2><span id="容灾验证">容灾验证</span></h2><p>待定</p>
 
     </article>
     <!-- license -->
@@ -716,7 +716,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prepare"><span class="toc-number">1.</span> <span class="toc-text">Prepare</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Helm"><span class="toc-number">1.1.</span> <span class="toc-text">安装Helm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8B%E9%9A%86percona-helm-charts%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">克隆percona-helm-charts这个项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85pxc-operator"><span class="toc-number">2.</span> <span class="toc-text">安装pxc-operator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85pxc-db"><span class="toc-number">3.</span> <span class="toc-text">安装pxc-db</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93"><span class="toc-number">3.1.</span> <span class="toc-text">更换私有仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9MySQL%E7%89%88%E6%9C%AC"><span class="toc-number">3.2.</span> <span class="toc-text">选择MySQL版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89-%E5%BC%80%E5%90%AFpmm-client"><span class="toc-number">3.3.</span> <span class="toc-text">(可选) 开启pmm-client</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E5%8F%8A%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="toc-number">3.4.</span> <span class="toc-text">密码及其他配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD%E9%85%8D%E7%BD%AE"><span class="toc-number">3.4.1.</span> <span class="toc-text">备份配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E9%85%8D%E7%BD%AE"><span class="toc-number">3.4.2.</span> <span class="toc-text">密码配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%9B%86%E7%BE%A4"><span class="toc-number">3.5.</span> <span class="toc-text">安装集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E5%90%AF%E5%8A%A8-%E6%A0%A1%E9%AA%8C%E9%9B%86%E7%BE%A4"><span class="toc-number">3.6.</span> <span class="toc-text">集群启动, 校验集群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%8A%B6%E6%80%81"><span class="toc-number">3.6.1.</span> <span class="toc-text">查看集群资源状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5MySQL"><span class="toc-number">3.6.2.</span> <span class="toc-text">连接MySQL</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E7%81%BE%E9%AA%8C%E8%AF%81"><span class="toc-number">4.</span> <span class="toc-text">容灾验证</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Prepare</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">安装Helm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">克隆percona-helm-charts这个项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">安装pxc-operator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">安装pxc-db</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">更换私有仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">选择MySQL版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text">(可选) 开启pmm-client</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text">密码及其他配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.4.1.</span> <span class="toc-text">备份配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.4.2.</span> <span class="toc-text">密码配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.5.</span> <span class="toc-text">安装集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.6.</span> <span class="toc-text">集群启动, 校验集群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.6.1.</span> <span class="toc-text">查看集群资源状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.6.2.</span> <span class="toc-text">连接MySQL</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">容灾验证</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1128,6 +1128,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1256,6 +1270,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1263,12 +1283,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1370,29 +1384,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1405,19 +1404,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1425,9 +1459,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1445,34 +1484,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1495,16 +1519,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1520,14 +1534,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

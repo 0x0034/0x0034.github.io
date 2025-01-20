@@ -508,34 +508,34 @@
 <li><a href="#alpine-apk%E5%8A%A0%E9%80%9F">alpine apk加速</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0">参考文章</a></li>
 </ul>
-<h2 id="Github资源加速"><a href="#Github资源加速" class="headerlink" title="Github资源加速"></a>Github资源加速</h2><blockquote>
+<h2><span id="github资源加速">Github资源加速</span></h2><blockquote>
 <p>你还在为github限速而烦恼吗? 你还在为没有机场而烦恼吗? 你还在为回到家下载源慢,不想卷而烦恼吗?<br>注: 仅面向没有机场的普通开发者, 有机场的大佬请当没看到.</p>
 </blockquote>
-<h3 id="Clone加速"><a href="#Clone加速" class="headerlink" title="Clone加速"></a>Clone加速</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：手动替换地址</span></span><br><span class="line"><span class="comment">#原地址</span></span><br><span class="line">git clone https://github.com/kubernetes/kubernetes.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将github.com 替换为github.com.cnpmjs.org 或者 hub.fastgit.org 哪个快用哪个</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com.cnpmjs.org/kubernetes/kubernetes.git</span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line">git clone https://hub.fastgit.org/kubernetes/kubernetes.git</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># gitclone.com 是将原url 拼接到 gitclone.com/的uri中</span></span><br><span class="line"><span class="comment"># 示例: https://gitclone.com/+github.com/kubernetes/kubernetes.git</span></span><br><span class="line">git clone https://gitclone.com/github.com/kubernetes/kubernetes.git</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：配置git自动替换(不建议)</span></span><br><span class="line"></span><br><span class="line">git config -<span class="literal">-global</span> url.<span class="string">&quot;https://hub.fastgit.org&quot;</span>.insteadOf https://github.com</span><br><span class="line"><span class="comment"># 取消设置</span></span><br><span class="line">git config -<span class="literal">-global</span> -<span class="literal">-unset</span> url.https://github.com/.insteadof</span><br></pre></td></tr></table></figure>
+<h3><span id="clone加速">Clone加速</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：手动替换地址</span></span><br><span class="line"><span class="comment">#原地址</span></span><br><span class="line">git clone https://github.com/kubernetes/kubernetes.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将github.com 替换为github.com.cnpmjs.org 或者 hub.fastgit.org 哪个快用哪个</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com.cnpmjs.org/kubernetes/kubernetes.git</span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line">git clone https://hub.fastgit.org/kubernetes/kubernetes.git</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># gitclone.com 是将原url 拼接到 gitclone.com/的uri中</span></span><br><span class="line"><span class="comment"># 示例: https://gitclone.com/+github.com/kubernetes/kubernetes.git</span></span><br><span class="line">git clone https://gitclone.com/github.com/kubernetes/kubernetes.git</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：配置git自动替换(不建议)</span></span><br><span class="line"></span><br><span class="line">git config -<span class="literal">-global</span> url.<span class="string">&quot;https://hub.fastgit.org&quot;</span>.insteadOf https://github.com</span><br><span class="line"><span class="comment"># 取消设置</span></span><br><span class="line">git config -<span class="literal">-global</span> -<span class="literal">-unset</span> url.https://github.com/.insteadof</span><br></pre></td></tr></table></figure>
 
-<h3 id="Release-加速"><a href="#Release-加速" class="headerlink" title="Release 加速"></a>Release 加速</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同样将url中的 github.com 替换为 download.fastgit.org 或者 hub.fastgit.org </span></span><br><span class="line"><span class="comment"># 同样那个快用哪个.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">wget</span> https://github.com/chaosblade<span class="literal">-io</span>/chaosblade/releases/download/v1.<span class="number">4.0</span>/chaosblade<span class="literal">-1</span>.<span class="number">4.0</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br><span class="line"><span class="comment"># 替换为</span></span><br><span class="line"><span class="built_in">wget</span> https://download.fastgit.org/chaosblade<span class="literal">-io</span>/chaosblade/releases/download/v1.<span class="number">4.0</span>/chaosblade<span class="literal">-1</span>.<span class="number">4.0</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br><span class="line"><span class="built_in">wget</span> https://hub.fastgit.org/chaosblade<span class="literal">-io</span>/chaosblade/releases/download/v1.<span class="number">4.0</span>/chaosblade<span class="literal">-1</span>.<span class="number">4.0</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br></pre></td></tr></table></figure>
+<h3><span id="release-加速">Release 加速</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同样将url中的 github.com 替换为 download.fastgit.org 或者 hub.fastgit.org </span></span><br><span class="line"><span class="comment"># 同样那个快用哪个.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">wget</span> https://github.com/chaosblade<span class="literal">-io</span>/chaosblade/releases/download/v1.<span class="number">4.0</span>/chaosblade<span class="literal">-1</span>.<span class="number">4.0</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br><span class="line"><span class="comment"># 替换为</span></span><br><span class="line"><span class="built_in">wget</span> https://download.fastgit.org/chaosblade<span class="literal">-io</span>/chaosblade/releases/download/v1.<span class="number">4.0</span>/chaosblade<span class="literal">-1</span>.<span class="number">4.0</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br><span class="line"><span class="built_in">wget</span> https://hub.fastgit.org/chaosblade<span class="literal">-io</span>/chaosblade/releases/download/v1.<span class="number">4.0</span>/chaosblade<span class="literal">-1</span>.<span class="number">4.0</span><span class="literal">-linux</span><span class="literal">-amd64</span>.tar.gz</span><br></pre></td></tr></table></figure>
 
-<h3 id="Raw-文件加速"><a href="#Raw-文件加速" class="headerlink" title="Raw 文件加速"></a>Raw 文件加速</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同样将url中的 raw.githubusercontent.com 替换为 raw.staticdn.net 或者 raw.fastgit.org</span></span><br><span class="line"><span class="comment"># 同样那个快用哪个.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/kubernetes/kubernetes/master/README.md</span><br><span class="line"><span class="comment"># 替换为</span></span><br><span class="line"><span class="built_in">wget</span> https://raw.staticdn.net/kubernetes/kubernetes/master/README.md</span><br><span class="line"><span class="built_in">wget</span> https://raw.fastgit.org/kubernetes/kubernetes/master/README.md</span><br></pre></td></tr></table></figure>
+<h3><span id="raw-文件加速">Raw 文件加速</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同样将url中的 raw.githubusercontent.com 替换为 raw.staticdn.net 或者 raw.fastgit.org</span></span><br><span class="line"><span class="comment"># 同样那个快用哪个.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">wget</span> https://raw.githubusercontent.com/kubernetes/kubernetes/master/README.md</span><br><span class="line"><span class="comment"># 替换为</span></span><br><span class="line"><span class="built_in">wget</span> https://raw.staticdn.net/kubernetes/kubernetes/master/README.md</span><br><span class="line"><span class="built_in">wget</span> https://raw.fastgit.org/kubernetes/kubernetes/master/README.md</span><br></pre></td></tr></table></figure>
 
-<h2 id="Golang-国内加速"><a href="#Golang-国内加速" class="headerlink" title="Golang 国内加速"></a>Golang 国内加速</h2><h3 id="Go-1-13-及以上（推荐）"><a href="#Go-1-13-及以上（推荐）" class="headerlink" title="Go 1.13 及以上（推荐）"></a>Go 1.13 及以上（推荐）</h3><p>打开你的终端并执行</p>
+<h2><span id="golang-国内加速">Golang 国内加速</span></h2><h3><span id="go-113-及以上推荐">Go 1.13 及以上（推荐）</span></h3><p>打开你的终端并执行</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go env <span class="literal">-w</span> GO111MODULE=on</span><br><span class="line">go env <span class="literal">-w</span> GOPROXY=https://goproxy.cn,direct</span><br></pre></td></tr></table></figure>
 
-<h3 id="macOS-或-Linux"><a href="#macOS-或-Linux" class="headerlink" title="macOS 或 Linux"></a>macOS 或 Linux</h3><p>打开你的终端并执行</p>
+<h3><span id="macos-或-linux">macOS 或 Linux</span></h3><p>打开你的终端并执行</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export GO111MODULE=on</span><br><span class="line">export GOPROXY=https://goproxy.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export GO111MODULE=on&quot;</span> &gt;&gt; ~/.profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export GOPROXY=https://goproxy.cn&quot;</span> &gt;&gt; ~/.profile</span><br><span class="line">source ~/.profile</span><br></pre></td></tr></table></figure>
 
-<h2 id="Maven-加速"><a href="#Maven-加速" class="headerlink" title="Maven 加速"></a>Maven 加速</h2><p>修改<code>setting.xml</code>,添加如下内容.</p>
-<h3 id="阿里云"><a href="#阿里云" class="headerlink" title="阿里云"></a>阿里云</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2><span id="maven-加速">Maven 加速</span></h2><p>修改<code>setting.xml</code>,添加如下内容.</p>
+<h3><span id="阿里云">阿里云</span></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="腾讯云"><a href="#腾讯云" class="headerlink" title="腾讯云"></a>腾讯云</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-tencentyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus tencentyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<h3><span id="腾讯云">腾讯云</span></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-tencentyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus tencentyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span> </span><br></pre></td></tr></table></figure>
 
-<h2 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h2><p>修改文件<code>~/.pip/pip.conf</code></p>
+<h2><span id="pip">pip</span></h2><p>修改文件<code>~/.pip/pip.conf</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
 
-<h2 id="CentOS-Yum加速"><a href="#CentOS-Yum加速" class="headerlink" title="CentOS Yum加速"></a>CentOS Yum加速</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份是个好的习惯</span></span><br><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/CentOS<span class="literal">-Base</span>.repo /etc/yum.repos.d/CentOS<span class="literal">-Base</span>.repo.backup</span><br><span class="line">cVersion=<span class="variable">$</span>(<span class="built_in">cat</span> /etc/redhat<span class="literal">-release</span> |awk <span class="operator">-F</span><span class="string">&#x27;release &#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>| awk <span class="operator">-F</span>. <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里云</span></span><br><span class="line"><span class="built_in">curl</span> <span class="literal">-o</span> /etc/yum.repos.d/CentOS<span class="literal">-Base</span>.repo https://mirrors.aliyun.com/repo/Centos-<span class="variable">$</span>&#123;cVersion&#125;.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 腾讯云</span></span><br><span class="line"><span class="built_in">wget</span> <span class="literal">-O</span> /etc/yum.repos.d/CentOS<span class="literal">-Base</span>.repo http://mirrors.cloud.tencent.com/repo/centos<span class="variable">$</span>&#123;cVersion&#125;_base.repo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理并重新生成缓存</span></span><br><span class="line"></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
+<h2><span id="centos-yum加速">CentOS Yum加速</span></h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份是个好的习惯</span></span><br><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/CentOS<span class="literal">-Base</span>.repo /etc/yum.repos.d/CentOS<span class="literal">-Base</span>.repo.backup</span><br><span class="line">cVersion=<span class="variable">$</span>(<span class="built_in">cat</span> /etc/redhat<span class="literal">-release</span> |awk <span class="operator">-F</span><span class="string">&#x27;release &#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>| awk <span class="operator">-F</span>. <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里云</span></span><br><span class="line"><span class="built_in">curl</span> <span class="literal">-o</span> /etc/yum.repos.d/CentOS<span class="literal">-Base</span>.repo https://mirrors.aliyun.com/repo/Centos-<span class="variable">$</span>&#123;cVersion&#125;.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 腾讯云</span></span><br><span class="line"><span class="built_in">wget</span> <span class="literal">-O</span> /etc/yum.repos.d/CentOS<span class="literal">-Base</span>.repo http://mirrors.cloud.tencent.com/repo/centos<span class="variable">$</span>&#123;cVersion&#125;_base.repo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理并重新生成缓存</span></span><br><span class="line"></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
 
-<h2 id="Ubuntu-apt加速"><a href="#Ubuntu-apt加速" class="headerlink" title="Ubuntu apt加速"></a>Ubuntu apt加速</h2><p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b113cPbgN">https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b113cPbgN</a><br>自己看吧</p>
-<h2 id="alpine-apk加速"><a href="#alpine-apk加速" class="headerlink" title="alpine apk加速"></a>alpine apk加速</h2><p><code>sed -i &#39;s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g&#39; /etc/apk/repositories</code></p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://blog.frytea.com/archives/504/">https://blog.frytea.com/archives/504/</a></p>
+<h2><span id="ubuntu-apt加速">Ubuntu apt加速</span></h2><p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b113cPbgN">https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b113cPbgN</a><br>自己看吧</p>
+<h2><span id="alpine-apk加速">alpine apk加速</span></h2><p><code>sed -i &#39;s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g&#39; /etc/apk/repositories</code></p>
+<h2><span id="参考文章">参考文章</span></h2><p><a target="_blank" rel="noopener" href="https://blog.frytea.com/archives/504/">https://blog.frytea.com/archives/504/</a></p>
 <p><a target="_blank" rel="noopener" href="https://goproxy.cn/">https://goproxy.cn/</a></p>
 <p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/">https://developer.aliyun.com/mirror/</a></p>
 <p><a target="_blank" rel="noopener" href="https://mirrors.cloud.tencent.com/">https://mirrors.cloud.tencent.com/</a></p>
@@ -696,7 +696,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Github%E8%B5%84%E6%BA%90%E5%8A%A0%E9%80%9F"><span class="toc-number">1.</span> <span class="toc-text">Github资源加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Clone%E5%8A%A0%E9%80%9F"><span class="toc-number">1.1.</span> <span class="toc-text">Clone加速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Release-%E5%8A%A0%E9%80%9F"><span class="toc-number">1.2.</span> <span class="toc-text">Release 加速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Raw-%E6%96%87%E4%BB%B6%E5%8A%A0%E9%80%9F"><span class="toc-number">1.3.</span> <span class="toc-text">Raw 文件加速</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Golang-%E5%9B%BD%E5%86%85%E5%8A%A0%E9%80%9F"><span class="toc-number">2.</span> <span class="toc-text">Golang 国内加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Go-1-13-%E5%8F%8A%E4%BB%A5%E4%B8%8A%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">Go 1.13 及以上（推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#macOS-%E6%88%96-Linux"><span class="toc-number">2.2.</span> <span class="toc-text">macOS 或 Linux</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven-%E5%8A%A0%E9%80%9F"><span class="toc-number">3.</span> <span class="toc-text">Maven 加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91"><span class="toc-number">3.1.</span> <span class="toc-text">阿里云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%85%BE%E8%AE%AF%E4%BA%91"><span class="toc-number">3.2.</span> <span class="toc-text">腾讯云</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pip"><span class="toc-number">4.</span> <span class="toc-text">pip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS-Yum%E5%8A%A0%E9%80%9F"><span class="toc-number">5.</span> <span class="toc-text">CentOS Yum加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu-apt%E5%8A%A0%E9%80%9F"><span class="toc-number">6.</span> <span class="toc-text">Ubuntu apt加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alpine-apk%E5%8A%A0%E9%80%9F"><span class="toc-number">7.</span> <span class="toc-text">alpine apk加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">8.</span> <span class="toc-text">参考文章</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Github资源加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">Clone加速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">Release 加速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">Raw 文件加速</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Golang 国内加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">Go 1.13 及以上（推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">macOS 或 Linux</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Maven 加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">阿里云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">腾讯云</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">pip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">CentOS Yum加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">Ubuntu apt加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">alpine apk加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">参考文章</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1108,6 +1108,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1236,6 +1250,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1243,12 +1263,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1350,29 +1364,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1385,19 +1384,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1405,9 +1439,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1425,34 +1464,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1475,16 +1499,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1500,14 +1514,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

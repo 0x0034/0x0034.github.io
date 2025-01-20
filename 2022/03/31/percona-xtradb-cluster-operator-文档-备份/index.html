@@ -526,7 +526,7 @@
 <li><a href="#%E5%88%A0%E9%99%A4%E4%B8%8D%E9%9C%80%E8%A6%81%E7%9A%84%E5%A4%87%E4%BB%BD">删除不需要的备份</a></li>
 <li><a href="#%E5%B0%86%E5%A4%87%E4%BB%BD%E5%A4%8D%E5%88%B6%E5%88%B0%E6%9C%AC%E5%9C%B0%E8%AE%A1%E7%AE%97%E6%9C%BA">将备份复制到本地计算机</a></li>
 </ul>
-<h2 id="计划备份"><a href="#计划备份" class="headerlink" title="计划备份"></a>计划备份</h2><p>由于备份单独存储在 Amazon S3 上，因此 Kubernetes 集群上应该存在一个 <code>AWS_ACCESS_KEY_ID</code>密钥<code>AWS_SECRET_ACCESS_KEY</code>。应创建具有这些 base64 编码密钥的机密文件：例如<code>deploy/backup-s3.yaml</code>具有以下内容的文件:</p>
+<h2><span id="计划备份">计划备份</span></h2><p>由于备份单独存储在 Amazon S3 上，因此 Kubernetes 集群上应该存在一个 <code>AWS_ACCESS_KEY_ID</code>密钥<code>AWS_SECRET_ACCESS_KEY</code>。应创建具有这些 base64 编码密钥的机密文件：例如<code>deploy/backup-s3.yaml</code>具有以下内容的文件:</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">my-cluster-name-backup-s3</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">Opaque</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">AWS_ACCESS_KEY_ID:</span> <span class="string">UkVQTEFDRS1XSVRILUFXUy1BQ0NFU1MtS0VZ</span></span><br><span class="line">  <span class="attr">AWS_SECRET_ACCESS_KEY:</span> <span class="string">UkVQTEFDRS1XSVRILUFXUy1TRUNSRVQtS0VZ</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -550,7 +550,7 @@
 <p>这三个小节中的选项在 <a target="_blank" rel="noopener" href="https://www.percona.com/doc/kubernetes-operator-for-pxc/operator.html#operator-custom-resource-options">自定义资源</a>选项中进一步解释。</p>
 <p>应该单独提及的一个选项是, 用于备份credentialsSecret的<code>Kubernetes secrets</code> 。此键的值应与用于创建<code>secret</code>对象的名称相同（my-cluster-name-backup-s3在最后一个示例中）。</p>
 <p>计划以 crontab 格式指定，如 <a target="_blank" rel="noopener" href="https://www.percona.com/doc/kubernetes-operator-for-pxc/operator.html#operator-custom-resource-options">自定义资源</a>选项中所述.</p>
-<h2 id="按需备份-手动备份"><a href="#按需备份-手动备份" class="headerlink" title="按需备份(手动备份)"></a>按需备份(手动备份)</h2><p>要进行按需备份，用户应首先在配置文件的backup.storages小节中配置备份存储，其deploy/cr.yaml方式与为计划备份所做的方式相同。当 deploy/cr.yaml文件包含正确配置的存储并通过kubectl命令应用时，请使用具有以下内容的特殊备份配置 YAML 文件:</p>
+<h2><span id="按需备份手动备份">按需备份(手动备份)</span></h2><p>要进行按需备份，用户应首先在配置文件的backup.storages小节中配置备份存储，其deploy/cr.yaml方式与为计划备份所做的方式相同。当 deploy/cr.yaml文件包含正确配置的存储并通过kubectl命令应用时，请使用具有以下内容的特殊备份配置 YAML 文件:</p>
 <ul>
 <li><strong>backup name</strong> in the metadata.name key,</li>
 <li><strong>Percona XtraDB Cluster name</strong> in the spec.pxcCluster key,</li>
@@ -563,7 +563,7 @@
 <p>当使用kubectl apply -f deploy/cr.yaml命令配置和应用备份目标时，会执行实际的备份命令:</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">kubectl</span> <span class="string">apply</span> <span class="string">-f</span> <span class="string">deploy/backup/backup.yaml</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="存储binlog-以进行时间点恢复"><a href="#存储binlog-以进行时间点恢复" class="headerlink" title="存储binlog 以进行时间点恢复"></a>存储binlog 以进行时间点恢复</h2><p><code>Point-in-time</code>恢复功能允许用户将集群回滚到特定的事务、时间（甚至在某些情况下跳过事务）。从技术上讲，此功能涉及将binary log更新连续保存到备份存储中。时间点恢复默认关闭，Operator 仅支持从 8.0.21-12.1 开始的 Percona XtraDB Cluster版本。</p>
+<h2><span id="存储binlog-以进行时间点恢复">存储binlog 以进行时间点恢复</span></h2><p><code>Point-in-time</code>恢复功能允许用户将集群回滚到特定的事务、时间（甚至在某些情况下跳过事务）。从技术上讲，此功能涉及将binary log更新连续保存到备份存储中。时间点恢复默认关闭，Operator 仅支持从 8.0.21-12.1 开始的 Percona XtraDB Cluster版本。</p>
 <p>要使用它，需要在deploy/cr.yaml文件部分pitr下的backup 部分中设置一些键：</p>
 <ul>
 <li>enabled键应设置为true,</li>
@@ -579,13 +579,13 @@
 <blockquote>
 <p>Note: 在传输到备份存储之前清除 binlog 会破坏时间点恢复</p>
 </blockquote>
-<h2 id="在持久卷上存储备份"><a href="#在持久卷上存储备份" class="headerlink" title="在持久卷上存储备份"></a>在持久卷上存储备份</h2><p>这是 deploy/cr.yaml 备份部分片段的示例，它为文件系统类型的存储配置私有卷:</p>
+<h2><span id="在持久卷上存储备份">在持久卷上存储备份</span></h2><p>这是 deploy/cr.yaml 备份部分片段的示例，它为文件系统类型的存储配置私有卷:</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">backup:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">storages:</span></span><br><span class="line">    <span class="attr">fs-pvc:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">filesystem</span></span><br><span class="line">      <span class="attr">volume:</span></span><br><span class="line">        <span class="attr">persistentVolumeClaim:</span></span><br><span class="line">          <span class="attr">accessModes:</span> [ <span class="string">&quot;ReadWriteOnce&quot;</span> ]</span><br><span class="line">          <span class="attr">resources:</span></span><br><span class="line">            <span class="attr">requests:</span></span><br><span class="line">              <span class="attr">storage:</span> <span class="string">6Gi</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>Note: 请注意，此示例中指定的 6Gi 存储大小可能不足以满足实际设置；考虑使用数十或数百 GB。deploy/cr.yaml此外，您可以稍后编辑此选项，更改将在应用更新后的文件使用kubectl生效 。</p>
 </blockquote>
-<h2 id="为备份启用压缩"><a href="#为备份启用压缩" class="headerlink" title="为备份启用压缩"></a>为备份启用压缩</h2><p>可以为备份启用 LZ4 压缩</p>
+<h2><span id="为备份启用压缩">为备份启用压缩</span></h2><p>可以为备份启用 LZ4 压缩</p>
 <blockquote>
 <p>Note: 此功能仅适用于 Percona XtraDB Cluster 8.0，不适用于 Percona XtraDB Cluster 5.7。</p>
 </blockquote>
@@ -593,7 +593,7 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pxc:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">percona/percona-xtradb-cluster:8.0.19-10.1</span></span><br><span class="line">  <span class="attr">configuration:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    ...</span></span><br><span class="line"><span class="string">    [sst]</span></span><br><span class="line"><span class="string">    xbstream-opts=--decompress</span></span><br><span class="line"><span class="string">    [xtrabackup]</span></span><br><span class="line"><span class="string">    compress=lz4</span></span><br><span class="line"><span class="string">    ...</span></span><br></pre></td></tr></table></figure>
 
 <p>启用后，压缩将被SST和backups同时启用。</p>
-<h2 id="从之前保存的备份中恢复集群"><a href="#从之前保存的备份中恢复集群" class="headerlink" title="从之前保存的备份中恢复集群"></a>从之前保存的备份中恢复集群</h2><p>不仅可以在创建备份的 Kubernetes 集群上恢复备份，还可以在安装了 Operator 的任何基于 Kubernetes 的环境中恢复备份。</p>
+<h2><span id="从之前保存的备份中恢复集群">从之前保存的备份中恢复集群</span></h2><p>不仅可以在创建备份的 Kubernetes 集群上恢复备份，还可以在安装了 Operator 的任何基于 Kubernetes 的环境中恢复备份。</p>
 <p>备份无法恢复到 emptyDir 和 hostPath 卷，但可以从此类存储（即从 emptyDir/hostPath 到 S3）进行备份，然后将其恢复到 Persistent Volume。</p>
 <blockquote>
 <p>Note: 恢复到新的基于 Kubernetes 的环境时，请确保它有一个 Secrets 对象，该对象的用户密码与原始集群中的用户密码相同。有关Secret 的更多详细信息可以在<a target="_blank" rel="noopener" href="https://www.percona.com/doc/kubernetes-operator-for-pxc/users.html#users-system-users">系统用户</a>中找到.</p>
@@ -611,7 +611,7 @@
 <p>以下命令将列出当前基于 Kubernetes 的环境中现有的 Percona XtraDB 集群名称:</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pxc</span><br></pre></td></tr></table></figure>
 
-<h3 id="不使用point-in-time恢复备份"><a href="#不使用point-in-time恢复备份" class="headerlink" title="不使用point-in-time恢复备份"></a>不使用point-in-time恢复备份</h3><p>当备份和集群的正确名称已知时，可以通过以下方式进行备份恢复。</p>
+<h3><span id="不使用point-in-time恢复备份">不使用point-in-time恢复备份</span></h3><p>当备份和集群的正确名称已知时，可以通过以下方式进行备份恢复。</p>
 <ul>
 <li><p><code>deploy/backup/restore.yaml</code>在文件中设置适当的键</p>
 <ul>
@@ -649,7 +649,7 @@
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply <span class="operator">-f</span> deploy/backup/restore.yaml</span><br></pre></td></tr></table></figure>
 
-<h3 id="使用point-in-time恢复恢复备份"><a href="#使用point-in-time恢复恢复备份" class="headerlink" title="使用point-in-time恢复恢复备份"></a>使用point-in-time恢复恢复备份</h3><blockquote>
+<h3><span id="使用point-in-time恢复恢复备份">使用point-in-time恢复恢复备份</span></h3><blockquote>
 <p>Note: 在现有集群上还原备份之前禁用现有集群上的时间点功能，无论备份是使用时间点恢复还是不使用时间点恢复。</p>
 </blockquote>
 <p>如果启用了时间点恢复功能，您可以将额外的恢复参数放入 restore.yaml 文件的 pitr 部分，以获得最细粒度的恢复。</p>
@@ -681,14 +681,14 @@
 <p>实际的恢复过程可以如下开始：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply <span class="operator">-f</span> deploy/backup/restore.yaml</span><br></pre></td></tr></table></figure>
 
-<h2 id="删除不需要的备份"><a href="#删除不需要的备份" class="headerlink" title="删除不需要的备份"></a>删除不需要的备份</h2><p>存储备份的最大数量由 backup.schedule.keep选项控制（仅计算成功的备份）。较旧的备份会自动删除，因此存储的备份量不会超过此数量。设置keep=0或删除此选项deploy/cr.yaml会禁用备份的自动删除。</p>
+<h2><span id="删除不需要的备份">删除不需要的备份</span></h2><p>存储备份的最大数量由 backup.schedule.keep选项控制（仅计算成功的备份）。较旧的备份会自动删除，因此存储的备份量不会超过此数量。设置keep=0或删除此选项deploy/cr.yaml会禁用备份的自动删除。</p>
 <p>手动删除以前保存的备份只需要备份名称。此名称可以从以下命令返回的可用备份列表中获取：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pxc<span class="literal">-backup</span></span><br></pre></td></tr></table></figure>
 
 <p>知道名称后，可以按如下方式删除备份：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete pxc<span class="literal">-backup</span>/&lt;<span class="built_in">backup-name</span>&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="将备份复制到本地计算机"><a href="#将备份复制到本地计算机" class="headerlink" title="将备份复制到本地计算机"></a>将备份复制到本地计算机</h2><p>制作以前保存的备份的本地副本只需要备份名称。此名称可以从以下命令返回的可用备份列表中获取：</p>
+<h2><span id="将备份复制到本地计算机">将备份复制到本地计算机</span></h2><p>制作以前保存的备份的本地副本只需要备份名称。此名称可以从以下命令返回的可用备份列表中获取：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pxc<span class="literal">-backup</span></span><br></pre></td></tr></table></figure>
 
 <p>知道名称后，可以将备份下载到本地机器，如下所示：</p>
@@ -852,7 +852,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E5%88%92%E5%A4%87%E4%BB%BD"><span class="toc-number">1.</span> <span class="toc-text">计划备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E9%9C%80%E5%A4%87%E4%BB%BD-%E6%89%8B%E5%8A%A8%E5%A4%87%E4%BB%BD"><span class="toc-number">2.</span> <span class="toc-text">按需备份(手动备份)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8binlog-%E4%BB%A5%E8%BF%9B%E8%A1%8C%E6%97%B6%E9%97%B4%E7%82%B9%E6%81%A2%E5%A4%8D"><span class="toc-number">3.</span> <span class="toc-text">存储binlog 以进行时间点恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E6%8C%81%E4%B9%85%E5%8D%B7%E4%B8%8A%E5%AD%98%E5%82%A8%E5%A4%87%E4%BB%BD"><span class="toc-number">4.</span> <span class="toc-text">在持久卷上存储备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E5%A4%87%E4%BB%BD%E5%90%AF%E7%94%A8%E5%8E%8B%E7%BC%A9"><span class="toc-number">5.</span> <span class="toc-text">为备份启用压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E4%B9%8B%E5%89%8D%E4%BF%9D%E5%AD%98%E7%9A%84%E5%A4%87%E4%BB%BD%E4%B8%AD%E6%81%A2%E5%A4%8D%E9%9B%86%E7%BE%A4"><span class="toc-number">6.</span> <span class="toc-text">从之前保存的备份中恢复集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E4%BD%BF%E7%94%A8point-in-time%E6%81%A2%E5%A4%8D%E5%A4%87%E4%BB%BD"><span class="toc-number">6.1.</span> <span class="toc-text">不使用point-in-time恢复备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8point-in-time%E6%81%A2%E5%A4%8D%E6%81%A2%E5%A4%8D%E5%A4%87%E4%BB%BD"><span class="toc-number">6.2.</span> <span class="toc-text">使用point-in-time恢复恢复备份</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E4%B8%8D%E9%9C%80%E8%A6%81%E7%9A%84%E5%A4%87%E4%BB%BD"><span class="toc-number">7.</span> <span class="toc-text">删除不需要的备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E5%A4%87%E4%BB%BD%E5%A4%8D%E5%88%B6%E5%88%B0%E6%9C%AC%E5%9C%B0%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="toc-number">8.</span> <span class="toc-text">将备份复制到本地计算机</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">计划备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">按需备份(手动备份)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">存储binlog 以进行时间点恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">在持久卷上存储备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">为备份启用压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">从之前保存的备份中恢复集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.1.</span> <span class="toc-text">不使用point-in-time恢复备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text">使用point-in-time恢复恢复备份</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">删除不需要的备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">将备份复制到本地计算机</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1264,6 +1264,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1392,6 +1406,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1399,12 +1419,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1506,29 +1520,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1541,19 +1540,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1561,9 +1595,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1581,34 +1620,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1631,16 +1655,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1656,14 +1670,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

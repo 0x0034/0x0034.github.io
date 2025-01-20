@@ -533,11 +533,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><h3 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h3><p>Netflix工程师创建了Chaos Monkey，使用该工具可以在整个系统中在随机位置引发故障。正如GitHub上的工具维护者所说，“Chaos Monkey会随机终止在生产环境中运行的虚拟机实例和容器。”通过Chaos Monkey，工程师可以快速了解他们正在构建的服务是否健壮，是否可以弹性扩容，是否可以处理计划外的故障。  </p>
+<h2><span id="简述">简述</span></h2><h3><span id="起源">起源</span></h3><p>Netflix工程师创建了Chaos Monkey，使用该工具可以在整个系统中在随机位置引发故障。正如GitHub上的工具维护者所说，“Chaos Monkey会随机终止在生产环境中运行的虚拟机实例和容器。”通过Chaos Monkey，工程师可以快速了解他们正在构建的服务是否健壮，是否可以弹性扩容，是否可以处理计划外的故障。  </p>
 <p>2012年，Netflix开源了Chaos Monkey。今天，许多公司(包括谷歌，亚马逊，IBM，耐克等），都采用某种形式的混沌工程来提高现代架构的可靠性。 Netflix甚至将其混沌工程工具集扩展到包括整个“Simian Army(中文可以译为猿军)”，用它攻击自己的系统。</p>
-<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>混沌工程，是一种提高技术架构弹性能力的复杂技术手段。Chaos工程经过实验可以确保系统的可用性。混沌工程旨在将故障扼杀在襁褓之中，也就是在故障造成中断之前将它们识别出来。通过主动制造故障，测试系统在各种压力下的行为，识别并修复故障问题，避免造成严重后果.</p>
-<h3 id="混沌工程与故障注入-故障测试的关系"><a href="#混沌工程与故障注入-故障测试的关系" class="headerlink" title="混沌工程与故障注入,故障测试的关系"></a>混沌工程与故障注入,故障测试的关系</h3><p>混沌工程和其他方法之间的主要区别在于，混沌工程是一种生成新信息的实践，而故障注入是测试一种情况的一种特定方法。当想要探索复杂系统可能出现的不良行为时，注入通信延迟和错误等失败是一种很好的方法。但是我们也想探索诸如流量激增，激烈竞争，拜占庭式失败，以及消息的计划外或不常见的组合。如果一个面向消费者的网站突然因为流量激增而导致更多收入，我们很难称之为错误或失败，但我们仍然对探索系统的影响非常感兴趣。同样，故障测试以某种预想的方式破坏系统，但没有探索更多可能发生的奇怪场景，那么不可预测的事情就可能发生。</p>
-<h3 id="社区现状"><a href="#社区现状" class="headerlink" title="社区现状"></a>社区现状</h3><table>
+<h3><span id="目的">目的</span></h3><p>混沌工程，是一种提高技术架构弹性能力的复杂技术手段。Chaos工程经过实验可以确保系统的可用性。混沌工程旨在将故障扼杀在襁褓之中，也就是在故障造成中断之前将它们识别出来。通过主动制造故障，测试系统在各种压力下的行为，识别并修复故障问题，避免造成严重后果.</p>
+<h3><span id="混沌工程与故障注入故障测试的关系">混沌工程与故障注入,故障测试的关系</span></h3><p>混沌工程和其他方法之间的主要区别在于，混沌工程是一种生成新信息的实践，而故障注入是测试一种情况的一种特定方法。当想要探索复杂系统可能出现的不良行为时，注入通信延迟和错误等失败是一种很好的方法。但是我们也想探索诸如流量激增，激烈竞争，拜占庭式失败，以及消息的计划外或不常见的组合。如果一个面向消费者的网站突然因为流量激增而导致更多收入，我们很难称之为错误或失败，但我们仍然对探索系统的影响非常感兴趣。同样，故障测试以某种预想的方式破坏系统，但没有探索更多可能发生的奇怪场景，那么不可预测的事情就可能发生。</p>
+<h3><span id="社区现状">社区现状</span></h3><table>
 <thead>
 <tr>
 <th align="center">工具名称</th>
@@ -605,27 +605,27 @@
 <td align="center">无</td>
 </tr>
 </tbody></table>
-<h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><blockquote>
+<h2><span id="原则">原则</span></h2><blockquote>
 <p>来源: <a target="_blank" rel="noopener" href="http://principlesofchaos.org/">http://principlesofchaos.org/</a></p>
 </blockquote>
 <p>混沌工程是在分布式系统上进行实验的学科, 目的是建立对系统抵御生产环境中失控条件的能力以及信心。</p>
-<h3 id="遵循步骤"><a href="#遵循步骤" class="headerlink" title="遵循步骤"></a>遵循步骤</h3><ol>
+<h3><span id="遵循步骤">遵循步骤</span></h3><ol>
 <li>首先，用系统在正常行为下的一些可测量的输出来定义“稳定状态”。</li>
 <li>其次，假设这个在控制组和实验组都会继续保持稳定状态。</li>
 <li>然后，在实验组中引入反映真实世界事件的变量，如服务器崩溃、硬盘故障、网络连接断开等。</li>
 <li>最后，通过控制组和实验组之间的状态差异来反驳稳定状态的假说。</li>
 </ol>
 <p>破坏稳态的难度越大，我们对系统行为的信心就越强。如果发现了一个弱点，那么我们就有了一个改进目标。避免在系统规模化之后被放大。</p>
-<h3 id="高级原则"><a href="#高级原则" class="headerlink" title="高级原则"></a>高级原则</h3><p>以下原则描述了应用混沌工程的理想方式，这些原则基于上述实验过程。对这些原则的匹配程度能够增强我们在大规模分布式系统的信心。</p>
-<h4 id="建立一个围绕稳定状态行为的假说"><a href="#建立一个围绕稳定状态行为的假说" class="headerlink" title="建立一个围绕稳定状态行为的假说"></a>建立一个围绕稳定状态行为的假说</h4><p>要关注系统的可测量输出, 而不是系统的属性。对这些输出在短时间内的度量构成了系统稳定状态的一个代理。 整个系统的吞吐量、错误率、延迟百分点等都可能是表示稳态行为的指标。 通过在实验中的系统性行为模式上的关注, 混沌工程验证了系统是否正常工作, 而不是试图验证它是如何工作的。</p>
-<h4 id="多样化真实世界的事件"><a href="#多样化真实世界的事件" class="headerlink" title="多样化真实世界的事件"></a>多样化真实世界的事件</h4><p>混沌变量反映了现实世界中的事件。 我们可以通过潜在影响或估计频率排定这些事件的优先级。考虑与硬件故障类似的事件, 如服务器宕机、软件故障 (如错误响应) 和非故障事件 (如流量激增或伸缩事件)。 任何能够破坏稳态的事件都是混沌实验中的一个潜在变量。</p>
-<h4 id="在生产环境中运行实验"><a href="#在生产环境中运行实验" class="headerlink" title="在生产环境中运行实验"></a>在生产环境中运行实验</h4><p>系统的行为会依据环境和流量模式都会有所不同。 由于资源使用率变化的随时可能发生, 因此通过采集实际流量是捕获请求路径的唯一可靠方法。 为了保证系统执行方式的真实性与当前部署系统的相关性, 混沌工程强烈推荐直接采用生产环境流量进行实验。</p>
-<h4 id="持续自动化运行实验"><a href="#持续自动化运行实验" class="headerlink" title="持续自动化运行实验"></a>持续自动化运行实验</h4><p>手动运行实验是劳动密集型的, 最终是不可持续的。所以我们要把实验自动化并持续运行，混沌工程要在系统中构建自动化的编排和分析。</p>
-<h4 id="最小化爆炸半径"><a href="#最小化爆炸半径" class="headerlink" title="最小化爆炸半径"></a>最小化爆炸半径</h4><p>在生产中进行试验可能会造成不必要的客户投诉。虽然对一些短期负面影响必须有一个补偿, 但混沌工程师的责任和义务是确保这些后续影响最小化且被考虑到。</p>
+<h3><span id="高级原则">高级原则</span></h3><p>以下原则描述了应用混沌工程的理想方式，这些原则基于上述实验过程。对这些原则的匹配程度能够增强我们在大规模分布式系统的信心。</p>
+<h4><span id="建立一个围绕稳定状态行为的假说">建立一个围绕稳定状态行为的假说</span></h4><p>要关注系统的可测量输出, 而不是系统的属性。对这些输出在短时间内的度量构成了系统稳定状态的一个代理。 整个系统的吞吐量、错误率、延迟百分点等都可能是表示稳态行为的指标。 通过在实验中的系统性行为模式上的关注, 混沌工程验证了系统是否正常工作, 而不是试图验证它是如何工作的。</p>
+<h4><span id="多样化真实世界的事件">多样化真实世界的事件</span></h4><p>混沌变量反映了现实世界中的事件。 我们可以通过潜在影响或估计频率排定这些事件的优先级。考虑与硬件故障类似的事件, 如服务器宕机、软件故障 (如错误响应) 和非故障事件 (如流量激增或伸缩事件)。 任何能够破坏稳态的事件都是混沌实验中的一个潜在变量。</p>
+<h4><span id="在生产环境中运行实验">在生产环境中运行实验</span></h4><p>系统的行为会依据环境和流量模式都会有所不同。 由于资源使用率变化的随时可能发生, 因此通过采集实际流量是捕获请求路径的唯一可靠方法。 为了保证系统执行方式的真实性与当前部署系统的相关性, 混沌工程强烈推荐直接采用生产环境流量进行实验。</p>
+<h4><span id="持续自动化运行实验">持续自动化运行实验</span></h4><p>手动运行实验是劳动密集型的, 最终是不可持续的。所以我们要把实验自动化并持续运行，混沌工程要在系统中构建自动化的编排和分析。</p>
+<h4><span id="最小化爆炸半径">最小化爆炸半径</span></h4><p>在生产中进行试验可能会造成不必要的客户投诉。虽然对一些短期负面影响必须有一个补偿, 但混沌工程师的责任和义务是确保这些后续影响最小化且被考虑到。</p>
 <p>混沌工程是一个强大的实践, 它已经在世界上一些规模最大的业务系统上改变了软件是如何设计和工程化的。 相较于其他方法解决了速度和灵活性, 混沌工程专门处理这些分布式系统中的系统不确定性。 混沌工程的原则为我们大规模的创新和给予客户他们应得的高质量的体验提供了信心。</p>
 <p><img src="https://raw.githubusercontent.com/0x0034/images/master/20211209122402.png" alt="爆炸半径"></p>
-<h2 id="混沌工程变量"><a href="#混沌工程变量" class="headerlink" title="混沌工程变量"></a>混沌工程变量</h2><p>阿里按照优先分析P1和P2故障，按照IaaS、PaaS、SaaS层的角度绘制了故障画像，如下图：<br><img src="https://raw.githubusercontent.com/0x0034/images/master/20211209112113.png" alt="混沌工程变量"></p>
-<h2 id="ChaosBlade"><a href="#ChaosBlade" class="headerlink" title="ChaosBlade"></a>ChaosBlade</h2><blockquote>
+<h2><span id="混沌工程变量">混沌工程变量</span></h2><p>阿里按照优先分析P1和P2故障，按照IaaS、PaaS、SaaS层的角度绘制了故障画像，如下图：<br><img src="https://raw.githubusercontent.com/0x0034/images/master/20211209112113.png" alt="混沌工程变量"></p>
+<h2><span id="chaosblade">ChaosBlade</span></h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/chaosblade-io/chaosblade/blob/master/README_CN.md">https://github.com/chaosblade-io/chaosblade/blob/master/README_CN.md</a></p>
 </blockquote>
 <p>一个简单易用且功能强大的混沌实验实施工具.<br>ChaosBlade 不仅使用简单，而且支持丰富的实验场景，场景包括：</p>
@@ -636,19 +636,19 @@
 <li>Docker 容器：比如杀容器、容器内 CPU、内存、网络、磁盘、进程等实验场景；</li>
 <li>云原生平台：比如 Kubernetes 平台节点上 CPU、内存、网络、磁盘、进程实验场景，Pod 网络和 Pod 本身实验场景如杀 Pod，容器的实验场景如上述的 Docker 容器实验场景；</li>
 </ul>
-<h3 id="场景大图"><a href="#场景大图" class="headerlink" title="场景大图"></a>场景大图</h3><p><img src="https://user-images.githubusercontent.com/3992234/72340872-eb47c400-3703-11ea-830f-062e117c2e95.png" alt="场景大图"></p>
-<h3 id="示例使用"><a href="#示例使用" class="headerlink" title="示例使用"></a>示例使用</h3><h4 id="OS层"><a href="#OS层" class="headerlink" title="OS层"></a>OS层</h4><h5 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 CPU 满载实验</span></span><br><span class="line">blade create cpu load</span><br></pre></td></tr></table></figure>
+<h3><span id="场景大图">场景大图</span></h3><p><img src="https://user-images.githubusercontent.com/3992234/72340872-eb47c400-3703-11ea-830f-062e117c2e95.png" alt="场景大图"></p>
+<h3><span id="示例使用">示例使用</span></h3><h4><span id="os层">OS层</span></h4><h5><span id="cpu">CPU</span></h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 CPU 满载实验</span></span><br><span class="line">blade create cpu load</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/0x0034/images/master/20211209144135.png" alt="cpu满载"></p>
 <p><img src="https://raw.githubusercontent.com/0x0034/images/master/20211209145941.png" alt="CPU监控"></p>
-<h5 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h5><h5 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h5><p>以上请参考官方文档</p>
-<h4 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h4><h5 id="prepare-jvm"><a href="#prepare-jvm" class="headerlink" title="prepare jvm"></a>prepare jvm</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">-j</span>, -<span class="literal">-javaHome</span> string   指定 JAVA_HOME 路径，用于指定 java bin 和 tools.jar，如果不添加此参数，默认会优先获取 JAVA_HOME 环境变量，如果获取失败，会解析指定进程参数获取 JAVA_HOME，获取失败，会使用 chaosblade 自带的 tools.jar</span><br><span class="line">-<span class="literal">-pid</span> string        java 进程ID</span><br><span class="line"><span class="literal">-P</span>, -<span class="literal">-port</span> int          java agent 暴露服务的本地端口，用于下发实验命令</span><br><span class="line"><span class="literal">-p</span>, -<span class="literal">-process</span> string    java 进程关键词，用于定位 java 进程</span><br><span class="line"><span class="literal">-d</span>, -<span class="literal">-debug</span>   开启 debug 模式</span><br></pre></td></tr></table></figure>
+<h5><span id="内存">内存</span></h5><h5><span id="磁盘">磁盘</span></h5><p>以上请参考官方文档</p>
+<h4><span id="jvm">JVM</span></h4><h5><span id="prepare-jvm">prepare jvm</span></h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">-j</span>, -<span class="literal">-javaHome</span> string   指定 JAVA_HOME 路径，用于指定 java bin 和 tools.jar，如果不添加此参数，默认会优先获取 JAVA_HOME 环境变量，如果获取失败，会解析指定进程参数获取 JAVA_HOME，获取失败，会使用 chaosblade 自带的 tools.jar</span><br><span class="line">-<span class="literal">-pid</span> string        java 进程ID</span><br><span class="line"><span class="literal">-P</span>, -<span class="literal">-port</span> int          java agent 暴露服务的本地端口，用于下发实验命令</span><br><span class="line"><span class="literal">-p</span>, -<span class="literal">-process</span> string    java 进程关键词，用于定位 java 进程</span><br><span class="line"><span class="literal">-d</span>, -<span class="literal">-debug</span>   开启 debug 模式</span><br></pre></td></tr></table></figure>
 
 <p>指定 pid 执行 java agent 挂载</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">blade prepare jvm -<span class="literal">-pid</span> <span class="number">26652</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令也可简写为</span></span><br><span class="line">blade p jvm -<span class="literal">-pid</span> <span class="number">26652</span></span><br></pre></td></tr></table></figure>
 
 <p>执行成功，会返回实验准备的 UID，例如：<br>{“code”:200,”success”:true,”result”:”2552c05c6066dde5”}<br>2552c05c6066dde5 就是实验准备对象的 UID，执行卸载操作需要用到此 UID.</p>
-<h5 id="create-jvm"><a href="#create-jvm" class="headerlink" title="create jvm"></a>create jvm</h5><ul>
+<h5><span id="create-jvm">create jvm</span></h5><ul>
 <li>delay: 指定类方法调用延迟</li>
 </ul>
 <p>业务代码:</p>
@@ -842,7 +842,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">简述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E6%BA%90"><span class="toc-number">1.1.</span> <span class="toc-text">起源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84"><span class="toc-number">1.2.</span> <span class="toc-text">目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B%E4%B8%8E%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5-%E6%95%85%E9%9A%9C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.3.</span> <span class="toc-text">混沌工程与故障注入,故障测试的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BE%E5%8C%BA%E7%8E%B0%E7%8A%B6"><span class="toc-number">1.4.</span> <span class="toc-text">社区现状</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%88%99"><span class="toc-number">2.</span> <span class="toc-text">原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%B5%E5%BE%AA%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.1.</span> <span class="toc-text">遵循步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E5%8E%9F%E5%88%99"><span class="toc-number">2.2.</span> <span class="toc-text">高级原则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E5%9B%B4%E7%BB%95%E7%A8%B3%E5%AE%9A%E7%8A%B6%E6%80%81%E8%A1%8C%E4%B8%BA%E7%9A%84%E5%81%87%E8%AF%B4"><span class="toc-number">2.2.1.</span> <span class="toc-text">建立一个围绕稳定状态行为的假说</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%A0%B7%E5%8C%96%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.2.2.</span> <span class="toc-text">多样化真实世界的事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%B8%AD%E8%BF%90%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">2.2.3.</span> <span class="toc-text">在生产环境中运行实验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">2.2.4.</span> <span class="toc-text">持续自动化运行实验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E5%8C%96%E7%88%86%E7%82%B8%E5%8D%8A%E5%BE%84"><span class="toc-number">2.2.5.</span> <span class="toc-text">最小化爆炸半径</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B%E5%8F%98%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">混沌工程变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ChaosBlade"><span class="toc-number">4.</span> <span class="toc-text">ChaosBlade</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E5%A4%A7%E5%9B%BE"><span class="toc-number">4.1.</span> <span class="toc-text">场景大图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BD%BF%E7%94%A8"><span class="toc-number">4.2.</span> <span class="toc-text">示例使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OS%E5%B1%82"><span class="toc-number">4.2.1.</span> <span class="toc-text">OS层</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#CPU"><span class="toc-number">4.2.1.1.</span> <span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%85%E5%AD%98"><span class="toc-number">4.2.1.2.</span> <span class="toc-text">内存</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A3%81%E7%9B%98"><span class="toc-number">4.2.1.3.</span> <span class="toc-text">磁盘</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM"><span class="toc-number">4.2.2.</span> <span class="toc-text">JVM</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#prepare-jvm"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">prepare jvm</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#create-jvm"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">create jvm</span></a></li></ol></li></ol></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">简述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">起源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">混沌工程与故障注入,故障测试的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">社区现状</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">遵循步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">高级原则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.1.</span> <span class="toc-text">建立一个围绕稳定状态行为的假说</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.2.</span> <span class="toc-text">多样化真实世界的事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.3.</span> <span class="toc-text">在生产环境中运行实验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.4.</span> <span class="toc-text">持续自动化运行实验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.5.</span> <span class="toc-text">最小化爆炸半径</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">混沌工程变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">ChaosBlade</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">场景大图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">示例使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.2.1.</span> <span class="toc-text">OS层</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.2.1.1.</span> <span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.2.1.2.</span> <span class="toc-text">内存</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.2.1.3.</span> <span class="toc-text">磁盘</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.2.2.</span> <span class="toc-text">JVM</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">prepare jvm</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">create jvm</span></a></li></ol></li></ol></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1254,6 +1254,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1382,6 +1396,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1389,12 +1409,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1496,29 +1510,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1531,19 +1530,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1551,9 +1585,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1571,34 +1610,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1621,16 +1645,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1646,14 +1660,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>

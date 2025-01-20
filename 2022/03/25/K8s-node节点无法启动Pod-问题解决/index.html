@@ -498,26 +498,26 @@
 </li>
 <li><a href="#%E6%A3%80%E6%9F%A5%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5">检查节点加入</a></li>
 </ul>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>问题出现的原因是,Master崩了,然后没有办法只能重装集群, 但是节点都没有重装系统, 还存在一定的残留. 报错信息如下所示.</p>
+<h2><span id="问题描述">问题描述</span></h2><p>问题出现的原因是,Master崩了,然后没有办法只能重装集群, 但是节点都没有重装系统, 还存在一定的残留. 报错信息如下所示.</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">network: failed to <span class="built_in">set</span> bridge addr: <span class="string">&quot;cni0&quot;</span> already has an IP address different from <span class="number">10.244</span>.<span class="number">3.1</span>/<span class="number">24</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>步骤如下所示.</p>
-<h3 id="重置kubeadm"><a href="#重置kubeadm" class="headerlink" title="重置kubeadm"></a>重置kubeadm</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm reset <span class="operator">-f</span></span><br></pre></td></tr></table></figure>
+<h2><span id="解决办法">解决办法</span></h2><p>步骤如下所示.</p>
+<h3><span id="重置kubeadm">重置kubeadm</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm reset <span class="operator">-f</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="停止kubelet-和-docker"><a href="#停止kubelet-和-docker" class="headerlink" title="停止kubelet 和 docker"></a>停止kubelet 和 docker</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop kubelet docker</span><br></pre></td></tr></table></figure>
+<h3><span id="停止kubelet-和-docker">停止kubelet 和 docker</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop kubelet docker</span><br></pre></td></tr></table></figure>
 
-<h3 id="清空CNI-和-kubelet-文件"><a href="#清空CNI-和-kubelet-文件" class="headerlink" title="清空CNI 和 kubelet 文件"></a>清空CNI 和 kubelet 文件</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> /var/lib/cni/</span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> /var/lib/kubelet/*</span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> /etc/cni/</span><br></pre></td></tr></table></figure>
+<h3><span id="清空cni-和-kubelet-文件">清空CNI 和 kubelet 文件</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> /var/lib/cni/</span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> /var/lib/kubelet/*</span><br><span class="line"><span class="built_in">rm</span> <span class="literal">-rf</span> /etc/cni/</span><br></pre></td></tr></table></figure>
 
-<h3 id="关闭CNI-flannel-docker网桥"><a href="#关闭CNI-flannel-docker网桥" class="headerlink" title="关闭CNI,flannel,docker网桥"></a>关闭CNI,flannel,docker网桥</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ifconfig cni0 down</span><br><span class="line">ifconfig flannel.<span class="number">1</span> down</span><br><span class="line">ifconfig docker0 down</span><br><span class="line">ip link delete cni0</span><br><span class="line">ip link delete flannel.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3><span id="关闭cniflanneldocker网桥">关闭CNI,flannel,docker网桥</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ifconfig cni0 down</span><br><span class="line">ifconfig flannel.<span class="number">1</span> down</span><br><span class="line">ifconfig docker0 down</span><br><span class="line">ip link delete cni0</span><br><span class="line">ip link delete flannel.<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="重启Docker和kubelet"><a href="#重启Docker和kubelet" class="headerlink" title="重启Docker和kubelet"></a>重启Docker和kubelet</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">start</span> docker</span><br><span class="line">systemctl <span class="built_in">start</span> kubelet</span><br></pre></td></tr></table></figure>
+<h3><span id="重启docker和kubelet">重启Docker和kubelet</span></h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">start</span> docker</span><br><span class="line">systemctl <span class="built_in">start</span> kubelet</span><br></pre></td></tr></table></figure>
 
-<h3 id="Node重新加入集群"><a href="#Node重新加入集群" class="headerlink" title="Node重新加入集群"></a>Node重新加入集群</h3><p>master执行如下所示命令输出:</p>
+<h3><span id="node重新加入集群">Node重新加入集群</span></h3><p>master执行如下所示命令输出:</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm token create -<span class="literal">-print</span><span class="operator">-join</span><span class="literal">-command</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="检查节点加入"><a href="#检查节点加入" class="headerlink" title="检查节点加入"></a>检查节点加入</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br></pre></td></tr></table></figure>
+<h2><span id="检查节点加入">检查节点加入</span></h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br></pre></td></tr></table></figure>
 
-<p>并且重新尝试调度Pod到此节点. </p>
+<p>并且重新尝试调度Pod到此节点.</p>
 
     </article>
     <!-- license -->
@@ -675,7 +675,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E7%BD%AEkubeadm"><span class="toc-number">2.1.</span> <span class="toc-text">重置kubeadm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%9C%E6%AD%A2kubelet-%E5%92%8C-docker"><span class="toc-number">2.2.</span> <span class="toc-text">停止kubelet 和 docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E7%A9%BACNI-%E5%92%8C-kubelet-%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">清空CNI 和 kubelet 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%ADCNI-flannel-docker%E7%BD%91%E6%A1%A5"><span class="toc-number">2.4.</span> <span class="toc-text">关闭CNI,flannel,docker网桥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AFDocker%E5%92%8Ckubelet"><span class="toc-number">2.5.</span> <span class="toc-text">重启Docker和kubelet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node%E9%87%8D%E6%96%B0%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4"><span class="toc-number">2.6.</span> <span class="toc-text">Node重新加入集群</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">检查节点加入</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">重置kubeadm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">停止kubelet 和 docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">清空CNI 和 kubelet 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.</span> <span class="toc-text">关闭CNI,flannel,docker网桥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.5.</span> <span class="toc-text">重启Docker和kubelet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.6.</span> <span class="toc-text">Node重新加入集群</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">检查节点加入</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1087,6 +1087,20 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -1215,6 +1229,12 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
+            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/flannel%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">flannel部署问题</a>
         </li>
     
@@ -1222,12 +1242,6 @@
         <li class="archive-post-item">
             <span class="archive-post-date">03/25</span>
             <a class="archive-post-title" href="/2022/03/25/ingress%E9%83%A8%E7%BD%B2/">ingress部署</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/25</span>
-            <a class="archive-post-title" href="/2022/03/25/K8s-node%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8Pod-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">K8s node节点无法启动Pod 问题解决</a>
         </li>
     
         
@@ -1329,29 +1343,14 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
-            <span class="sidebar-tag-name" data-tags="helm">
-                <span class="iconfont-archer">&#xe606;</span>
-                helm
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="kubernetes">
-                <span class="iconfont-archer">&#xe606;</span>
-                kubernetes
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="java">
-                <span class="iconfont-archer">&#xe606;</span>
-                java
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="chartmuseum">
-                <span class="iconfont-archer">&#xe606;</span>
-                chartmuseum
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="helm3">
                 <span class="iconfont-archer">&#xe606;</span>
                 helm3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="helm">
+                <span class="iconfont-archer">&#xe606;</span>
+                helm
             </span>
         
             <span class="sidebar-tag-name" data-tags="源码">
@@ -1364,19 +1363,54 @@
                 go
             </span>
         
-            <span class="sidebar-tag-name" data-tags="linux">
+            <span class="sidebar-tag-name" data-tags="pmm-server">
                 <span class="iconfont-archer">&#xe606;</span>
-                linux
+                pmm-server
             </span>
         
-            <span class="sidebar-tag-name" data-tags="性能分析">
+            <span class="sidebar-tag-name" data-tags="安装文档">
                 <span class="iconfont-archer">&#xe606;</span>
-                性能分析
+                安装文档
             </span>
         
-            <span class="sidebar-tag-name" data-tags="工具">
+            <span class="sidebar-tag-name" data-tags="kubernetes">
                 <span class="iconfont-archer">&#xe606;</span>
-                工具
+                kubernetes
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+                <span class="iconfont-archer">&#xe606;</span>
+                mac 配置问题
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="vscode">
+                <span class="iconfont-archer">&#xe606;</span>
+                vscode
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="MySQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                MySQL
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="chartmuseum">
+                <span class="iconfont-archer">&#xe606;</span>
+                chartmuseum
             </span>
         
             <span class="sidebar-tag-name" data-tags="CPU性能优化">
@@ -1384,9 +1418,14 @@
                 CPU性能优化
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pidstat">
+            <span class="sidebar-tag-name" data-tags="linux">
                 <span class="iconfont-archer">&#xe606;</span>
-                pidstat
+                linux
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iptables">
+                <span class="iconfont-archer">&#xe606;</span>
+                iptables
             </span>
         
             <span class="sidebar-tag-name" data-tags="percona-xtradb-cluster-operator">
@@ -1404,34 +1443,19 @@
                 operator
             </span>
         
-            <span class="sidebar-tag-name" data-tags="pmm-server">
+            <span class="sidebar-tag-name" data-tags="性能分析">
                 <span class="iconfont-archer">&#xe606;</span>
-                pmm-server
+                性能分析
             </span>
         
-            <span class="sidebar-tag-name" data-tags="安装文档">
+            <span class="sidebar-tag-name" data-tags="工具">
                 <span class="iconfont-archer">&#xe606;</span>
-                安装文档
+                工具
             </span>
         
-            <span class="sidebar-tag-name" data-tags="mac 配置问题">
+            <span class="sidebar-tag-name" data-tags="pidstat">
                 <span class="iconfont-archer">&#xe606;</span>
-                mac 配置问题
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="vscode">
-                <span class="iconfont-archer">&#xe606;</span>
-                vscode
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="MySQL">
-                <span class="iconfont-archer">&#xe606;</span>
-                MySQL
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="iptables">
-                <span class="iconfont-archer">&#xe606;</span>
-                iptables
+                pidstat
             </span>
         
             <span class="sidebar-tag-name" data-tags="ssh">
@@ -1454,16 +1478,6 @@
                 xfs_repair
             </span>
         
-            <span class="sidebar-tag-name" data-tags="docker">
-                <span class="iconfont-archer">&#xe606;</span>
-                docker
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="jre">
-                <span class="iconfont-archer">&#xe606;</span>
-                jre
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="docker remote api">
                 <span class="iconfont-archer">&#xe606;</span>
                 docker remote api
@@ -1479,14 +1493,14 @@
                 ubuntu
             </span>
         
-            <span class="sidebar-tag-name" data-tags="node-exporter">
+            <span class="sidebar-tag-name" data-tags="docker">
                 <span class="iconfont-archer">&#xe606;</span>
-                node-exporter
+                docker
             </span>
         
-            <span class="sidebar-tag-name" data-tags="prometheus">
+            <span class="sidebar-tag-name" data-tags="jre">
                 <span class="iconfont-archer">&#xe606;</span>
-                prometheus
+                jre
             </span>
         
     </div>
