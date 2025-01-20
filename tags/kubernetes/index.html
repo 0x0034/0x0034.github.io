@@ -428,6 +428,47 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2025/01/20/Node-Exporter-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                
+                <span class="abstract-title-text">Node-Exporter 性能优化</span>
+            </a>
+            <div class="abstract-content">
+                [TOC]
+起因Node-exporter 采集数据有断图的问题, 排查发现/metrics接口 rt 很高, 大概都需要 1-3s 左右. 
+12345678# time curl http://127.0.0.1:9199/metrics -o ne.txt% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current                                 Dload  Upload   Total   Spent    Left  Speed100 7539k   ...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2025/01/20">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2025/01/20</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="kubernetes">kubernetes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="node-exporter">node-exporter</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="prometheus">prometheus</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/03/31/percona-xtradb-cluster-operator-%E6%96%87%E6%A1%A3-%E5%A4%87%E4%BB%BD/">
                 
                 <span class="abstract-title-text">percona-xtradb-cluster-operator-文档-备份</span>
@@ -862,7 +903,24 @@ JVM最大堆 * 125% &lt;= 容器request
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1089,7 +1147,7 @@ JVM最大堆 * 125% &lt;= 容器request
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 32
+        Total : 33
         </div>
         <!-- search  -->
         
@@ -1099,6 +1157,21 @@ JVM最大堆 * 125% &lt;= 容器request
     
         
             
+            
+            <div class="archive-year"> 2025 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/20</span>
+            <a class="archive-post-title" href="/2025/01/20/Node-Exporter-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">Node-Exporter 性能优化</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
             
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
@@ -1458,6 +1531,16 @@ JVM最大堆 * 125% &lt;= 容器request
             <span class="sidebar-tag-name" data-tags="ubuntu">
                 <span class="iconfont-archer">&#xe606;</span>
                 ubuntu
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="node-exporter">
+                <span class="iconfont-archer">&#xe606;</span>
+                node-exporter
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="prometheus">
+                <span class="iconfont-archer">&#xe606;</span>
+                prometheus
             </span>
         
     </div>
