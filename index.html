@@ -448,9 +448,10 @@
                 <span class="abstract-title-text">Node-Exporter 性能优化</span>
             </a>
             <div class="abstract-content">
-                [TOC]
+                
+
 起因Node-exporter 采集数据有断图的问题, 排查发现/metrics接口 rt 很高, 大概都需要 1-3s 左右. 
-12345678# time curl http://127.0.0.1:9199/metrics -o ne.txt% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current                                 Dload  Upload   Total   Spent    Left  Speed100 7539k   ...
+12345678# time curl http://127.0.0.1:9199/metrics -o ne.txt% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current                                 Dload  Upload   Total   Spent    Left  Speed100 7539k    0 7...
             </div>
             <!-- read more -->
             
